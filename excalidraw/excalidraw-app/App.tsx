@@ -1189,10 +1189,6 @@ const ExcalidrawWrapper = () => {
     );
     presenceChannelRef.current = presenceChannel;
 
-    // Ask for Notification permission
-    if ("Notification" in window && Notification.permission === "default") {
-      Notification.requestPermission();
-    }
 
     presenceChannel
       .on("presence", { event: "sync" }, () => {

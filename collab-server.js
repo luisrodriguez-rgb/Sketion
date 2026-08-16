@@ -6,11 +6,13 @@ const server = http.createServer((req, res) => {
   res.end("Excalidraw Collaboration Server running");
 });
 
-// CN-004: Restrict CORS to known origins only
+// CN-004: Restrict CORS to known origins and Vercel deployments
 const ALLOWED_ORIGINS = [
+  "https://sketion.vercel.app",
   "https://my-excalidraw-nine.vercel.app",
   "http://localhost:3001",
   "http://localhost:3000",
+  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(",") : []),
 ];
 
 // CN-005 + CN-013: Rate limiter to prevent message flooding
@@ -36,7 +38,11 @@ const broadcastLimiter = createRateLimiter(60, 1000); // 60 updates per 1s
 const io = new Server(server, {
   cors: {
     origin: (origin, callback) => {
-      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+      if (
+        !origin ||
+        ALLOWED_ORIGINS.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
         callback(null, true);
       } else {
         console.warn(`[CORS] Blocked request from origin: ${origin}`);

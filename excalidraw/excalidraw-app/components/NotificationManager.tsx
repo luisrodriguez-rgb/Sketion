@@ -20,15 +20,6 @@ export const NotificationManager: React.FC<NotificationManagerProps> = ({
   const [toasts, setToasts] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
 
-  useEffect(() => {
-    if (
-      isCollaborating &&
-      "Notification" in window &&
-      Notification.permission === "default"
-    ) {
-      Notification.requestPermission();
-    }
-  }, [isCollaborating]);
 
   useEffect(() => {
     const handleFocus = () => {

@@ -26,26 +26,38 @@ import type { Socket } from "socket.io-client";
 class Portal {
   collab: TCollabClass;
   socket: Socket | null = null;
-  socketInitialized: boolean = false; // we don't want the socket to emit any updates until it is fully initialized
+  socketInitialized: boolean = false;
   roomId: string | null = null;
   roomKey: string | null = null;
   broadcastedElementVersions: Map<string, number> = new Map();
   supabaseChannel: any = null;
+  clientId: string = "client_" + Math.random().toString(36).substring(2, 11);
 
   constructor(collab: TCollabClass) {
     this.collab = collab;
   }
 
-  open(socket: Socket, id: string, key: string) {
+  open(socket: Socket | null, id: string, key: string) {
     this.socket = socket;
     this.roomId = id;
     this.roomKey = key;
 
-    // Initialize Supabase Broadcast channel for instant 0-delay room collab
-    this.supabaseChannel = supabase.channel(`collab-room-${id}`);
+    // Initialize Supabase Realtime channel for instant E2EE room collaboration
+    this.supabaseChannel = supabase.channel(`collab-room-${id}`, {
+      config: {
+        presence: {
+          key: this.clientId,
+        },
+      },
+    });
+
     this.supabaseChannel
       .on("broadcast", { event: "collab" }, async ({ payload }: any) => {
-        if (payload && payload.senderId !== this.socket?.id) {
+        if (
+          payload &&
+          payload.senderId !== this.clientId &&
+          payload.senderId !== this.socket?.id
+        ) {
           try {
             const encryptedBuffer = new Uint8Array(payload.encryptedBuffer).buffer;
             const iv = new Uint8Array(payload.iv);
@@ -55,40 +67,117 @@ class Portal {
           }
         }
       })
-      .subscribe();
+      .on("broadcast", { event: "request-scene" }, async ({ payload }: any) => {
+        if (payload && payload.senderId !== this.clientId) {
+          const elements = this.collab.getSceneElementsIncludingDeleted();
+          if (elements && elements.length > 0) {
+            await this.broadcastScene(WS_SUBTYPES.INIT, elements, true);
+          }
+        }
+      })
+      .on("broadcast", { event: "collab-chat" }, ({ payload }: any) => {
+        if (payload && payload.senderId !== this.clientId) {
+          window.dispatchEvent(
+            new CustomEvent("collab-chat-message", { detail: payload.data }),
+          );
+        }
+      })
+      .on("broadcast", { event: "collab-comment-create" }, ({ payload }: any) => {
+        if (payload && payload.senderId !== this.clientId) {
+          window.dispatchEvent(
+            new CustomEvent("collab-comment-create", { detail: payload.comment }),
+          );
+        }
+      })
+      .on("broadcast", { event: "collab-comment-resolve" }, ({ payload }: any) => {
+        if (payload && payload.senderId !== this.clientId) {
+          window.dispatchEvent(
+            new CustomEvent("collab-comment-resolve", {
+              detail: payload.commentId,
+            }),
+          );
+        }
+      })
+      .on("presence", { event: "sync" }, () => {
+        const state = this.supabaseChannel.presenceState();
+        const userIds = Object.keys(state) as SocketId[];
+        this.collab.setCollaborators(userIds);
+      })
+      .on("presence", { event: "join" }, ({ key, newPresences }: any) => {
+        if (key !== this.clientId && newPresences?.length > 0) {
+          window.dispatchEvent(
+            new CustomEvent("collab-user-join", { detail: { socketId: key } }),
+          );
+        }
+      })
+      .on("presence", { event: "leave" }, ({ key }: any) => {
+        if (key !== this.clientId) {
+          window.dispatchEvent(
+            new CustomEvent("collab-user-leave", { detail: { socketId: key } }),
+          );
+        }
+      })
+      .subscribe(async (status: string) => {
+        if (status === "SUBSCRIBED") {
+          this.socketInitialized = true;
+          trackEvent("share", "room joined");
+          try {
+            await this.supabaseChannel.track({
+              username: this.collab.state.username || "Colaborador",
+              onlineAt: Date.now(),
+            });
+            // Request existing scene from connected peers
+            this.supabaseChannel.send({
+              type: "broadcast",
+              event: "request-scene",
+              payload: { senderId: this.clientId },
+            });
+          } catch (e) {
+            console.error("Error tracking presence in collab room:", e);
+          }
+        }
+      });
 
-    // Initialize socket listeners
-    this.socket.on("init-room", () => {
-      if (this.socket) {
-        this.socket.emit("join-room", this.roomId);
-        trackEvent("share", "room joined");
-      }
-    });
-    this.socket.on("new-user", async (_socketId: string) => {
-      this.broadcastScene(
-        WS_SUBTYPES.INIT,
-        this.collab.getSceneElementsIncludingDeleted(),
-        /* syncAll */ true,
-      );
-    });
-    this.socket.on("room-user-change", (clients: SocketId[]) => {
-      this.collab.setCollaborators(clients);
-    });
+    // Optional: Socket.IO listeners if custom socket is available
+    if (this.socket) {
+      this.socket.on("init-room", () => {
+        if (this.socket) {
+          this.socket.emit("join-room", this.roomId);
+        }
+      });
+      this.socket.on("new-user", async (_socketId: string) => {
+        this.broadcastScene(
+          WS_SUBTYPES.INIT,
+          this.collab.getSceneElementsIncludingDeleted(),
+          true,
+        );
+      });
+      this.socket.on("room-user-change", (clients: SocketId[]) => {
+        this.collab.setCollaborators(clients);
+      });
+    }
 
     return socket;
   }
 
   close() {
-    if (!this.socket) {
-      return;
-    }
     if (this.supabaseChannel) {
-      supabase.removeChannel(this.supabaseChannel);
+      try {
+        supabase.removeChannel(this.supabaseChannel);
+      } catch (err) {
+        console.warn("Error closing supabase collab channel:", err);
+      }
       this.supabaseChannel = null;
     }
     this.queueFileUpload.flush();
-    this.socket.close();
-    this.socket = null;
+    if (this.socket) {
+      try {
+        this.socket.close();
+      } catch (err) {
+        console.warn("Error closing socket client:", err);
+      }
+      this.socket = null;
+    }
     this.roomId = null;
     this.roomKey = null;
     this.socketInitialized = false;
@@ -97,8 +186,7 @@ class Portal {
 
   isOpen() {
     return !!(
-      this.socketInitialized &&
-      this.socket &&
+      (this.socketInitialized || this.supabaseChannel) &&
       this.roomId &&
       this.roomKey
     );
@@ -114,20 +202,22 @@ class Portal {
       const encoded = new TextEncoder().encode(json);
       const { encryptedBuffer, iv } = await encryptData(this.roomKey!, encoded);
 
-      this.socket?.emit(
-        volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
-        roomId ?? this.roomId,
-        encryptedBuffer,
-        iv,
-      );
+      if (this.socket && this.socket.connected) {
+        this.socket.emit(
+          volatile ? WS_EVENTS.SERVER_VOLATILE : WS_EVENTS.SERVER,
+          roomId ?? this.roomId,
+          encryptedBuffer,
+          iv,
+        );
+      }
 
-      // Broadcast over Supabase Realtime channel as zero-latency fallback
+      // Broadcast over Supabase Realtime channel (instant E2EE)
       if (this.supabaseChannel) {
         this.supabaseChannel.send({
           type: "broadcast",
           event: "collab",
           payload: {
-            socketId: this.socket?.id || "anon",
+            senderId: this.clientId,
             encryptedBuffer: Array.from(new Uint8Array(encryptedBuffer)),
             iv: Array.from(iv),
           },
@@ -158,9 +248,6 @@ class Portal {
       .map((element) => {
         if (this.collab.fileManager.shouldUpdateImageElementStatus(element)) {
           isChanged = true;
-          // this will signal collaborators to pull image data from server
-          // (using mutation instead of newElementWith otherwise it'd break
-          // in-progress dragging)
           return newElementWith(element, { status: "saved" });
         }
         return element;
@@ -183,9 +270,6 @@ class Portal {
       throw new Error("syncAll must be true when sending SCENE.INIT");
     }
 
-    // sync out only the elements we think we need to to save bandwidth.
-    // periodically we'll resync the whole thing to make sure no one diverges
-    // due to a dropped message (server goes down etc).
     const syncableElements = elements.reduce((acc, element) => {
       if (
         (syncAll ||
@@ -218,44 +302,42 @@ class Portal {
   };
 
   broadcastIdleChange = (userState: UserIdleState) => {
-    if (this.socket?.id) {
-      const data: SocketUpdateDataSource["IDLE_STATUS"] = {
-        type: WS_SUBTYPES.IDLE_STATUS,
-        payload: {
-          socketId: this.socket.id as SocketId,
-          userState,
-          username: this.collab.state.username,
-        },
-      };
-      return this._broadcastSocketData(
-        data as SocketUpdateData,
-        true, // volatile
-      );
-    }
+    const senderId = (this.socket?.id || this.clientId) as SocketId;
+    const data: SocketUpdateDataSource["IDLE_STATUS"] = {
+      type: WS_SUBTYPES.IDLE_STATUS,
+      payload: {
+        socketId: senderId,
+        userState,
+        username: this.collab.state.username,
+      },
+    };
+    return this._broadcastSocketData(
+      data as SocketUpdateData,
+      true, // volatile
+    );
   };
 
   broadcastMouseLocation = (payload: {
     pointer: SocketUpdateDataSource["MOUSE_LOCATION"]["payload"]["pointer"];
     button: SocketUpdateDataSource["MOUSE_LOCATION"]["payload"]["button"];
   }) => {
-    if (this.socket?.id) {
-      const data: SocketUpdateDataSource["MOUSE_LOCATION"] = {
-        type: WS_SUBTYPES.MOUSE_LOCATION,
-        payload: {
-          socketId: this.socket.id as SocketId,
-          pointer: payload.pointer,
-          button: payload.button || "up",
-          selectedElementIds:
-            this.collab.excalidrawAPI.getAppState().selectedElementIds,
-          username: this.collab.state.username,
-        },
-      };
+    const senderId = (this.socket?.id || this.clientId) as SocketId;
+    const data: SocketUpdateDataSource["MOUSE_LOCATION"] = {
+      type: WS_SUBTYPES.MOUSE_LOCATION,
+      payload: {
+        socketId: senderId,
+        pointer: payload.pointer,
+        button: payload.button || "up",
+        selectedElementIds:
+          this.collab.excalidrawAPI.getAppState().selectedElementIds,
+        username: this.collab.state.username,
+      },
+    };
 
-      return this._broadcastSocketData(
-        data as SocketUpdateData,
-        true, // volatile
-      );
-    }
+    return this._broadcastSocketData(
+      data as SocketUpdateData,
+      true, // volatile
+    );
   };
 
   broadcastVisibleSceneBounds = (
@@ -264,26 +346,25 @@ class Portal {
     },
     roomId: string,
   ) => {
-    if (this.socket?.id) {
-      const data: SocketUpdateDataSource["USER_VISIBLE_SCENE_BOUNDS"] = {
-        type: WS_SUBTYPES.USER_VISIBLE_SCENE_BOUNDS,
-        payload: {
-          socketId: this.socket.id as SocketId,
-          username: this.collab.state.username,
-          sceneBounds: payload.sceneBounds,
-        },
-      };
+    const senderId = (this.socket?.id || this.clientId) as SocketId;
+    const data: SocketUpdateDataSource["USER_VISIBLE_SCENE_BOUNDS"] = {
+      type: WS_SUBTYPES.USER_VISIBLE_SCENE_BOUNDS,
+      payload: {
+        socketId: senderId,
+        username: this.collab.state.username,
+        sceneBounds: payload.sceneBounds,
+      },
+    };
 
-      return this._broadcastSocketData(
-        data as SocketUpdateData,
-        true, // volatile
-        roomId,
-      );
-    }
+    return this._broadcastSocketData(
+      data as SocketUpdateData,
+      true, // volatile
+      roomId,
+    );
   };
 
   broadcastUserFollowed = (payload: OnUserFollowedPayload) => {
-    if (this.socket?.id) {
+    if (this.socket && this.socket.connected) {
       this.socket.emit(WS_EVENTS.USER_FOLLOW_CHANGE, payload);
     }
   };

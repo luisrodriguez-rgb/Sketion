@@ -217,7 +217,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     window.addEventListener(EVENT.UNLOAD, this.onUnload);
 
     const unsubOnUserFollow = this.excalidrawAPI.onUserFollow((payload) => {
-      this.portal.socket && this.portal.broadcastUserFollowed(payload);
+      this.portal.isOpen() && this.portal.broadcastUserFollowed(payload);
     });
     const throttledRelayUserViewportBounds = throttleRAF(
       this.relayVisibleSceneBounds,
@@ -426,13 +426,22 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   };
 
   sendChatMessage = (text: string) => {
-    if (this.portal.socket && this.portal.roomId) {
+    if (this.portal.roomId) {
       const msg = {
         text,
         username: this.getUsername(),
         timestamp: new Date().toISOString(),
       };
-      this.portal.socket.emit("server-chat", this.portal.roomId, msg);
+      if (this.portal.socket && this.portal.socket.connected) {
+        this.portal.socket.emit("server-chat", this.portal.roomId, msg);
+      }
+      if (this.portal.supabaseChannel) {
+        this.portal.supabaseChannel.send({
+          type: "broadcast",
+          event: "collab-chat",
+          payload: { senderId: this.portal.clientId, data: msg },
+        });
+      }
       window.dispatchEvent(
         new CustomEvent("collab-chat-message", { detail: msg }),
       );
@@ -440,22 +449,40 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   };
 
   sendCommentCreate = (comment: any) => {
-    if (this.portal.socket && this.portal.roomId) {
-      this.portal.socket.emit(
-        "server-comment-create",
-        this.portal.roomId,
-        comment,
-      );
+    if (this.portal.roomId) {
+      if (this.portal.socket && this.portal.socket.connected) {
+        this.portal.socket.emit(
+          "server-comment-create",
+          this.portal.roomId,
+          comment,
+        );
+      }
+      if (this.portal.supabaseChannel) {
+        this.portal.supabaseChannel.send({
+          type: "broadcast",
+          event: "collab-comment-create",
+          payload: { senderId: this.portal.clientId, comment },
+        });
+      }
     }
   };
 
   sendCommentResolve = (commentId: string) => {
-    if (this.portal.socket && this.portal.roomId) {
-      this.portal.socket.emit(
-        "server-comment-resolve",
-        this.portal.roomId,
-        commentId,
-      );
+    if (this.portal.roomId) {
+      if (this.portal.socket && this.portal.socket.connected) {
+        this.portal.socket.emit(
+          "server-comment-resolve",
+          this.portal.roomId,
+          commentId,
+        );
+      }
+      if (this.portal.supabaseChannel) {
+        this.portal.supabaseChannel.send({
+          type: "broadcast",
+          event: "collab-comment-resolve",
+          payload: { senderId: this.portal.clientId, commentId },
+        });
+      }
     }
   };
 
@@ -643,7 +670,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       }
     }
 
-    if (this.portal.socket) {
+    if (this.portal.isOpen()) {
       return null;
     }
 
@@ -670,10 +697,6 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     this.setIsCollaborating(true);
     LocalData.pauseSave("collaboration");
 
-    const { default: socketIOClient } = await import(
-      /* webpackChunkName: "socketIoClient" */ "socket.io-client"
-    );
-
     const fallbackInitializationHandler = () => {
       this.initializeRoom({
         roomLinkData: existingRoomLinkData,
@@ -684,18 +707,29 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     };
     this.fallbackInitializationHandler = fallbackInitializationHandler;
 
-    try {
-      this.portal.socket = this.portal.open(
-        socketIOClient(import.meta.env.VITE_APP_WS_SERVER_URL, {
+    let socket: any = null;
+    const wsUrl = import.meta.env.VITE_APP_WS_SERVER_URL;
+    if (wsUrl && wsUrl.trim() && !wsUrl.includes("oss-collab.excalidraw.com")) {
+      try {
+        const { default: socketIOClient } = await import(
+          /* webpackChunkName: "socketIoClient" */ "socket.io-client"
+        );
+        socket = socketIOClient(wsUrl, {
           transports: ["polling", "websocket"],
-          reconnectionAttempts: 5,
-          timeout: 5000,
-        }),
-        roomId,
-        roomKey,
-      );
+          reconnectionAttempts: 3,
+          timeout: 4000,
+        });
+        socket.once("connect_error", fallbackInitializationHandler);
+      } catch (e) {
+        console.warn(
+          "Could not connect to custom WS server, falling back to Supabase Realtime",
+          e,
+        );
+      }
+    }
 
-      this.portal.socket.once("connect_error", fallbackInitializationHandler);
+    try {
+      this.portal.open(socket, roomId, roomKey);
     } catch (error: any) {
       console.error(error);
       this.setErrorDialog(error.message);
@@ -732,52 +766,58 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     );
 
     // All socket listeners are moving to Portal
-    this.portal.socket.on(
-      "client-broadcast",
-      async (encryptedData: ArrayBuffer, iv: Uint8Array<ArrayBuffer>) => {
-        await this.handleIncomingEncryptedPayload(encryptedData, iv, scenePromise);
-      },
-    );
+    if (this.portal.socket) {
+      this.portal.socket.on(
+        "client-broadcast",
+        async (encryptedData: ArrayBuffer, iv: Uint8Array<ArrayBuffer>) => {
+          await this.handleIncomingEncryptedPayload(
+            encryptedData,
+            iv,
+            scenePromise,
+          );
+        },
+      );
 
-    this.portal.socket.on("first-in-room", async () => {
-      if (this.portal.socket) {
-        this.portal.socket.off("first-in-room");
-      }
-      const sceneData = await this.initializeRoom({
-        fetchScene: true,
-        roomLinkData: existingRoomLinkData,
-      });
-      scenePromise.resolve(sceneData);
-    });
-
-    this.portal.socket.on(
-      WS_EVENTS.USER_FOLLOW_ROOM_CHANGE,
-      (followedBy: SocketId[]) => {
-        this.excalidrawAPI.updateScene({
-          appState: { followedBy: new Set(followedBy) },
+      this.portal.socket.on("first-in-room", async () => {
+        if (this.portal.socket) {
+          this.portal.socket.off("first-in-room");
+        }
+        const sceneData = await this.initializeRoom({
+          fetchScene: true,
+          roomLinkData: existingRoomLinkData,
         });
+        scenePromise.resolve(sceneData);
+      });
 
-        this.relayVisibleSceneBounds({ force: true });
-      },
-    );
+      this.portal.socket.on(
+        WS_EVENTS.USER_FOLLOW_ROOM_CHANGE,
+        (followedBy: SocketId[]) => {
+          this.excalidrawAPI.updateScene({
+            appState: { followedBy: new Set(followedBy) },
+          });
 
-    this.portal.socket.on("client-chat", (data: any) => {
-      window.dispatchEvent(
-        new CustomEvent("collab-chat-message", { detail: data }),
+          this.relayVisibleSceneBounds({ force: true });
+        },
       );
-    });
 
-    this.portal.socket.on("client-comment-create", (comment: any) => {
-      window.dispatchEvent(
-        new CustomEvent("collab-comment-create", { detail: comment }),
-      );
-    });
+      this.portal.socket.on("client-chat", (data: any) => {
+        window.dispatchEvent(
+          new CustomEvent("collab-chat-message", { detail: data }),
+        );
+      });
 
-    this.portal.socket.on("client-comment-resolve", (commentId: string) => {
-      window.dispatchEvent(
-        new CustomEvent("collab-comment-resolve", { detail: commentId }),
-      );
-    });
+      this.portal.socket.on("client-comment-create", (comment: any) => {
+        window.dispatchEvent(
+          new CustomEvent("collab-comment-create", { detail: comment }),
+        );
+      });
+
+      this.portal.socket.on("client-comment-resolve", (commentId: string) => {
+        window.dispatchEvent(
+          new CustomEvent("collab-comment-resolve", { detail: commentId }),
+        );
+      });
+    }
 
     this.initializeIdleDetector();
 
@@ -948,12 +988,13 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   };
 
   setCollaborators(sockets: SocketId[]) {
+    const currentId = (this.portal.socket?.id || this.portal.clientId) as SocketId;
     const oldSockets = Array.from(this.collaborators.keys());
     const joined = sockets.filter(
-      (id) => !oldSockets.includes(id) && id !== this.portal.socket?.id,
+      (id) => !oldSockets.includes(id) && id !== currentId,
     );
     const left = oldSockets.filter(
-      (id) => !sockets.includes(id) && id !== this.portal.socket?.id,
+      (id) => !sockets.includes(id) && id !== currentId,
     );
 
     joined.forEach((id) => {
@@ -973,7 +1014,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       collaborators.set(
         socketId,
         Object.assign({}, this.collaborators.get(socketId), {
-          isCurrentUser: socketId === this.portal.socket?.id,
+          isCurrentUser: socketId === currentId,
         }),
       );
     }
@@ -982,13 +1023,14 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   }
 
   updateCollaborator = (socketId: SocketId, updates: Partial<Collaborator>) => {
+    const currentId = (this.portal.socket?.id || this.portal.clientId) as SocketId;
     const collaborators = new Map(this.collaborators);
     const user: Mutable<Collaborator> = Object.assign(
       {},
       collaborators.get(socketId),
       updates,
       {
-        isCurrentUser: socketId === this.portal.socket?.id,
+        isCurrentUser: socketId === currentId,
       },
     );
     collaborators.set(socketId, user);
@@ -1018,7 +1060,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       pointersMap: Gesture["pointers"];
     }) => {
       payload.pointersMap.size < 2 &&
-        this.portal.socket &&
+        this.portal.isOpen() &&
         this.portal.broadcastMouseLocation(payload);
     },
     CURSOR_SYNC_TIMEOUT,
@@ -1026,13 +1068,14 @@ class Collab extends PureComponent<CollabProps, CollabState> {
 
   relayVisibleSceneBounds = (props?: { force: boolean }) => {
     const appState = this.excalidrawAPI.getAppState();
+    const currentId = (this.portal.socket?.id || this.portal.clientId) as SocketId;
 
-    if (this.portal.socket && (appState.followedBy.size > 0 || props?.force)) {
+    if (this.portal.isOpen() && (appState.followedBy.size > 0 || props?.force)) {
       this.portal.broadcastVisibleSceneBounds(
         {
           sceneBounds: getVisibleSceneBounds(appState),
         },
-        `follow@${this.portal.socket.id}`,
+        `follow@${currentId}`,
       );
     }
   };
