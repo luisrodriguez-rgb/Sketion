@@ -68,7 +68,42 @@ export async function saveBoardsMetadata(
 export async function getBoard(id: string): Promise<Board | null> {
   try {
     const board = await get<Board>(`board_content_${id}`, boardsStore);
-    return board || null;
+    if (board) {
+      return board;
+    }
+
+    if (id && id !== "collab_room" && id !== "board_default") {
+      try {
+        const { data: remoteBoard, error } = await supabase
+          .from("boards")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (remoteBoard && !error) {
+          const loadedBoard: Board = {
+            id: remoteBoard.id,
+            name: remoteBoard.name || "Untitled Board",
+            createdAt: new Date(remoteBoard.created_at).getTime(),
+            updatedAt: new Date(remoteBoard.updated_at).getTime(),
+            elements: remoteBoard.elements || [],
+            appState: remoteBoard.app_state || {},
+            files: remoteBoard.files || {},
+            tags: remoteBoard.tags || [],
+            folderId: remoteBoard.folder_id,
+            password: remoteBoard.password,
+            isTemplate: remoteBoard.is_template,
+            isDeleted: remoteBoard.is_deleted,
+          };
+          await set(`board_content_${id}`, loadedBoard, boardsStore);
+          return loadedBoard;
+        }
+      } catch (remoteErr) {
+        console.warn(`Could not fetch remote board ${id} from Supabase:`, remoteErr);
+      }
+    }
+
+    return null;
   } catch (error) {
     console.error(`Error reading board ${id}:`, error);
     return null;

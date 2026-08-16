@@ -1155,6 +1155,7 @@ const ExcalidrawWrapper = () => {
           const now = Date.now();
           // Skip if we ourselves just saved (avoid echo)
           if (now - lastLocalSaveTimeRef.current > 500) {
+            const currentCount = excalidrawAPI.getSceneElements().length;
             const elements = restoreElements(payload.elements, null);
             excalidrawAPI.updateScene({
               elements,
@@ -1163,12 +1164,36 @@ const ExcalidrawWrapper = () => {
             if (payload.files && Object.keys(payload.files).length > 0) {
               excalidrawAPI.addFiles(Object.values(payload.files));
             }
+            if (currentCount === 0 && elements.length > 0) {
+              (excalidrawAPI as any).scrollToContent?.(elements, { fitToViewport: true });
+            }
+          }
+        }
+      })
+      .on("broadcast", { event: "request-canvas" }, ({ payload }) => {
+        if (payload && payload.senderId !== socketId) {
+          const currentElements = excalidrawAPI.getSceneElementsIncludingDeleted();
+          if (currentElements && currentElements.length > 0) {
+            broadcastChannel.send({
+              type: "broadcast",
+              event: "canvas",
+              payload: {
+                senderId: socketId,
+                elements: currentElements,
+                files: excalidrawAPI.getFiles(),
+              },
+            });
           }
         }
       })
       .subscribe((status) => {
         if (status === "SUBSCRIBED") {
           isBroadcastSubscribed = true;
+          broadcastChannel.send({
+            type: "broadcast",
+            event: "request-canvas",
+            payload: { senderId: socketId },
+          });
         }
       });
 
@@ -1221,6 +1246,19 @@ const ExcalidrawWrapper = () => {
           excalidrawAPI.setToast({ message: `👋 ${user} se unió a la sala`, duration: 3000 });
           if ("Notification" in window && Notification.permission === "granted") {
             new Notification("Nueva conexión", { body: `${user} se unió a la sala colaborativa.` });
+          }
+          // Automatically sync canvas to newly joined peer
+          const currentElements = excalidrawAPI.getSceneElementsIncludingDeleted();
+          if (currentElements && currentElements.length > 0 && broadcastChannelRef.current) {
+            broadcastChannelRef.current.send({
+              type: "broadcast",
+              event: "canvas",
+              payload: {
+                senderId: socketId,
+                elements: currentElements,
+                files: excalidrawAPI.getFiles(),
+              },
+            });
           }
         }
       })
