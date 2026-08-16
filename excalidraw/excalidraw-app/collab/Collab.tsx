@@ -144,6 +144,7 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   private socketInitializationTimer?: number;
   private lastBroadcastedOrReceivedSceneVersion: number = -1;
   private collaborators = new Map<SocketId, Collaborator>();
+  public scenePromise: any = null;
 
   constructor(props: CollabProps) {
     super(props);
@@ -554,20 +555,19 @@ class Collab extends PureComponent<CollabProps, CollabState> {
       case WS_SUBTYPES.INVALID_RESPONSE:
         return;
       case WS_SUBTYPES.INIT: {
-        if (!this.portal.socketInitialized) {
-          this.initializeRoom({ fetchScene: false });
-          const remoteElements = toBrandedType<
-            readonly RemoteExcalidrawElement[]
-          >(decryptedData.payload.elements);
-          const reconciledElements =
-            this._reconcileElements(remoteElements);
-          this.handleRemoteSceneUpdate(reconciledElements);
-          if (scenePromise) {
-            scenePromise.resolve({
-              elements: reconciledElements,
-              scrollToContent: true,
-            });
-          }
+        const remoteElements = toBrandedType<
+          readonly RemoteExcalidrawElement[]
+        >(decryptedData.payload.elements);
+        const reconciledElements =
+          this._reconcileElements(remoteElements);
+        this.handleRemoteSceneUpdate(reconciledElements);
+        const targetPromise = scenePromise || this.scenePromise;
+        if (targetPromise) {
+          targetPromise.resolve({
+            elements: reconciledElements,
+            scrollToContent: true,
+          });
+          this.scenePromise = null;
         }
         break;
       }

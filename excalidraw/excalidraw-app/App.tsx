@@ -47,14 +47,17 @@ import {
   share,
   youtubeIcon,
 } from "@excalidraw/excalidraw/components/icons";
-import { isElementLink } from "@excalidraw/element";
+import {
+  isElementLink,
+  newElementWith,
+  isInitializedImageElement,
+  getSceneVersion,
+} from "@excalidraw/element";
 import {
   bumpElementVersions,
   restoreAppState,
   restoreElements,
 } from "@excalidraw/excalidraw/data/restore";
-import { newElementWith } from "@excalidraw/element";
-import { isInitializedImageElement } from "@excalidraw/element";
 import clsx from "clsx";
 import {
   parseLibraryTokensFromUrl,
@@ -601,7 +604,7 @@ const ExcalidrawWrapper = () => {
   const presenceChannelRef = useRef<any>(null);
   const broadcastChannelRef = useRef<any>(null);
   const lastUsernameRef = useRef<string>("Usuario");
-  const lastBroadcastElementsRef = useRef<string>("");
+  const lastBroadcastSceneVersionRef = useRef<number>(-1);
   const [presenceUsers, setPresenceUsers] = useState<
     Array<{ username: string; color: string }>
   >([]);
@@ -1151,11 +1154,12 @@ const ExcalidrawWrapper = () => {
 
     broadcastChannel
       .on("broadcast", { event: "canvas" }, ({ payload }) => {
-        if (payload && payload.senderId !== socketId) {
-          const now = Date.now();
-          // Skip if we ourselves just saved (avoid echo)
-          if (now - lastLocalSaveTimeRef.current > 500) {
-            const currentCount = excalidrawAPI.getSceneElements().length;
+        if (payload && payload.senderId !== socketId && payload.elements) {
+          const currentElements = excalidrawAPI.getSceneElementsIncludingDeleted();
+          const remoteVersion = getSceneVersion(payload.elements);
+          const localVersion = getSceneVersion(currentElements);
+          if (remoteVersion !== localVersion || currentElements.length === 0) {
+            lastBroadcastSceneVersionRef.current = remoteVersion;
             const elements = restoreElements(payload.elements, null);
             excalidrawAPI.updateScene({
               elements,
@@ -1164,7 +1168,7 @@ const ExcalidrawWrapper = () => {
             if (payload.files && Object.keys(payload.files).length > 0) {
               excalidrawAPI.addFiles(Object.values(payload.files));
             }
-            if (currentCount === 0 && elements.length > 0) {
+            if (currentElements.length === 0 && elements.length > 0) {
               (excalidrawAPI as any).scrollToContent?.(elements, { fitToViewport: true });
             }
           }
@@ -1840,6 +1844,27 @@ const ExcalidrawWrapper = () => {
     ),
   ).current;
 
+  // Throttled canvas broadcast - sends real-time updates smoothly at ~16 FPS without saturating WebSockets
+  const throttledBroadcastCanvas = useRef(
+    throttle(
+      (channel: any, senderId: string, elements: any, files: any) => {
+        if (channel && typeof channel.send === "function") {
+          channel.send({
+            type: "broadcast",
+            event: "canvas",
+            payload: {
+              senderId,
+              elements,
+              files,
+            },
+          });
+        }
+      },
+      50,
+      { leading: true, trailing: true },
+    ),
+  ).current;
+
   const onChange = (
     elements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -1880,19 +1905,16 @@ const ExcalidrawWrapper = () => {
         typeof broadcastChannelRef.current.__subscribed === "function" &&
         broadcastChannelRef.current.__subscribed()
       ) {
-        const elementsJson = JSON.stringify(elements.map((el) => el.id));
-        if (elementsJson !== lastBroadcastElementsRef.current) {
-          lastBroadcastElementsRef.current = elementsJson;
-          // Use httpSend to avoid REST fallback warnings
-          broadcastChannelRef.current.send({
-            type: "broadcast",
-            event: "canvas",
-            payload: {
-              senderId: (broadcastChannelRef.current as any).__socketId ?? "anon",
-              elements,
-              files,
-            },
-          });
+        const sceneVersion = getSceneVersion(elements);
+        if (sceneVersion !== lastBroadcastSceneVersionRef.current) {
+          lastBroadcastSceneVersionRef.current = sceneVersion;
+          const currentFiles = excalidrawAPI ? { ...excalidrawAPI.getFiles(), ...files } : files;
+          throttledBroadcastCanvas(
+            broadcastChannelRef.current,
+            (broadcastChannelRef.current as any).__socketId ?? "anon",
+            elements,
+            currentFiles,
+          );
         }
       }
     }
