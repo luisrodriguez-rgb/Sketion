@@ -2863,17 +2863,16 @@ const ExcalidrawWrapper = () => {
         </div>
       )}
 
-      {/* Grupo Unificado de Botones Flotantes — oculto durante presentación */}
+      {/* Grupo Unificado de Botones Flotantes — dock vertical estilo Island */}
       {excalidrawAPI && activeBoardId && !isPresenting && (
         <div
-          className="floating-action-buttons-group"
+          className="floating-action-buttons-group Island"
           style={{
             position: "fixed",
             top: "140px",
             right: showNotesSidebar || Boolean(excalidrawAPI?.getAppState()?.openSidebar) ? "370px" : "18px",
             display: "flex",
             flexDirection: "column",
-            gap: "6px",
             zIndex: 9999999,
             transition: "right 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
             pointerEvents: "auto",
@@ -2884,19 +2883,11 @@ const ExcalidrawWrapper = () => {
         >
           {/* 1. Modo Estudio */}
           <button
-            className="floating-action-btn floating-study-btn"
+            className={`floating-action-btn floating-study-btn ${showStudyMode ? "active" : ""}`}
             onPointerDown={(e) => { e.stopPropagation(); setShowStudyMode(true); }}
             title="Modo Estudio"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#ef4444",
-              border: "1.5px solid #fecaca",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
             </svg>
           </button>
@@ -2906,14 +2897,7 @@ const ExcalidrawWrapper = () => {
             className="floating-action-btn"
             onPointerDown={(e) => { e.stopPropagation(); setShowLaTeXModal(true); setTechnicalInputText(""); }}
             title="Insertar Ecuación LaTeX"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#ef4444",
-              border: "1.5px solid #fecaca",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: "bold", fontSize: "15px", pointerEvents: "auto",
-            }}
+            style={{ fontWeight: 700, fontSize: "16px" }}
           >
             Σ
           </button>
@@ -2937,17 +2921,9 @@ const ExcalidrawWrapper = () => {
               });
             }}
             title="Abrir selector de Google Drive"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#4285F4",
-              border: "1.5px solid #dbeafe",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
             {/* Google Drive icon */}
-            <svg width="16" height="16" viewBox="0 0 87.3 78" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg width="17" height="17" viewBox="0 0 87.3 78" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
               <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
               <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
@@ -2962,16 +2938,8 @@ const ExcalidrawWrapper = () => {
             className="floating-action-btn"
             onPointerDown={(e) => { e.stopPropagation(); setShowMermaidModal(true); setTechnicalInputText(""); }}
             title="Diagrama Mermaid — convierte código a nodos y flechas"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#d97706",
-              border: "1.5px solid #fde68a",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="5" r="2"/>
               <circle cx="5" cy="19" r="2"/>
               <circle cx="19" cy="19" r="2"/>
@@ -2985,23 +2953,15 @@ const ExcalidrawWrapper = () => {
             className="floating-action-btn floating-sheets-btn"
             onPointerDown={(e) => { e.stopPropagation(); setShowSheetsModal(true); setSheetInputText(""); }}
             title="Importar tabla desde Google Sheets o CSV"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#0f9d58",
-              border: "1.5px solid #bbf7d0",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19.002 3h-14c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3h5v2h-5V6zm0 3h5v2h-5V9zm0 3h5v2h-5v-2zM7 6h3v2H7V6zm0 3h3v2H7V9zm0 3h3v2H7v-2zm0 3h10v2H7v-2z"/>
             </svg>
           </button>
 
           {/* 6. Importar PDF */}
           <button
-            className="floating-action-btn floating-pdf-btn"
+            className={`floating-action-btn floating-pdf-btn ${isImportingPDF ? "active" : ""}`}
             disabled={isImportingPDF}
             onPointerDown={(e) => {
               e.stopPropagation();
@@ -3092,95 +3052,55 @@ const ExcalidrawWrapper = () => {
               input.click();
             }}
             title={isImportingPDF ? "Importando PDF..." : "Importar PDF al canvas"}
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: isImportingPDF ? "#ef4444" : "#ffffff",
-              color: isImportingPDF ? "#ffffff" : "#ef4444",
-              border: "1.5px solid #fecaca",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: isImportingPDF ? "wait" : "pointer",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              position: "relative",
-              pointerEvents: "auto",
-            }}
           >
             {isImportingPDF ? (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 1s linear infinite" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: "spin 1s linear infinite" }}>
                 <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
               </svg>
             ) : (
-              <>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                </svg>
-                <span style={{ position: "absolute", bottom: "2px", right: "2px", fontSize: "6px", fontWeight: 800, color: "#ef4444", letterSpacing: "-0.5px", lineHeight: 1 }}>PDF</span>
-              </>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
             )}
           </button>
 
-          {/* 8. Notas del Elemento */}
+          {/* 7. Notas del Elemento */}
           <button
-            className="floating-action-btn floating-notes-btn"
+            className={`floating-action-btn floating-notes-btn ${showNotesSidebar ? "active" : ""}`}
             onPointerDown={(e) => { e.stopPropagation(); setShowNotesSidebar(!showNotesSidebar); }}
             title={showNotesSidebar ? "Cerrar notas" : "Notas del elemento"}
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: showNotesSidebar ? "#ef4444" : "#ffffff",
-              color: showNotesSidebar ? "#ffffff" : "#ef4444",
-              border: `1.5px solid ${showNotesSidebar ? "#ef4444" : "#fecaca"}`,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
             </svg>
           </button>
 
-          {/* 9. Modo Presentación */}
+          {/* 8. Modo Presentación */}
           <button
-            className="floating-action-btn floating-presentation-btn"
+            className={`floating-action-btn floating-presentation-btn ${isPresenting ? "active" : ""}`}
             onPointerDown={(e) => { e.stopPropagation(); setIsPresenting(!isPresenting); }}
             title="Iniciar modo presentación"
-            style={{
-              width: "36px", height: "36px", borderRadius: "50%",
-              backgroundColor: "#ffffff", color: "#ef4444",
-              border: "1.5px solid #fecaca",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"/>
             </svg>
           </button>
 
-          {/* 10. Modo Comentarios */}
+          {/* 9. Modo Comentarios */}
           {activeBoardId !== "collab_room" && (
             <button
               className={`floating-action-btn floating-comment-mode-btn ${commentModeActive ? "active" : ""}`}
               onPointerDown={(e) => { e.stopPropagation(); setCommentModeActive(!commentModeActive); }}
               title={commentModeActive ? "Desactivar comentarios" : "Activar modo comentarios"}
-              style={{
-                width: "36px", height: "36px", borderRadius: "50%",
-                backgroundColor: commentModeActive ? "#ef4444" : "#ffffff",
-                color: commentModeActive ? "#ffffff" : "#64748b",
-                border: `1.5px solid ${commentModeActive ? "#ef4444" : "#e2e8f0"}`,
-                boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-                cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-                pointerEvents: "auto",
-              }}
             >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
               </svg>
             </button>
           )}
 
-          {/* 11. Alternar Mapa del Canvas */}
+          {/* 10. Alternar Mapa del Canvas */}
           <button
             className={`floating-action-btn floating-minimap-btn ${minimapVisible ? "active" : ""}`}
             onPointerDown={(e) => {
@@ -3188,25 +3108,11 @@ const ExcalidrawWrapper = () => {
               setMinimapVisible(!minimapVisible);
             }}
             title={minimapVisible ? "Ocultar mapa del canvas" : "Mostrar mapa del canvas"}
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "50%",
-              backgroundColor: minimapVisible ? "#ef4444" : "#ffffff",
-              color: minimapVisible ? "#ffffff" : "#ef4444",
-              border: `1.5px solid ${minimapVisible ? "#ef4444" : "#fecaca"}`,
-              boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              pointerEvents: "auto",
-            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="17"
+              height="17"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

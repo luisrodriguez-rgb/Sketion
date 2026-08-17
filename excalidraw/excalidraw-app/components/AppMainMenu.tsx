@@ -84,7 +84,7 @@ export const AppMainMenu: React.FC<{
       <MainMenu.DefaultItems.SaveToActiveFile />
       <MainMenu.DefaultItems.Export />
       <MainMenu.DefaultItems.SaveAsImage />
-      <MainMenu.DefaultItems.CommandPalette className="highlighted" />
+      <MainMenu.DefaultItems.CommandPalette />
 
       <MainMenu.DefaultItems.SearchMenu />
       <MainMenu.DefaultItems.Help />
@@ -109,7 +109,6 @@ export const AppMainMenu: React.FC<{
           <MainMenu.Item
             icon={LogOutIcon}
             onSelect={handleSignOut}
-            className="highlighted"
           >
             Cerrar Sesión
           </MainMenu.Item>
@@ -124,7 +123,6 @@ export const AppMainMenu: React.FC<{
               window.location.reload();
             }
           }}
-          className="highlighted"
         >
           Iniciar Sesión
         </MainMenu.Item>

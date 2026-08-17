@@ -407,31 +407,85 @@
   }
 }
 
-/* Grouped Right Floating Buttons Docking & Positioning */
-.excalidraw-app {
-  .floating-action-btn,
-  .floating-notes-btn,
-  .floating-presentation-btn,
-  .floating-comment-mode-btn,
-  .floating-pdf-btn,
-  .floating-sheets-btn,
-  .floating-minimap-btn {
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    background-color: #ffffff !important;
-    color: #1e293b !important;
-    border: 1px solid rgba(226, 232, 240, 0.8) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+/* Grouped Right Floating Toolbar (Matching Excalidraw Island Toolbar in Image 2) */
+.floating-action-buttons-group {
+  background-color: var(--island-bg-color, #ffffff) !important;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08)) !important;
+  border-radius: var(--border-radius-lg, 10px) !important;
+  box-shadow: var(--shadow-island, 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05)) !important;
+  padding: 4px !important;
+  gap: 3px !important;
 
-    &:hover {
-      background-color: var(--sk-primary, #2563eb) !important;
+  .floating-action-btn {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: var(--border-radius-md, 8px) !important;
+    border: none !important;
+    outline: none !important;
+    background-color: transparent !important;
+    color: var(--icon-fill-color, #334155) !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.12s ease, color 0.12s ease !important;
+    transform: none !important;
+    padding: 0 !important;
+
+    svg {
+      color: inherit;
+    }
+
+    &:hover:not(.active) {
+      background-color: var(--button-hover-bg, #f1f5f9) !important;
+      color: var(--color-on-surface, #0f172a) !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    &.active {
+      background-color: var(--color-primary, #2563eb) !important;
       color: #ffffff !important;
-      border-color: var(--sk-primary, #2563eb) !important;
-      transform: translateY(-3px) scale(1.05) !important;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35) !important;
+      border-radius: var(--border-radius-md, 8px) !important;
+      transform: none !important;
+      box-shadow: none !important;
+
+      svg {
+        color: #ffffff !important;
+        stroke: #ffffff !important;
+      }
+      polygon {
+        fill: #ffffff !important;
+      }
     }
 
     &:active {
-      transform: translateY(-1px) scale(0.98) !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* Dark theme styling for right dock */
+.excalidraw.theme--dark ~ .floating-action-buttons-group,
+.excalidraw.theme--dark + .floating-action-buttons-group,
+.excalidraw-app:has(.theme--dark) .floating-action-buttons-group,
+.excalidraw-app.theme--dark .floating-action-buttons-group {
+  background-color: #232329 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+
+  .floating-action-btn {
+    color: #cbd5e1 !important;
+
+    &:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      color: #ffffff !important;
+    }
+
+    &.active {
+      background-color: #2563eb !important;
+      color: #ffffff !important;
     }
   }
 }

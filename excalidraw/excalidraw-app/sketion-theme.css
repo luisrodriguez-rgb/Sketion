@@ -150,8 +150,7 @@ h1, h2, h3, h4, .font-display, .sketion-welcome-title {
 /* Toolbar Buttons Hover */
 .excalidraw .ToolIcon_type_radio + label,
 .excalidraw .ToolIcon_type_button,
-.excalidraw .button-list label,
-.excalidraw .dropdown-menu-item {
+.excalidraw .button-list label {
   border-radius: var(--sk-radius-sm) !important;
   transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -249,30 +248,31 @@ h1, h2, h3, h4, .font-display, .sketion-welcome-title {
   color: var(--sk-text-dark) !important;
 }
 
-/* Dropdown Menu Item Hover */
-.excalidraw .dropdown-menu-item:hover,
-.excalidraw .dropdown-menu-item.highlighted {
-  border-left: 3px solid var(--sk-primary) !important;
-  padding-left: 12px !important;
+/* Dropdown Menu Item Hover (Simple, flat, no jumping or scaling) */
+.excalidraw .dropdown-menu-item {
+  border: none !important;
+  transform: none !important;
+  transition: background-color 0.12s ease !important;
 }
 
-.excalidraw.theme--light .dropdown-menu-item:hover,
-.excalidraw.theme--light .dropdown-menu-item.highlighted {
-  background: rgba(37, 99, 235, 0.08) !important;
-  color: var(--sk-primary) !important;
-}
-.excalidraw.theme--light .dropdown-menu-item:hover *,
-.excalidraw.theme--light .dropdown-menu-item.highlighted * {
-  color: var(--sk-primary) !important;
+.excalidraw .dropdown-menu-item:hover {
+  border: none !important;
+  transform: none !important;
 }
 
-.excalidraw.theme--dark .dropdown-menu-item:hover,
-.excalidraw.theme--dark .dropdown-menu-item.highlighted {
-  background: rgba(37, 99, 235, 0.18) !important;
+.excalidraw.theme--light .dropdown-menu-item:hover {
+  background: var(--button-hover-bg, #f1f5f9) !important;
+  color: var(--color-on-surface, #0f172a) !important;
+}
+.excalidraw.theme--light .dropdown-menu-item:hover * {
+  color: var(--color-on-surface, #0f172a) !important;
+}
+
+.excalidraw.theme--dark .dropdown-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
   color: #FFFFFF !important;
 }
-.excalidraw.theme--dark .dropdown-menu-item:hover *,
-.excalidraw.theme--dark .dropdown-menu-item.highlighted * {
+.excalidraw.theme--dark .dropdown-menu-item:hover * {
   color: #FFFFFF !important;
 }
 
