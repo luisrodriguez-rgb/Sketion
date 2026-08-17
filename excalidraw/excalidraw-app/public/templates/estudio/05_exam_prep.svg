@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1525.0 515.0" width="1525.0" height="515.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1525.0" height="515.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1445.0" height="435.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION TEMPLATE LIBRARY · ESTUDIO · INTER VECTORIAL</text>
+  <text x="40.0" y="91.0" fill="#64748B" font-size="11px" font-weight="400">TEMA DE EXAMEN</text>
+  <text x="340.0" y="91.0" fill="#64748B" font-size="11px" font-weight="400">DIFICULTAD</text>
+  <text x="540.0" y="91.0" fill="#64748B" font-size="11px" font-weight="400">ESTADO</text>
+  <text x="740.0" y="91.0" fill="#64748B" font-size="11px" font-weight="400">HORAS ESTIMADAS</text>
+  <text x="1000.0" y="91.0" fill="#64748B" font-size="11px" font-weight="400">ACCION CLAVE</text>
+  <rect x="30.0" y="120.0" width="1390.0" height="65.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="40.0" y="153.0" fill="#0F172A" font-size="11px" font-weight="400">1. Programacion Dinamica</text>
+  <text x="340.0" y="153.0" fill="#D93829" font-size="11px" font-weight="400">ALTA</text>
+  <text x="540.0" y="153.0" fill="#D97706" font-size="11px" font-weight="400">REPASO</text>
+  <text x="740.0" y="153.0" fill="#64748B" font-size="11px" font-weight="400">4h</text>
+  <text x="1000.0" y="153.0" fill="#334155" font-size="11px" font-weight="400">Resolver ejercicios LeetCode Hard</text>
+  <rect x="30.0" y="195.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <text x="40.0" y="228.0" fill="#0F172A" font-size="11px" font-weight="400">2. Grafos y BFS / DFS</text>
+  <text x="340.0" y="228.0" fill="#0F172A" font-size="11px" font-weight="400">MEDIA</text>
+  <text x="540.0" y="228.0" fill="#059669" font-size="11px" font-weight="400">DOMINADO</text>
+  <text x="740.0" y="228.0" fill="#64748B" font-size="11px" font-weight="400">2h</text>
+  <text x="1000.0" y="228.0" fill="#334155" font-size="11px" font-weight="400">Revisar implementacion de Dijkstra</text>
+  <rect x="30.0" y="270.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <text x="40.0" y="303.0" fill="#0F172A" font-size="11px" font-weight="400">3. Arboles AVL y Red-Black</text>
+  <text x="340.0" y="303.0" fill="#D93829" font-size="11px" font-weight="400">ALTA</text>
+  <text x="540.0" y="303.0" fill="#D97706" font-size="11px" font-weight="400">PENDIENTE</text>
+  <text x="740.0" y="303.0" fill="#64748B" font-size="11px" font-weight="400">3h</text>
+  <text x="1000.0" y="303.0" fill="#334155" font-size="11px" font-weight="400">Dibujar rotaciones a mano</text>
+  <rect x="30.0" y="345.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+  <text x="40.0" y="378.0" fill="#0F172A" font-size="11px" font-weight="400">4. Analisis Asintotico Big-O</text>
+  <text x="340.0" y="378.0" fill="#0F172A" font-size="11px" font-weight="400">BAJA</text>
+  <text x="540.0" y="378.0" fill="#059669" font-size="11px" font-weight="400">DOMINADO</text>
+  <text x="740.0" y="378.0" fill="#64748B" font-size="11px" font-weight="400">1h</text>
+  <text x="1000.0" y="378.0" fill="#334155" font-size="11px" font-weight="400">Repaso de cotas ajustadas</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1520.0 535.0" width="1520.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1520.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1440.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION TEMPLATE LIBRARY · INGENIERÍA · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="260.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="60.0" y="118.0" fill="#0F172A" font-size="13px" font-weight="400">SUPPLIERS</text>
+  <text x="60.0" y="161.0" fill="#475569" font-size="11px" font-weight="400">Proveedores de materia prima
+y especificaciones tecnicas</text>
+  <rect x="315.0" y="80.0" width="260.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="335.0" y="118.0" fill="#0F172A" font-size="13px" font-weight="400">INPUTS</text>
+  <text x="335.0" y="161.0" fill="#475569" font-size="11px" font-weight="400">Materiales, energia, APIs
+y requerimientos de diseno</text>
+  <rect x="590.0" y="80.0" width="260.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="610.0" y="118.0" fill="#D93829" font-size="13px" font-weight="400">PROCESS</text>
+  <text x="610.0" y="161.0" fill="#475569" font-size="11px" font-weight="400">Transformacion paso a paso
+con controles de calidad</text>
+  <rect x="865.0" y="80.0" width="260.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="885.0" y="118.0" fill="#0F172A" font-size="13px" font-weight="400">OUTPUTS</text>
+  <text x="885.0" y="161.0" fill="#475569" font-size="11px" font-weight="400">Producto terminado, reportes
+y metricas de produccion</text>
+  <rect x="1140.0" y="80.0" width="260.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="1160.0" y="118.0" fill="#0F172A" font-size="13px" font-weight="400">CUSTOMERS</text>
+  <text x="1160.0" y="161.0" fill="#475569" font-size="11px" font-weight="400">Clientes finales, plantas
+y operadores de servicio</text>
+</svg>

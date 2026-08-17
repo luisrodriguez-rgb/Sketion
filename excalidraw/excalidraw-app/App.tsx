@@ -2392,11 +2392,15 @@ const ExcalidrawWrapper = () => {
     const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
     let name = "Nueva Pizarra";
     let elements: any[] = [];
+    let appState: any = { viewBackgroundColor: "#F8FAFC" };
     if (templateId) {
       const template = TEMPLATES.find((t) => t.id === templateId);
       if (template) {
         name = template.name;
         elements = template.getElements();
+        if (template.getAppState) {
+          appState = template.getAppState();
+        }
       } else {
         const { processAIPromptToCanvas } = await import("./data/aiSkillEngine");
         const aiResult = processAIPromptToCanvas(templateId);
@@ -2404,7 +2408,7 @@ const ExcalidrawWrapper = () => {
         elements = aiResult.elements;
       }
     }
-    await saveBoard(id, { name }, elements, {}, {});
+    await saveBoard(id, { name }, elements, appState, {});
     setActiveBoardName(name);
     setActiveBoardId(id);
   };

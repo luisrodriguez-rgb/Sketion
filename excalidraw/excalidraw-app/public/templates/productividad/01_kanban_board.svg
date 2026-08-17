@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1589.6 535.0" width="1589.6" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1589.6" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1509.6" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION TEMPLATE LIBRARY · PRODUCTIVIDAD · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="330.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="60.0" y="117.0" fill="#0F172A" font-size="12px" font-weight="400">BACKLOG</text>
+  <rect x="55.0" y="140.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="67.0" y="150.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="71.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="69.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #1</text>
+  <text x="69.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Descripcion de actividad prioritaria</text>
+  <rect x="55.0" y="230.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="67.0" y="240.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="71.0" y="252.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="69.0" y="282.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #2</text>
+  <text x="69.0" y="302.9" fill="#475569" font-size="12px" font-weight="400">Validacion y testing de modulo</text>
+  <rect x="385.0" y="80.0" width="330.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="405.0" y="117.0" fill="#D93829" font-size="12px" font-weight="400">EN PROGRESO</text>
+  <rect x="400.0" y="140.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="412.0" y="150.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="416.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="414.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #3</text>
+  <text x="414.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Descripcion de actividad prioritaria</text>
+  <rect x="400.0" y="230.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="412.0" y="240.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="416.0" y="252.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="414.0" y="282.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #4</text>
+  <text x="414.0" y="302.9" fill="#475569" font-size="12px" font-weight="400">Validacion y testing de modulo</text>
+  <rect x="730.0" y="80.0" width="330.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="750.0" y="117.0" fill="#0F172A" font-size="12px" font-weight="400">EN REVISION</text>
+  <rect x="745.0" y="140.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="757.0" y="150.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="761.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="759.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #5</text>
+  <text x="759.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Descripcion de actividad prioritaria</text>
+  <rect x="745.0" y="230.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="757.0" y="240.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="761.0" y="252.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="759.0" y="282.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #6</text>
+  <text x="759.0" y="302.9" fill="#475569" font-size="12px" font-weight="400">Validacion y testing de modulo</text>
+  <rect x="1075.0" y="80.0" width="330.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="1095.0" y="117.0" fill="#0F172A" font-size="12px" font-weight="400">COMPLETADO</text>
+  <rect x="1090.0" y="140.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="1102.0" y="150.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="1106.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="1104.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #7</text>
+  <text x="1104.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Descripcion de actividad prioritaria</text>
+  <rect x="1090.0" y="230.0" width="300.0" height="75.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="1102.0" y="240.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="1106.0" y="252.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="1104.0" y="282.0" fill="#0F172A" font-size="14px" font-weight="600">Tarea #8</text>
+  <text x="1104.0" y="302.9" fill="#475569" font-size="12px" font-weight="400">Validacion y testing de modulo</text>
+</svg>

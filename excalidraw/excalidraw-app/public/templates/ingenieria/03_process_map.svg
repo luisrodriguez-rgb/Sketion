@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1256.4 375.0" width="1256.4" height="375.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1256.4" height="375.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1176.4" height="295.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION TEMPLATE LIBRARY · INGENIERÍA · INTER VECTORIAL</text>
+  <rect x="40.0" y="160.0" width="220.0" height="100.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="52.0" y="170.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="56.0" y="182.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="54.0" y="212.0" fill="#0F172A" font-size="14px" font-weight="600">1. Ingestion</text>
+  <text x="54.0" y="232.9" fill="#475569" font-size="12px" font-weight="400">Recepcion de Lote</text>
+  <line x1="260.0" y1="210.0" x2="340.0" y2="210.0" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <polygon points="400.0,150.0 460.0,210.0 400.0,270.0 340.0,210.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.8" />
+  <text x="370.0" y="211.0" fill="#D93829" font-size="11px" font-weight="400">¿Valido?</text>
+  <line x1="460.0" y1="210.0" x2="560.0" y2="210.0" stroke="#D93829" stroke-width="1.5" marker-end="url(#arrowhead-hero)" />
+  <text x="485.0" y="200.0" fill="#D93829" font-size="10px" font-weight="400">SI</text>
+  <rect x="560.0" y="160.0" width="260.0" height="100.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="2.0" />
+  <rect x="572.0" y="170.0" width="45.0" height="20.0" rx="6.0" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.0" />
+  <text x="576.0" y="182.0" fill="#D93829" font-size="10px" font-weight="400">EXT</text>
+  <text x="574.0" y="212.0" fill="#0F172A" font-size="14px" font-weight="600">2. Procesamiento</text>
+  <text x="574.0" y="232.9" fill="#475569" font-size="12px" font-weight="400">Operacion Principal</text>
+  <line x1="820.0" y1="210.0" x2="920.0" y2="210.0" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <rect x="920.0" y="160.0" width="220.0" height="100.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="932.0" y="170.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="936.0" y="182.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="934.0" y="212.0" fill="#0F172A" font-size="14px" font-weight="600">3. Finalizacion</text>
+  <text x="934.0" y="232.9" fill="#475569" font-size="12px" font-weight="400">Almacenaje y Salida</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1515.0 535.0" width="1515.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1515.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1435.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION TEMPLATE LIBRARY · NEGOCIOS · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="260.0" height="230.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="55.0" y="106.0" fill="#0F172A" font-size="11px" font-weight="400">Problema</text>
+  <rect x="315.0" y="80.0" width="260.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="330.0" y="106.0" fill="#0F172A" font-size="11px" font-weight="400">Solucion</text>
+  <rect x="315.0" y="200.0" width="260.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="330.0" y="226.0" fill="#0F172A" font-size="11px" font-weight="400">Metricas Clave</text>
+  <rect x="590.0" y="80.0" width="270.0" height="230.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="605.0" y="106.0" fill="#D93829" font-size="11px" font-weight="400">Propuesta Unica de Valor</text>
+  <rect x="875.0" y="80.0" width="260.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="890.0" y="106.0" fill="#0F172A" font-size="11px" font-weight="400">Ventaja Injusta</text>
+  <rect x="875.0" y="200.0" width="260.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="890.0" y="226.0" fill="#0F172A" font-size="11px" font-weight="400">Canales</text>
+  <rect x="1150.0" y="80.0" width="260.0" height="230.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="1165.0" y="106.0" fill="#0F172A" font-size="11px" font-weight="400">Segmento de Clientes</text>
+  <rect x="40.0" y="320.0" width="675.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="55.0" y="346.0" fill="#0F172A" font-size="11px" font-weight="400">Estructura de Costes</text>
+  <rect x="735.0" y="320.0" width="675.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="750.0" y="346.0" fill="#0F172A" font-size="11px" font-weight="400">Flujos de Ingresos</text>
+</svg>

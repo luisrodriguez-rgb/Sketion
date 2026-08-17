@@ -20,7 +20,13 @@ import {
   saveTemplate,
   deleteTemplate,
 } from "../data/boardsDb";
-import { TEMPLATES } from "../data/templates";
+import {
+  TEMPLATES,
+  CATEGORIES,
+  TemplateCategorySlug,
+  getFeaturedTemplates,
+  searchTemplates,
+} from "../data/templates";
 import { supabase } from "../data/supabaseClient";
 import { exportToSvg } from "@excalidraw/excalidraw";
 
@@ -271,7 +277,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // Premium Templates Hub States
-  const [selectedTemplateCategory, setSelectedTemplateCategory] = useState<"todos" | "negocios" | "ingenieria" | "equipo" | "ai">("todos");
+  const [selectedTemplateCategory, setSelectedTemplateCategory] = useState<TemplateCategorySlug>("todos");
+  const [templateSource, setTemplateSource] = useState<"oficiales" | "equipo">("oficiales");
+  const [showAllTemplates, setShowAllTemplates] = useState(false);
+  const [showAiBuilderModal, setShowAiBuilderModal] = useState(false);
   const [templateSearchQuery, setTemplateSearchQuery] = useState("");
   const [aiPrompt, setAiPrompt] = useState("");
   const [isGeneratingTemplate, setIsGeneratingTemplate] = useState(false);
@@ -516,16 +525,20 @@ export const Dashboard: React.FC<DashboardProps> = ({
     const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
     let name = `Sketion ${boards.filter(b => !b.isDeleted).length + 1}`;
     let elements: any[] = [];
+    let appState: any = { viewBackgroundColor: "#F8FAFC" };
 
     if (templateId) {
       const template = TEMPLATES.find((t) => t.id === templateId);
       if (template) {
         name = template.name;
         elements = template.getElements();
+        if (template.getAppState) {
+          appState = template.getAppState();
+        }
       }
     }
 
-    await saveBoard(id, { name, folderId: activeFolderId || undefined }, elements, {}, {});
+    await saveBoard(id, { name, folderId: activeFolderId || undefined }, elements, appState, {});
     onSelectBoard(id);
   };
 
@@ -1389,199 +1402,227 @@ export const Dashboard: React.FC<DashboardProps> = ({
         {activeTab === "plantillas" ? (
           <div className="templates-hub-container">
             <div className="templates-hub-header">
-              <h3>Biblioteca de Plantillas</h3>
-              <p>Elige una plantilla profesional estructurada o deja que Gemini cree una para ti instantáneamente.</p>
-            </div>
-
-            <div className="templates-hub-filters">
-              <div className="category-tabs">
-                <button
-                  className={`category-tab-btn ${selectedTemplateCategory === "todos" ? "active" : ""}`}
-                  onClick={() => setSelectedTemplateCategory("todos")}
-                >
-                  Todos
-                </button>
-                <button
-                  className={`category-tab-btn ${selectedTemplateCategory === "negocios" ? "active" : ""}`}
-                  onClick={() => setSelectedTemplateCategory("negocios")}
-                >
-                  Negocios
-                </button>
-                <button
-                  className={`category-tab-btn ${selectedTemplateCategory === "ingenieria" ? "active" : ""}`}
-                  onClick={() => setSelectedTemplateCategory("ingenieria")}
-                >
-                  Ingeniería
-                </button>
-                <button
-                  className={`category-tab-btn ${selectedTemplateCategory === "equipo" ? "active" : ""}`}
-                  onClick={() => setSelectedTemplateCategory("equipo")}
-                >
-                  Plantillas del Equipo
-                </button>
-                <button
-                  className={`category-tab-btn ${selectedTemplateCategory === "ai" ? "active" : ""}`}
-                  onClick={() => setSelectedTemplateCategory("ai")}
-                >
-                  Generador IA (Gemini)
-                </button>
+              <div className="templates-header-text">
+                <h3>Biblioteca de Plantillas</h3>
+                <p>Colección curada de 62 plantillas estructuradas de nivel profesional y diseño limpio.</p>
               </div>
-
-              {selectedTemplateCategory !== "ai" && (
-                <div className="template-search-box">
-                  <span className="search-icon"><SearchIcon /></span>
-                  <input
-                    type="text"
-                    placeholder="Buscar plantilla..."
-                    value={templateSearchQuery}
-                    onChange={(e) => setTemplateSearchQuery(e.target.value)}
-                  />
-                </div>
-              )}
+              <button
+                className="btn-create-with-ai"
+                onClick={() => setShowAiBuilderModal(true)}
+              >
+                <span>✨</span> Crear con IA (Gemini)
+              </button>
             </div>
 
-            {selectedTemplateCategory === "ai" ? (
-              <div className="ai-template-builder-card">
-                <div className="ai-builder-left">
-                  <h4>Gemini 1.5 Flash AI Blueprint Builder</h4>
-                  <p>Describe el diagrama, mapa o estructura que necesitas y la inteligencia artificial construirá los cuadros, flechas, conectores y textos por ti en segundos.</p>
+            {/* Selector de Origen: Biblioteca Oficial vs Plantillas del Equipo */}
+            <div className="templates-source-bar">
+              <button
+                className={`source-tab-btn ${templateSource === "oficiales" ? "active" : ""}`}
+                onClick={() => {
+                  setTemplateSource("oficiales");
+                  setSelectedTemplateCategory("todos");
+                }}
+              >
+                <TemplateIcon />
+                <span>Biblioteca Oficial ({TEMPLATES.length})</span>
+              </button>
+              <button
+                className={`source-tab-btn ${templateSource === "equipo" ? "active" : ""}`}
+                onClick={() => setTemplateSource("equipo")}
+              >
+                <FolderIcon />
+                <span>Plantillas del Equipo ({workspaceTemplates.length})</span>
+              </button>
+            </div>
 
-                  <div className="ai-prompt-input-group">
-                    <label>Describe tu idea:</label>
-                    <textarea
-                      placeholder="Ej: Mapeo de procesos de registro de usuarios, Customer Journey de una app de entrega de comida, Lean Canvas para un SaaS de IA, etc."
-                      value={aiPrompt}
-                      onChange={(e) => setAiPrompt(e.target.value)}
-                      disabled={isGeneratingTemplate}
+            {templateSource === "oficiales" ? (
+              <>
+                <div className="templates-hub-filters">
+                  <div className="category-tabs">
+                    {CATEGORIES.map((cat) => (
+                      <button
+                        key={cat.slug}
+                        className={`category-tab-btn ${selectedTemplateCategory === cat.slug ? "active" : ""}`}
+                        onClick={() => {
+                          setSelectedTemplateCategory(cat.slug);
+                          setShowAllTemplates(cat.slug !== "todos");
+                        }}
+                      >
+                        <span className="cat-icon">{cat.icon}</span>
+                        <span>{cat.name}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="template-search-box">
+                    <span className="search-icon"><SearchIcon /></span>
+                    <input
+                      type="text"
+                      placeholder="Buscar plantilla por nombre, tema o etiqueta..."
+                      value={templateSearchQuery}
+                      onChange={(e) => setTemplateSearchQuery(e.target.value)}
                     />
                   </div>
+                </div>
 
-                  <div className="ai-prompt-examples">
-                    <span className="examples-label">Ejemplos populares:</span>
-                    <div className="examples-list">
+                {/* Grid de Plantillas Oficiales */}
+                {selectedTemplateCategory === "todos" && !templateSearchQuery && !showAllTemplates ? (
+                  <div className="featured-templates-section">
+                    <div className="featured-section-banner">
+                      <div className="featured-badge">
+                        <span>⭐</span> COLECCIÓN DESTACADA
+                      </div>
+                      <h4>Plantillas Más Populares & Efectivas</h4>
+                      <p>Selección rápida recomendada para arrancar tu tablero en segundos.</p>
+                    </div>
+
+                    <div className="templates-gallery-grid">
+                      {getFeaturedTemplates().map((tmpl) => (
+                        <div key={tmpl.id} className="template-card-premium">
+                          <div className="template-card-header">
+                            <span className={`tmpl-badge tmpl-badge-${tmpl.categorySlug}`}>
+                              {tmpl.category.toUpperCase()}
+                            </span>
+                            <h4>{tmpl.name}</h4>
+                          </div>
+
+                          <div
+                            className="template-thumbnail-container"
+                            dangerouslySetInnerHTML={{ __html: tmpl.thumbnailSvg }}
+                          />
+
+                          <p>{tmpl.description}</p>
+                          <button
+                            className="btn-use-template"
+                            onClick={() => handleCreateBoard(tmpl.id)}
+                          >
+                            Usar esta plantilla
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="view-all-templates-cta">
                       <button
-                        onClick={() => setAiPrompt("Diagrama de arquitectura AWS con CloudFront, S3 y Lambda")}
-                        disabled={isGeneratingTemplate}
+                        className="btn-view-all-templates"
+                        onClick={() => setShowAllTemplates(true)}
                       >
-                        Arquitectura AWS
-                      </button>
-                      <button
-                        onClick={() => setAiPrompt("Mapa mental sobre estrategias de retención de usuarios")}
-                        disabled={isGeneratingTemplate}
-                      >
-                        Retención de Usuarios
-                      </button>
-                      <button
-                        onClick={() => setAiPrompt("Diagrama de flujo de compra en una tienda online")}
-                        disabled={isGeneratingTemplate}
-                      >
-                        Flujo de Tienda Online
+                        Ver todas las plantillas ({TEMPLATES.length}) →
                       </button>
                     </div>
                   </div>
-
-                  <button
-                    className="btn-ai-generate"
-                    onClick={async () => {
-                      if (!aiPrompt.trim()) return;
-                      setIsGeneratingTemplate(true);
-                      try {
-                        const { processAIPromptToCanvas } = await import("../data/aiSkillEngine");
-                        const result = processAIPromptToCanvas(aiPrompt);
-                        const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
-                        await saveBoard(id, { name: result.title || aiPrompt }, result.elements, {}, {});
-                        onSelectBoard(id);
-                      } catch (err: any) {
-                        console.error("AI Generation failed:", err);
-                        alert(`No se pudo generar el diagrama asistido.\n\nDetalles: ${err?.message || err}`);
-                      } finally {
-                        setIsGeneratingTemplate(false);
-                      }
-                    }}
-                    disabled={isGeneratingTemplate || !aiPrompt.trim()}
-                  >
-                    {isGeneratingTemplate ? "Generando diagrama..." : "Generar Diagrama en Canvas"}
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="templates-gallery-grid">
-                {selectedTemplateCategory === "equipo" ? (
-                  workspaceTemplates.filter((tmpl) => {
-                    if (templateSearchQuery && !tmpl.name.toLowerCase().includes(templateSearchQuery.toLowerCase()) && !tmpl.description?.toLowerCase().includes(templateSearchQuery.toLowerCase())) return false;
-                    return true;
-                  }).map((tmpl) => (
-                    <div key={tmpl.id} className="template-card-premium">
-                      <div className="template-card-header">
-                        <span className="tmpl-badge">EQUIPO</span>
-                        {tmpl.thumbnail ? (
-                          <div className="template-thumbnail-container">
-                            <img src={tmpl.thumbnail} className="template-thumbnail-img" alt={tmpl.name} />
-                          </div>
-                        ) : (
-                          <div className="template-thumbnail-placeholder">
-                            <FolderIcon />
-                          </div>
-                        )}
-                        <h4>{tmpl.name}</h4>
-                      </div>
-                      <p>{tmpl.description || "Plantilla personalizada creada por tu equipo."}</p>
-                      <div className="template-card-actions">
-                        <button
-                          className="btn-use-template"
-                          onClick={async () => {
-                            const fullTmpl = await getTemplate(tmpl.id);
-                            const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
-                            await saveBoard(id, { name: tmpl.name }, fullTmpl?.elements || [], {}, {});
-                            onSelectBoard(id);
-                          }}
-                        >
-                          Usar plantilla
-                        </button>
-                        <button
-                          className="btn-delete-template-danger"
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            if (confirm(`¿Estás seguro de que deseas eliminar la plantilla "${tmpl.name}"?`)) {
-                              await deleteTemplate(tmpl.id);
-                              loadBoards();
-                            }
-                          }}
-                        >
-                          Eliminar
-                        </button>
-                      </div>
-                    </div>
-                  ))
                 ) : (
-                  TEMPLATES.filter((tmpl) => {
-                    if (selectedTemplateCategory === "negocios" && tmpl.category !== "Business & Strategy") return false;
-                    if (selectedTemplateCategory === "ingenieria" && !["Product & Engineering", "Design & UI"].includes(tmpl.category)) return false;
-
-                    if (templateSearchQuery && !tmpl.name.toLowerCase().includes(templateSearchQuery.toLowerCase()) && !tmpl.description.toLowerCase().includes(templateSearchQuery.toLowerCase())) return false;
-
-                    return true;
-                  }).map((tmpl) => (
-                    <div key={tmpl.id} className="template-card-premium">
-                      <div className="template-card-header">
-                        <span className="tmpl-badge">
-                          {tmpl.category === "Business & Strategy"
-                            ? "NEGOCIOS"
-                            : tmpl.category === "Product & Engineering"
-                            ? "INGENIERÍA"
-                            : "DISEÑO & UI"}
-                        </span>
-                        <h4>{tmpl.name}</h4>
+                  <div className="all-templates-section">
+                    {selectedTemplateCategory === "todos" && !templateSearchQuery && (
+                      <div className="all-templates-header-actions">
+                        <span className="all-templates-count">Mostrando las {TEMPLATES.length} plantillas de la biblioteca</span>
+                        <button
+                          className="btn-back-to-featured"
+                          onClick={() => setShowAllTemplates(false)}
+                        >
+                          ⭐ Ver solo destacadas
+                        </button>
                       </div>
-                      <p>{tmpl.description}</p>
+                    )}
+
+                    <div className="templates-gallery-grid">
+                      {searchTemplates(templateSearchQuery, selectedTemplateCategory).map((tmpl) => (
+                        <div key={tmpl.id} className="template-card-premium">
+                          <div className="template-card-header">
+                            <span className={`tmpl-badge tmpl-badge-${tmpl.categorySlug}`}>
+                              {tmpl.category.toUpperCase()}
+                            </span>
+                            <h4>{tmpl.name}</h4>
+                          </div>
+
+                          <div
+                            className="template-thumbnail-container"
+                            dangerouslySetInnerHTML={{ __html: tmpl.thumbnailSvg }}
+                          />
+
+                          <p>{tmpl.description}</p>
+                          <button
+                            className="btn-use-template"
+                            onClick={() => handleCreateBoard(tmpl.id)}
+                          >
+                            Usar esta plantilla
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {searchTemplates(templateSearchQuery, selectedTemplateCategory).length === 0 && (
+                      <div className="templates-empty-search">
+                        <p>No se encontraron plantillas que coincidan con "<strong>{templateSearchQuery}</strong>".</p>
+                        <button
+                          className="btn-clear-search"
+                          onClick={() => setTemplateSearchQuery("")}
+                        >
+                          Limpiar búsqueda
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
+            ) : (
+              /* Plantillas del Equipo */
+              <div className="templates-gallery-grid team-templates-grid">
+                {workspaceTemplates.filter((tmpl) => {
+                  if (templateSearchQuery && !tmpl.name.toLowerCase().includes(templateSearchQuery.toLowerCase()) && !tmpl.description?.toLowerCase().includes(templateSearchQuery.toLowerCase())) return false;
+                  return true;
+                }).map((tmpl) => (
+                  <div key={tmpl.id} className="template-card-premium">
+                    <div className="template-card-header">
+                      <span className="tmpl-badge tmpl-badge-equipo">EQUIPO</span>
+                      <h4>{tmpl.name}</h4>
+                    </div>
+
+                    {tmpl.thumbnail ? (
+                      <div className="template-thumbnail-container">
+                        <img src={tmpl.thumbnail} className="template-thumbnail-img" alt={tmpl.name} />
+                      </div>
+                    ) : (
+                      <div className="template-thumbnail-placeholder">
+                        <FolderIcon />
+                      </div>
+                    )}
+
+                    <p>{tmpl.description || "Plantilla personalizada creada por tu equipo."}</p>
+                    <div className="template-card-actions">
                       <button
                         className="btn-use-template"
-                        onClick={() => handleCreateBoard(tmpl.id)}
+                        onClick={async () => {
+                          const fullTmpl = await getTemplate(tmpl.id);
+                          const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
+                          await saveBoard(id, { name: tmpl.name }, fullTmpl?.elements || [], {}, {});
+                          onSelectBoard(id);
+                        }}
                       >
-                        Usar esta plantilla
+                        Usar plantilla
+                      </button>
+                      <button
+                        className="btn-delete-template-danger"
+                        onClick={async (e) => {
+                          e.stopPropagation();
+                          if (confirm(`¿Estás seguro de que deseas eliminar la plantilla "${tmpl.name}"?`)) {
+                            await deleteTemplate(tmpl.id);
+                            loadBoards();
+                          }
+                        }}
+                      >
+                        Eliminar
                       </button>
                     </div>
-                  ))
+                  </div>
+                ))}
+
+                {workspaceTemplates.length === 0 && (
+                  <div className="templates-empty-team">
+                    <div className="empty-team-icon"><FolderIcon /></div>
+                    <h4>Aún no hay plantillas compartidas en tu equipo</h4>
+                    <p>Puedes guardar cualquier tablero como plantilla desde el menú del tablero para reutilizar tus diagramas y estructuras con el equipo.</p>
+                  </div>
                 )}
               </div>
             )}
@@ -2155,8 +2196,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* Templates Modal */}
       {showTemplatesModal && (
         <div className="dialog-overlay">
-          <div className="dialog-box templates-dialog" style={{ maxWidth: "600px" }}>
-            <h3>Crear Nuevo Tablero</h3>
+          <div className="dialog-box templates-dialog" style={{ maxWidth: "680px" }}>
+            <div className="dialog-header-with-action">
+              <h3>Crear Nuevo Tablero</h3>
+              <button
+                className="btn-create-with-ai-small"
+                onClick={() => {
+                  setShowTemplatesModal(false);
+                  setShowAiBuilderModal(true);
+                }}
+              >
+                <span>✨</span> Crear con IA
+              </button>
+            </div>
             <p className="dialog-desc">Selecciona un punto de partida para tu tablero:</p>
             <div className="templates-grid">
               <div
@@ -2170,7 +2222,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 <h4>Lienzo Vacío</h4>
                 <p>Comienza desde cero con un lienzo limpio.</p>
               </div>
-              {TEMPLATES.map((tmpl) => (
+              {getFeaturedTemplates().map((tmpl) => (
                 <div
                   key={tmpl.id}
                   className="template-card"
@@ -2180,7 +2232,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   }}
                 >
                   <span className="tmpl-icon">
-                    {tmpl.id === "kanban" ? <KanbanIcon /> : tmpl.id === "retro" ? <RetroIcon /> : tmpl.id === "matrix" ? <MatrixIcon /> : <DocumentIcon />}
+                    <TemplateIcon />
                   </span>
                   <h4>{tmpl.name}</h4>
                   <p>{tmpl.description}</p>
@@ -2188,8 +2240,103 @@ export const Dashboard: React.FC<DashboardProps> = ({
               ))}
             </div>
             <div className="dialog-buttons">
+              <button
+                className="btn-cancel"
+                onClick={() => {
+                  setShowTemplatesModal(false);
+                  setActiveTab("plantillas");
+                }}
+              >
+                Explorar biblioteca completa ({TEMPLATES.length}) →
+              </button>
               <button className="btn-cancel" onClick={() => setShowTemplatesModal(false)}>
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Gemini AI Blueprint Generator Modal */}
+      {showAiBuilderModal && (
+        <div className="dialog-overlay" onClick={() => !isGeneratingTemplate && setShowAiBuilderModal(false)}>
+          <div className="dialog-box ai-generator-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "680px" }}>
+            <div className="ai-modal-header">
+              <div className="ai-modal-badge">✨ GEMINI 1.5 FLASH</div>
+              <h3>Creador Inteligente de Diagramas & Blueprints</h3>
+              <p>Describe el flujo, arquitectura o estructura que necesitas y Sketion construirá los bloques, relaciones y textos al instante.</p>
+            </div>
+
+            <div className="ai-prompt-input-group">
+              <label>Describe tu idea:</label>
+              <textarea
+                placeholder="Ej: Diagrama de arquitectura AWS con CloudFront, S3 y Lambda; o Customer Journey de una app de entrega de comida..."
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                disabled={isGeneratingTemplate}
+                rows={4}
+              />
+            </div>
+
+            <div className="ai-prompt-examples">
+              <span className="examples-label">Ejemplos rápidos:</span>
+              <div className="examples-list">
+                <button
+                  type="button"
+                  onClick={() => setAiPrompt("Arquitectura RAG con Embeddings, Vector DB y LLM")}
+                  disabled={isGeneratingTemplate}
+                >
+                  Arquitectura RAG
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiPrompt("Mapa mental sobre estrategias de retención y monetización")}
+                  disabled={isGeneratingTemplate}
+                >
+                  Mapa Mental
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiPrompt("Diagrama SIPOC para proceso de onboarding de clientes")}
+                  disabled={isGeneratingTemplate}
+                >
+                  Diagrama SIPOC
+                </button>
+              </div>
+            </div>
+
+            <div className="dialog-buttons">
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={() => setShowAiBuilderModal(false)}
+                disabled={isGeneratingTemplate}
+              >
                 Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn-confirm btn-ai-generate-confirm"
+                onClick={async () => {
+                  if (!aiPrompt.trim()) return;
+                  setIsGeneratingTemplate(true);
+                  try {
+                    const { processAIPromptToCanvas } = await import("../data/aiSkillEngine");
+                    const result = processAIPromptToCanvas(aiPrompt);
+                    const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
+                    await saveBoard(id, { name: result.title || aiPrompt }, result.elements, {}, {});
+                    setShowAiBuilderModal(false);
+                    onSelectBoard(id);
+                  } catch (err: any) {
+                    console.error("AI Generation failed:", err);
+                    alert(`No se pudo generar el diagrama asistido.\n\nDetalles: ${err?.message || err}`);
+                  } finally {
+                    setIsGeneratingTemplate(false);
+                  }
+                }}
+                disabled={isGeneratingTemplate || !aiPrompt.trim()}
+              >
+                {isGeneratingTemplate ? "Generando diagrama..." : "✨ Generar en Canvas"}
               </button>
             </div>
           </div>
