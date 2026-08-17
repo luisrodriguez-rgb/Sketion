@@ -9,7 +9,7 @@ const CATEGORY_META = {
   estudio: {
     slug: "estudio",
     name: "Estudio",
-    icon: "🎓",
+    icon: "estudio",
     description: "Apuntes de clase, mapas mentales, síntesis y preparación de exámenes",
     tsFileName: "estudio.ts",
     exportName: "ESTUDIO_TEMPLATES",
@@ -29,7 +29,7 @@ const CATEGORY_META = {
   ingenieria: {
     slug: "ingenieria",
     name: "Ingeniería",
-    icon: "⚙️",
+    icon: "ingenieria",
     description: "SIPOC, VSM, Ishikawa, FMEA, Pareto y análisis de procesos industriales",
     tsFileName: "ingenieria.ts",
     exportName: "INGENIERIA_TEMPLATES",
@@ -49,7 +49,7 @@ const CATEGORY_META = {
   software_ia: {
     slug: "software_ia",
     name: "Software & IA",
-    icon: "💻",
+    icon: "software_ia",
     description: "System Design, arquitecturas, APIs, diagramas ER, agentes IA y RAG",
     tsFileName: "software_ia.ts",
     exportName: "SOFTWARE_IA_TEMPLATES",
@@ -71,7 +71,7 @@ const CATEGORY_META = {
   negocios: {
     slug: "negocios",
     name: "Negocios & Producto",
-    icon: "💼",
+    icon: "negocios",
     description: "Lean Canvas, FODA, Business Model, Product Roadmaps y matrices de decisión",
     tsFileName: "negocios.ts",
     exportName: "NEGOCIOS_TEMPLATES",
@@ -91,7 +91,7 @@ const CATEGORY_META = {
   diseno_ux: {
     slug: "diseno_ux",
     name: "Diseño & UX",
-    icon: "🎨",
+    icon: "diseno_ux",
     description: "Customer Journey, mapas de empatía, personas, flujos y Design Sprints",
     tsFileName: "diseno_ux.ts",
     exportName: "DISENO_UX_TEMPLATES",
@@ -111,7 +111,7 @@ const CATEGORY_META = {
   productividad: {
     slug: "productividad",
     name: "Productividad",
-    icon: "📈",
+    icon: "productividad",
     description: "Tableros Kanban, retrospectivas ágiles, minutas y planificadores",
     tsFileName: "productividad.ts",
     exportName: "PRODUCTIVIDAD_TEMPLATES",
@@ -298,43 +298,43 @@ export const CATEGORIES: TemplateCategoryInfo[] = [
   {
     slug: "todos",
     name: "Todos",
-    icon: "✨",
+    icon: "todos",
     description: "Colección curada completa de 62 plantillas vectoriales profesionales",
   },
   {
     slug: "estudio",
     name: "Estudio",
-    icon: "🎓",
+    icon: "estudio",
     description: "Apuntes de clase, mapas conceptuales, fichas de lectura y preparación de parciales",
   },
   {
     slug: "ingenieria",
     name: "Ingeniería",
-    icon: "⚙️",
+    icon: "ingenieria",
     description: "SIPOC, VSM, Ishikawa, FMEA, análisis de Pareto y matrices de riesgo",
   },
   {
     slug: "software_ia",
     name: "Software & IA",
-    icon: "💻",
+    icon: "software_ia",
     description: "System design, microservicios, bases de datos relacionales, arquitecturas de agentes IA y RAG",
   },
   {
     slug: "negocios",
     name: "Negocios & Producto",
-    icon: "💼",
+    icon: "negocios",
     description: "Lean Canvas, FODA, Product Roadmaps, OKRs y matrices estratégicas",
   },
   {
     slug: "diseno_ux",
     name: "Diseño & UX",
-    icon: "🎨",
+    icon: "diseno_ux",
     description: "Customer Journey, mapas de empatía, personas, flujos de navegación y Design Sprints",
   },
   {
     slug: "productividad",
     name: "Productividad",
-    icon: "📈",
+    icon: "productividad",
     description: "Tableros Kanban, retrospectivas de equipo, minutas de reunión y planificadores",
   },
 ];

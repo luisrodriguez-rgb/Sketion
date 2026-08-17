@@ -254,6 +254,85 @@ const EyeIcon = () => (
   </svg>
 );
 
+const SparkleIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+  </svg>
+);
+
+const StudyCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+  </svg>
+);
+
+const EngineeringCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+const SoftwareCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const BusinessCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  </svg>
+);
+
+const DesignCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z" />
+  </svg>
+);
+
+const ProductivityCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 3v18h18" />
+    <path d="m19 9-5 5-4-4-3 3" />
+  </svg>
+);
+
+const AllCategoryIcon = () => (
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+  </svg>
+);
+
+const getCategoryIcon = (slug: string) => {
+  switch (slug) {
+    case "estudio":
+      return <StudyCategoryIcon />;
+    case "ingenieria":
+      return <EngineeringCategoryIcon />;
+    case "software_ia":
+      return <SoftwareCategoryIcon />;
+    case "negocios":
+      return <BusinessCategoryIcon />;
+    case "diseno_ux":
+      return <DesignCategoryIcon />;
+    case "productividad":
+      return <ProductivityCategoryIcon />;
+    default:
+      return <AllCategoryIcon />;
+  }
+};
+
 export const Dashboard: React.FC<DashboardProps> = ({
   onSelectBoard,
   onJoinRoom,
@@ -1410,7 +1489,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 className="btn-create-with-ai"
                 onClick={() => setShowAiBuilderModal(true)}
               >
-                <span>✨</span> Crear con IA (Gemini)
+                <SparkleIcon />
+                <span>Crear con IA (Gemini)</span>
               </button>
             </div>
 
@@ -1448,7 +1528,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                           setShowAllTemplates(cat.slug !== "todos");
                         }}
                       >
-                        <span className="cat-icon">{cat.icon}</span>
+                        <span className="cat-icon">{getCategoryIcon(cat.slug)}</span>
                         <span>{cat.name}</span>
                       </button>
                     ))}
@@ -1470,7 +1550,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <div className="featured-templates-section">
                     <div className="featured-section-banner">
                       <div className="featured-badge">
-                        <span>⭐</span> COLECCIÓN DESTACADA
+                        <StarIcon />
+                        <span>COLECCIÓN DESTACADA</span>
                       </div>
                       <h4>Plantillas Más Populares & Efectivas</h4>
                       <p>Selección rápida recomendada para arrancar tu tablero en segundos.</p>
@@ -1520,7 +1601,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                           className="btn-back-to-featured"
                           onClick={() => setShowAllTemplates(false)}
                         >
-                          ⭐ Ver solo destacadas
+                          <StarIcon />
+                          <span>Ver solo destacadas</span>
                         </button>
                       </div>
                     )}
@@ -2206,7 +2288,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   setShowAiBuilderModal(true);
                 }}
               >
-                <span>✨</span> Crear con IA
+                <SparkleIcon />
+                <span>Crear con IA</span>
               </button>
             </div>
             <p className="dialog-desc">Selecciona un punto de partida para tu tablero:</p>
@@ -2262,7 +2345,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <div className="dialog-overlay" onClick={() => !isGeneratingTemplate && setShowAiBuilderModal(false)}>
           <div className="dialog-box ai-generator-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "680px" }}>
             <div className="ai-modal-header">
-              <div className="ai-modal-badge">✨ GEMINI 1.5 FLASH</div>
+              <div className="ai-modal-badge">
+                <SparkleIcon />
+                <span>GEMINI 1.5 FLASH</span>
+              </div>
               <h3>Creador Inteligente de Diagramas & Blueprints</h3>
               <p>Describe el flujo, arquitectura o estructura que necesitas y Sketion construirá los bloques, relaciones y textos al instante.</p>
             </div>
@@ -2336,7 +2422,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 }}
                 disabled={isGeneratingTemplate || !aiPrompt.trim()}
               >
-                {isGeneratingTemplate ? "Generando diagrama..." : "✨ Generar en Canvas"}
+                {isGeneratingTemplate ? "Generando diagrama..." : "Generar en Canvas"}
               </button>
             </div>
           </div>
