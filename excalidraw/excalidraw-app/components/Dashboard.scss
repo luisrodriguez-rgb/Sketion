@@ -1,17 +1,18 @@
 .workspace-dashboard {
-  // Premium Palette
-  --bg-primary: #121214;
-  --bg-secondary: #18181c;
-  --bg-card: #1f1f23;
-  --border-color: #2e2e36;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --accent-color: #06B6D4; /* Sketion Cyan */
-  --accent-hover: #7C3AED; /* Sketion Violet */
-  --accent-light: rgba(6, 182, 212, 0.15);
+  // Sketion Platform Identity Palette
+  --bg-primary: #05070B;
+  --bg-secondary: #0B0F16;
+  --bg-card: #111827;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --accent-color: #2563EB; /* Sketion Primary */
+  --accent-hover: #1D4ED8; /* Sketion Primary Dark */
+  --accent-light: rgba(37, 99, 235, 0.12);
   --danger-color: #ef4444;
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Outfit', sans-serif;
 
   display: flex;
   height: 100vh;
@@ -23,15 +24,15 @@
   box-sizing: border-box;
 
   &.theme-light {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
-    --bg-card: #ffffff;
-    --border-color: #e2e8f0;
-    --text-primary: #0f172a;
-    --text-secondary: #64748b;
-    --accent-color: #06B6D4; /* Sketion Cyan */
-    --accent-hover: #7C3AED; /* Sketion Violet */
-    --accent-light: rgba(6, 182, 212, 0.08);
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --border-color: #E2E8F0;
+    --text-primary: #111827;
+    --text-secondary: #64748B;
+    --accent-color: #2563EB; /* Sketion Primary */
+    --accent-hover: #1D4ED8; /* Sketion Primary Dark */
+    --accent-light: rgba(37, 99, 235, 0.08);
     --card-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
   }
 
@@ -61,20 +62,23 @@
         width: 32px;
         height: 32px;
         border-radius: 8px;
-        object-fit: cover;
+        object-fit: contain;
       }
 
       .logo-text {
         h2 {
           margin: 0;
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 700;
           color: var(--text-primary);
+          font-family: var(--font-display);
+          letter-spacing: -0.01em;
         }
         span {
           font-size: 11px;
           color: var(--text-secondary);
           font-weight: 500;
+          letter-spacing: 0.04em;
         }
       }
     }
@@ -1788,7 +1792,7 @@
 
       .left-pink-hero-section {
         width: 320px;
-        background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(124, 58, 237, 0.02) 100%);
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(29, 78, 216, 0.02) 100%);
         border-right: 1px solid var(--border-color);
         padding: 24px;
         display: flex;
@@ -1799,7 +1803,7 @@
           width: 44px;
           height: 44px;
           border-radius: 10px;
-          background-color: rgba(6, 182, 212, 0.15);
+          background-color: rgba(37, 99, 235, 0.12);
           color: var(--accent-color);
           display: flex;
           align-items: center;
@@ -2063,7 +2067,7 @@
 
   .alert-icon {
     font-size: 20px;
-    color: #06B6D4;
+    color: var(--accent-color);
   }
 
   .alert-content {
@@ -2074,7 +2078,7 @@
   }
 
   .btn-upgrade-banner {
-    background: var(--sketion-gradient, linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%));
+    background: var(--accent-color);
     color: white;
     border: none;
     padding: 8px 16px;
@@ -2086,7 +2090,7 @@
     white-space: nowrap;
 
     &:hover {
-      filter: brightness(1.1);
+      background: var(--accent-hover);
       transform: translateY(-1px);
     }
   }
@@ -2437,7 +2441,7 @@
 
       .btn-ai-generate {
         align-self: flex-start;
-        background: linear-gradient(135deg, #a855f7, #6366f1);
+        background: var(--accent-color);
         color: white;
         border: none;
         padding: 10px 26px;
@@ -2446,17 +2450,17 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 
         &:hover {
-          background: linear-gradient(135deg, #b55fe6, #4f46e5);
+          background: var(--accent-hover);
           transform: translateY(-1.5px);
-          box-shadow: 0 6px 16px rgba(168, 85, 247, 0.3);
+          box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
         }
 
         &:active {
           transform: translateY(0);
-          box-shadow: 0 2px 8px rgba(168, 85, 247, 0.15);
+          box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
         }
 
         &:disabled {

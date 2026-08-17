@@ -896,7 +896,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* 1. Sidebar Notion-Style */}
       <aside className="dashboard-sidebar">
         <div className="logo-section">
-          <img src="/logo-custom-small.png" alt="Logo" className="logo-img" />
+          <img 
+            src="/Sketion_principal.svg" 
+            alt="Sketion" 
+            className="logo-img" 
+            onError={(e) => { (e.target as HTMLImageElement).src = '/sketion-logo.svg'; }}
+          />
           <div className="logo-text">
             <h2>Sketion</h2>
             <span>Workspace</span>

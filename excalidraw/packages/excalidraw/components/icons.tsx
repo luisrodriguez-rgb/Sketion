@@ -298,8 +298,8 @@ export const ExcalLogo = createIcon(
   <>
     <defs>
       <linearGradient id="sketionGradientLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#06B6D4"/>
-        <stop offset="100%" stopColor="#7C3AED"/>
+        <stop offset="0%" stopColor="#3B82F6"/>
+        <stop offset="100%" stopColor="#1D4ED8"/>
       </linearGradient>
     </defs>
     <g>
@@ -309,8 +309,8 @@ export const ExcalLogo = createIcon(
             strokeWidth="40" 
             strokeLinecap="round" 
             strokeLinejoin="round"/>
-      <circle cx="352" cy="176" r="18" fill="#06B6D4"/>
-      <circle cx="160" cy="452" r="18" fill="#7C3AED"/>
+      <circle cx="352" cy="176" r="18" fill="#3B82F6"/>
+      <circle cx="160" cy="452" r="18" fill="#1D4ED8"/>
     </g>
   </>,
   { width: 512, height: 512, fill: "none" }

@@ -33,7 +33,7 @@ export const AppWelcomeScreen: React.FC<{
       <WelcomeScreen.Center>
         <div className="sketion-logo-wrapper">
           <img 
-            src="/logo-custom.png" 
+            src="/Sketion_principal.svg" 
             onError={(e) => { (e.target as HTMLImageElement).src = '/sketion-logo.svg'; }}
             alt="Sketion Logo" 
             className="sketion-logo-img" 

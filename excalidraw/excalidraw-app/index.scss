@@ -269,7 +269,7 @@
     font-size: 15px;
     font-weight: 600;
     color: #0f172a;
-    border: 1.5px solid var(--color-primary, #e03131);
+    border: 1.5px solid var(--sk-primary, #2563eb);
     border-radius: 6px;
     padding: 3px 8px;
     outline: none;
@@ -324,7 +324,7 @@
         position: absolute;
         top: 2px;
         right: 2px;
-        background: #ef4444;
+        background: var(--sk-primary, #2563eb);
         color: #ffffff;
         font-size: 9px;
         font-weight: 700;
@@ -351,7 +351,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #ef4444;
+      background: var(--sk-primary, #2563eb);
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -383,7 +383,7 @@
   &__btn-share {
     display: flex;
     align-items: center;
-    background: var(--color-primary, #e03131);
+    background: var(--sk-primary, #2563eb);
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -392,12 +392,12 @@
     padding: 0 16px;
     height: 36px;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(224, 49, 49, 0.25);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
     transition: all 0.15s ease;
 
     &:hover {
-      background: #c92a2a;
-      box-shadow: 0 4px 12px rgba(224, 49, 49, 0.35);
+      background: var(--sk-primary-dark, #1d4ed8);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
       transform: translateY(-1px);
     }
 
@@ -423,11 +423,11 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 
     &:hover {
-      background-color: #ef4444 !important;
+      background-color: var(--sk-primary, #2563eb) !important;
       color: #ffffff !important;
-      border-color: #ef4444 !important;
+      border-color: var(--sk-primary, #2563eb) !important;
       transform: translateY(-3px) scale(1.05) !important;
-      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35) !important;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35) !important;
     }
 
     &:active {
@@ -441,16 +441,16 @@
 .excalidraw.theme--dark + .workspace-header,
 .excalidraw-app:has(.theme--dark) .workspace-header,
 .excalidraw-app.theme--dark .workspace-header {
-  background: #1c1c1e;
+  background: #0b0f16;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
   .workspace-header__btn-back {
-    background: #1c1c1e;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: #0b0f16;
+    border-color: rgba(255, 255, 255, 0.12);
     color: #cbd5e1;
 
     &:hover {
-      background: #2c2c2e;
+      background: #111827;
       color: #ffffff;
     }
   }
@@ -459,13 +459,13 @@
     color: #f1f5f9;
 
     &:hover {
-      background: #2c2c2e;
+      background: #111827;
     }
   }
 
   .workspace-header__title-input {
     color: #f1f5f9;
-    background: #1c1c1e;
+    background: #0b0f16;
   }
 
   .workspace-header__status {

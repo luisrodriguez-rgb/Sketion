@@ -1,26 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="186 144 1206 1206" width="100%" height="100%">
   <defs>
-    <linearGradient id="sketionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06B6D4"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
+    <linearGradient id="sketionGradient" x1="189" y1="147" x2="1389" y2="1347" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#07111D"/>
+      <stop offset="100%" stop-color="#02030A"/>
+    </linearGradient>
+    <linearGradient id="sketionBlueGrad" x1="395" y1="338" x2="1183" y2="1156" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3077CF"/>
+      <stop offset="50%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
     </linearGradient>
   </defs>
 
-  <!-- Dark Deep Base (#0B0F14) -->
-  <rect width="512" height="512" rx="128" fill="#0B0F14"/>
+  <!-- Dark Base Squircle -->
+  <path d="M1178.23 147H399.773C283.366 147 189 238.682 189 351.778V1142.22C189 1255.32 283.366 1347 399.773 1347H1178.23C1294.63 1347 1389 1255.32 1389 1142.22V351.778C1389 238.682 1294.63 147 1178.23 147Z" fill="url(#sketionGradient)" stroke="#151925" stroke-width="5"/>
 
-  <!-- Sketion 'S' Geometric Node Path -->
-  <g transform="translate(0, 0)">
-    <!-- Main S Curve -->
-    <path d="M 352 176 L 224 176 C 180 176 152 204 152 240 C 152 276 180 300 224 308 L 288 320 C 332 328 360 352 360 388 C 360 424 332 452 288 452 L 160 452" 
-          fill="none" 
-          stroke="url(#sketionGradient)" 
-          stroke-width="40" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"/>
-    
-    <!-- Connector Nodes -->
-    <circle cx="352" cy="176" r="18" fill="#06B6D4"/>
-    <circle cx="160" cy="452" r="18" fill="#7C3AED"/>
-  </g>
+  <!-- Sketion 'S' Flow & Connections -->
+  <path d="M1183 338H699.14C514.813 338 395 456.3 395 620.1C395 783.9 514.813 884 689.924 884H892.684" stroke="#2563EB" stroke-width="96" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M678.876 624H884.441C1065.53 624 1183 732.203 1183 885.492C1183 1056.81 1060.64 1156 874.652 1156H395" stroke="#2563EB" stroke-width="96" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Connector Nodes -->
+  <circle cx="1183" cy="338" r="65" fill="#3B82F6"/>
+  <circle cx="687" cy="624" r="65" fill="#3B82F6"/>
+  <circle cx="887" cy="884" r="65" fill="#2563EB"/>
+  <circle cx="395" cy="1156" r="65" fill="#1D4ED8"/>
 </svg>

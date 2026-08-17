@@ -2302,8 +2302,8 @@ const ExcalidrawWrapper = () => {
     predicate: true,
     icon: (
       <img
-        src="/logo-custom-small.png"
-        alt="Logo"
+        src="/Sketion_principal.svg"
+        alt="Sketion"
         style={{ width: 14, height: 14, borderRadius: "2px" }}
       />
     ),
@@ -2323,8 +2323,8 @@ const ExcalidrawWrapper = () => {
     predicate: true,
     icon: (
       <img
-        src="/logo-custom-small.png"
-        alt="Logo"
+        src="/Sketion_principal.svg"
+        alt="Sketion"
         style={{ width: 14, height: 14, borderRadius: "2px" }}
       />
     ),

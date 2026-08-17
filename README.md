@@ -1,32 +1,32 @@
 <div align="center">
 
-<img src="https://res.cloudinary.com/lucho-cloude/image/upload/v1785392444/logo-custom_s94xrr.png" width="100%" max-width="850" style="border-radius: 16px; box-shadow: 0 12px 32px rgba(0,0,0,0.25); margin-bottom: 20px;" alt="My-Excalidraw Banner" />
+# Sketion
 
-# My-Excalidraw
+**Visual Knowledge Workspace — Think. Structure. Build.**
 
-**Workspace Visual para PDFs, Ingeniería, Matemáticas Aplicadas, Programación y Estudio**
-
-[![Autor](https://img.shields.io/badge/Creador-luisrodriguez--rgb-ef4444?style=for-the-badge&logo=github)](https://github.com/luisrodriguez-rgb)
-[![Deploy Vercel](https://img.shields.io/badge/Vercel-Deployment-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://my-excalidraw-nine.vercel.app)
+[![Autor](https://img.shields.io/badge/Creador-luisrodriguez--rgb-2563eb?style=for-the-badge&logo=github)](https://github.com/luisrodriguez-rgb)
+[![Domain](https://img.shields.io/badge/Domain-sketion.com-2563eb?style=for-the-badge)](https://sketion.com)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 
-[🚀 Probar Aplicación en Vivo](https://my-excalidraw-nine.vercel.app) • [✅ Funciones Hoy](#-lo-que-existe-hoy) • [🔬 Ecosistema Técnico](#-ecosistema-acad%C3%A9mico--t%C3%A9cnico-de-alto-impacto) • [📊 Comparativa vs Excalidraw](#-tabla-comparativa-my-excalidraw-vs-excalidraw-original) • [🛣️ Roadmap 2026](#%EF%B8%8F-roadmap-2026)
+[🚀 Explorar Sketion](https://sketion.com) • [✅ Funciones Hoy](#-lo-que-existe-hoy) • [🔬 Ecosistema Técnico](#-ecosistema-acad%C3%A9mico--t%C3%A9cnico-de-alto-impacto) • [🛣️ Roadmap 2026](#%EF%B8%8F-roadmap-2026)
 
 </div>
 
 ---
 
-## 💡 Acerca del Proyecto
+## 💡 Acerca de Sketion
 
-**My-Excalidraw** transforma la tradicional pizarra a mano alzada en un **Workspace Visual todo-en-uno**. Permite integrar documentos **PDF**, tablas nativas importadas desde **Google Sheets / Excel**, especificaciones enriquecidas en **Markdown**, salas de colaboración multi-usuario, roles de lectura y un **Modo Estudio** interactivo con tarjetas de memoria.
+**Sketion** es un **Visual Knowledge Workspace** para aprender, pensar, estructurar información, diseñar sistemas, documentar conocimiento y construir con IA. Permite integrar documentos **PDF**, fórmulas **LaTeX**, diagramas **Mermaid**, tablas nativas, notas en **Markdown**, salas de colaboración en tiempo real y herramientas de estudio en un único espacio visual.
 
 ---
 
-## 🚀 Visión del Proyecto
+## 🚀 Visión de Sketion
 
-My-Excalidraw está optimizado para el **estudiante técnico, ingeniero y programador**. Nuestra visión es construir un **Workspace Visual** donde se integre el flujo completo de aprendizaje y desarrollo:
+> **Where knowledge becomes visual.**
+
+Sketion está optimizado para el **estudiante técnico, ingeniero, desarrollador e investigador**. Nuestra visión es construir un **Visual Knowledge Workspace** donde se integre el flujo completo de pensamiento, estructura y construcción:
 
 ```text
 Profesor / Equipo entrega PDF
@@ -46,7 +46,7 @@ Profesor / Equipo entrega PDF
 
 ## 🔬 Ecosistema Académico & Técnico de Alto Impacto
 
-My-Excalidraw integra directamente herramientas que generan y representan conocimiento visual científico y de ingeniería:
+**Sketion** integra directamente herramientas que generan y representan conocimiento visual científico y de ingeniería:
 
 1. **🐍 Google Colab & Jupyter Cards**: Tarjetas enriquecidas con vista previa de celdas de código Python y gráficas.
 2. **📐 GeoGebra Web Embed**: Embebido interactivo de construcciones geométricas, cálculo y álgebra lineal (costo 0.0).
@@ -87,9 +87,9 @@ Las siguientes capacidades se encuentran completamente implementadas y listas pa
 
 ---
 
-## 📊 Tabla Comparativa: My-Excalidraw vs. Excalidraw Original
+## 📊 Tabla Comparativa: Sketion vs. Excalidraw Original
 
-| Característica | Excalidraw Estándar | My-Excalidraw (Este Proyecto) |
+| Característica | Excalidraw Estándar | Sketion Workspace |
 | :--- | :---: | :---: |
 | **Documentos PDF en Canvas** | ❌ No soportado | ⚡ **Renderizado nativo ultra-liviano** |
 | **Tablas de Google Sheets & CSV** | ❌ No soportado | 📊 **Conversión instantánea a tablas editables** |
@@ -140,7 +140,7 @@ Nivel de madurez actual del ecosistema:
 - [ ] Renderizado nativo de ecuaciones LaTeX compuestas
 - [ ] Componente `GeoGebraEmbedNode` para trazado dinámico de funciones
 - [ ] Tarjetas enriquecidas de Google Colab & Jupyter Notebooks
-- [ ] Conversor de código Mermaid.js a elementos vectoriales Excalidraw
+- [ ] Conversor de código Mermaid.js a elementos vectoriales
 
 ---
 
@@ -169,10 +169,10 @@ Nivel de madurez actual del ecosistema:
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/luisrodriguez-rgb/My-Excalidraw.git
+git clone https://github.com/luisrodriguez-rgb/SKETION.git
 
 # 2. Entrar al directorio
-cd My-Excalidraw/excalidraw
+cd SKETION/My-Excalidraw/excalidraw
 
 # 3. Dar permisos de ejecutable e instalar dependencias
 yarn install
@@ -189,7 +189,7 @@ Desarrollado y mantenido por **Luis Rodriguez** ([@luisrodriguez-rgb](https://gi
 
 <div align="center">
   <a href="https://github.com/luisrodriguez-rgb">
-    <img src="https://github.com/luisrodriguez-rgb.png" width="90" height="90" style="border-radius: 50%; border: 3px solid #ef4444;" alt="Luis Rodriguez" />
+    <img src="https://github.com/luisrodriguez-rgb.png" width="90" height="90" style="border-radius: 50%; border: 3px solid #2563eb;" alt="Luis Rodriguez" />
     <br/>
     <strong>Luis Rodriguez (luisrodriguez-rgb)</strong>
   </a>

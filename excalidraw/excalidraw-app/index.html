@@ -8,12 +8,12 @@
     content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
   <meta name="referrer" content="origin" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#0B0F14" />
+  <meta name="theme-color" content="#05070B" />
 
-  <!-- Google Fonts: Outfit -->
+  <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Sketion Official Global Theme & CSS Tokens -->
   <link rel="stylesheet" href="./sketion-theme.css" />
@@ -21,34 +21,27 @@
   <!-- Primary Meta Tags -->
   <meta name="title" content="Sketion — Think. Structure. Build." />
   <meta name="description"
-    content="Sketion: Espacio de trabajo visual inteligente para pensar, estructurar y construir. Diagramación instantánea, plantillas avanzadas y colaboración." />
-  <meta name="image" content="https://res.cloudinary.com/lucho-cloude/image/upload/v1785113515/image_sdpttq.jpg" />
+    content="Sketion is a Visual Knowledge Workspace for learning, engineering, software development and AI. Think. Structure. Build." />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="Sketion" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sketion.app" />
-  <meta property="og:title" content="Sketion — Visual Workspace & Intelligent Templates" />
+  <meta property="og:url" content="https://sketion.com" />
+  <meta property="og:title" content="Sketion — Think. Structure. Build." />
   <meta property="og:image:alt"
-    content="Sketion — Espacio de trabajo visual colaborativo con plantillas inteligentes y diagramación" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+    content="Sketion — Visual Knowledge Workspace for learning, engineering and AI" />
   <meta property="og:description"
-    content="Sketion es una plataforma de productividad visual de nueva generación con plantillas inteligentes de arquitectura, diagramación rápida, notas Markdown y colaboración en tiempo real." />
-  <meta property="og:image"
-    content="https://res.cloudinary.com/lucho-cloude/image/upload/v1785113515/image_sdpttq.jpg" />
+    content="A Visual Knowledge Workspace for learning, engineering, software development and AI. Bring documents, notes, math, diagrams, and data into one connected workspace." />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:site" content="@sketionapp" />
-  <meta property="twitter:url" content="https://sketion.app" />
-  <meta property="twitter:title" content="Sketion — Visual Workspace & Intelligent Templates" />
+  <meta property="twitter:url" content="https://sketion.com" />
+  <meta property="twitter:title" content="Sketion — Think. Structure. Build." />
   <meta property="twitter:description"
-    content="Sketion es una plataforma de productividad visual de nueva generación con plantillas inteligentes de arquitectura, diagramación rápida, notas Markdown y colaboración en tiempo real." />
-  <meta property="twitter:image"
-    content="https://res.cloudinary.com/lucho-cloude/image/upload/v1785113515/image_sdpttq.jpg" />
+    content="A Visual Knowledge Workspace for learning, engineering, software development and AI. Bring documents, notes, math, diagrams, and data into one connected workspace." />
 
-  <link rel="canonical" href="https://my-excalidraw-nine.vercel.app" />
+  <link rel="canonical" href="https://sketion.com" />
 
   <!------------------------------------------------------------------------->
   <!--   to minimize white flash on load when user has dark mode enabled   -->
@@ -81,8 +74,8 @@
   </script>
   <style>
     html.dark {
-      background-color: #121212;
-      color: #fff;
+      background-color: #05070B;
+      color: #F8FAFC;
     }
   </style>
 
@@ -94,17 +87,10 @@
   <% if (typeof PROD !='undefined' && PROD==true) { %>
     <script>
       // Redirect Excalidraw+ users which have auto-redirect enabled.
-      //
-      // Redirect only the bare root path, so link/room/library urls are not
-      // redirected.
-      //
-      // Putting into index.html for best performance (can't redirect on server
-      // due to location.hash checks).
       if (
         window.location.pathname === "/" &&
         !window.location.hash &&
         !window.location.search &&
-        // if its present redirect
         document.cookie.includes("excplus-autoredirect=true")
       ) {
         window.location.href = "https://app.excalidraw.com";
@@ -123,11 +109,12 @@
       </script>
       <% } %>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/logo-custom.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logo-custom-small.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/logo-custom-small.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/Sketion_principal.svg" />
+        <link rel="icon" type="image/svg+xml" href="/Sketion_principal.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/Sketion_principal.svg" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/Sketion_principal.svg" />
 
-        <!-- Excalidraw version -->
+        <!-- Sketion version -->
         <meta name="version" content="{version}" />
 
         <% if (typeof VITE_APP_DEV_DISABLE_LIVE_RELOAD !='undefined' && VITE_APP_DEV_DISABLE_LIVE_RELOAD==true) { %>
@@ -199,7 +186,7 @@
 <body>
   <noscript> You need to enable JavaScript to run this app. </noscript>
   <header>
-    <h1 class="visually-hidden">Excalidraw</h1>
+    <h1 class="visually-hidden">Sketion</h1>
   </header>
   <div id="root"></div>
   <script type="module" src="index.tsx"></script>

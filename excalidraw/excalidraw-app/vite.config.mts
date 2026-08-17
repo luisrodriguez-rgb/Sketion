@@ -226,11 +226,16 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 4 * 1024 ** 2, // 4MB
         },
         manifest: {
-          short_name: "Excalidraw",
-          name: "Excalidraw",
+          short_name: "Sketion",
+          name: "Sketion",
           description:
-            "Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them.",
+            "Sketion is a Visual Knowledge Workspace for learning, engineering, software development and AI. Think. Structure. Build.",
           icons: [
+            {
+              src: "Sketion_principal.svg",
+              sizes: "any",
+              type: "image/svg+xml",
+            },
             {
               src: "android-chrome-192x192.png",
               sizes: "192x192",
@@ -253,10 +258,10 @@ export default defineConfig(({ mode }) => {
             },
           ],
           start_url: "/",
-          id: "excalidraw",
+          id: "sketion",
           display: "standalone",
-          theme_color: "#121212",
-          background_color: "#ffffff",
+          theme_color: "#05070B",
+          background_color: "#05070B",
           file_handlers: [
             {
               action: "/",

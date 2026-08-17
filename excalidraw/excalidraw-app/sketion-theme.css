@@ -1,42 +1,65 @@
 /* ==========================================================================
-   SKETION COMPREHENSIVE GLOBAL DESIGN SYSTEM & THEME ENGINE
+   SKETION — BRANDING SYSTEM & PLATFORM IDENTITY
    Tagline: Think. Structure. Build.
+   Positioning: Visual Knowledge Workspace
    ========================================================================== */
 
 :root {
-  /* Sketion Core Palette (Brand Guide Specs) */
-  --sketion-bg-deep: #0B0F14;
-  --sketion-bg-surface: #1A1F26;
-  --sketion-bg-elevated: #242B35;
-  --sketion-text-light: #F2F4F7;
-  --sketion-text-muted: rgba(242, 244, 247, 0.65);
-  
-  --sketion-cyan: #06B6D4;
-  --sketion-cyan-glow: rgba(6, 182, 212, 0.35);
-  --sketion-violet: #7C3AED;
-  --sketion-violet-glow: rgba(124, 58, 237, 0.35);
-  
-  --sketion-gradient: linear-gradient(135deg, #06B6D4 0%, #7C3AED 100%);
-  --sketion-gradient-hover: linear-gradient(135deg, #0891B2 0%, #6D28D9 100%);
+  /* Brand Colors (Brand Guide Specs) */
+  --sk-primary: #2563EB;
+  --sk-primary-dark: #1D4ED8;
+  --sk-primary-light: #3B82F6;
+
+  /* Brand Dark Theme Palette */
+  --sk-bg: #05070B;
+  --sk-bg-surface: #0B0F16;
+  --sk-bg-surface-2: #111827;
+  --sk-border-dark: rgba(255, 255, 255, 0.08);
+  --sk-text-dark: #F8FAFC;
+  --sk-text-dark-muted: #94A3B8;
+
+  /* Brand Light Theme Palette */
+  --sk-white: #FFFFFF;
+  --sk-surface-light: #F8FAFC;
+  --sk-surface-light-2: #F1F5F9;
+  --sk-border-light: #E2E8F0;
+  --sk-text-light: #111827;
+  --sk-text-light-muted: #64748B;
+
+  /* Brand Logo Gradient Tokens */
+  --sk-logo-blue-start: #3077CF;
+  --sk-logo-dark-mid: #0B0D10;
+  --sk-logo-blue-end: #3E79DA;
+  --sk-logo-gradient: linear-gradient(135deg, #3077CF 0%, #0B0D10 48%, #3E79DA 100%);
+  --sk-primary-gradient: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
 
   /* Typography */
-  --sketion-font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sk-font-display: 'Outfit', sans-serif;
+  --sk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Glassmorphism & Shadows */
-  --sketion-glass-bg: rgba(26, 31, 38, 0.85);
-  --sketion-glass-border: rgba(242, 244, 247, 0.1);
-  --sketion-shadow-card: 0 12px 36px rgba(0, 0, 0, 0.45);
-  --sketion-shadow-glow: 0 4px 20px rgba(6, 182, 212, 0.25);
+  /* Shape Tokens */
+  --sk-radius-sm: 8px;
+  --sk-radius-md: 12px;
+  --sk-radius-lg: 20px;
+
+  /* Shadows */
+  --sk-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --sk-shadow-card: 0 12px 36px rgba(0, 0, 0, 0.45);
+  --sk-shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.25);
+  --sk-shadow-primary-hover: 0 6px 20px rgba(37, 99, 235, 0.35);
 
   /* Overriding Internal Excalidraw Theme Variables */
-  --color-primary: #7C3AED !important;
-  --color-primary-darker: #6D28D9 !important;
-  --color-primary-light: #06B6D4 !important;
-  --color-brand-hover: rgba(124, 58, 237, 0.15) !important;
-  --color-surface-lowest: #0B0F14 !important;
-  --color-surface-low: #1A1F26 !important;
-  --color-surface-mid: #242B35 !important;
-  --font-family-base: var(--sketion-font-family) !important;
+  --color-primary: var(--sk-primary) !important;
+  --color-primary-darker: var(--sk-primary-dark) !important;
+  --color-primary-light: #EFF6FF !important;
+  --color-primary-light-darker: #DBEAFE !important;
+  --color-brand-hover: rgba(37, 99, 235, 0.12) !important;
+  --color-brand-active: var(--sk-primary-dark) !important;
+  --color-selection: var(--sk-primary) !important;
+  --color-surface-high: #F1F5F9 !important;
+  --color-surface-primary-container: #DBEAFE !important;
+  --color-on-primary-container: #1D4ED8 !important;
+  --font-family-base: var(--sk-font-body) !important;
   --font-family-code: 'Cascadia', monospace !important;
 }
 
@@ -51,66 +74,150 @@ button,
 .excalidraw .context-menu,
 .excalidraw .popover,
 .excalidraw .modal {
-  font-family: var(--sketion-font-family) !important;
+  font-family: var(--sk-font-body) !important;
+}
+
+h1, h2, h3, h4, .font-display, .sketion-welcome-title {
+  font-family: var(--sk-font-display) !important;
 }
 
 /* App Canvas Deep Background */
 .excalidraw.theme--dark {
-  --canvas-bg: var(--sketion-bg-deep) !important;
-  background-color: var(--sketion-bg-deep) !important;
+  --canvas-bg: var(--sk-bg) !important;
+  background-color: var(--sk-bg) !important;
+  --color-surface-lowest: var(--sk-bg) !important;
+  --color-surface-low: var(--sk-bg-surface) !important;
+  --color-surface-mid: var(--sk-bg-surface-2) !important;
+  --color-surface-high: #1E293B !important;
+  --color-surface-primary-container: rgba(37, 99, 235, 0.25) !important;
+  --color-on-primary-container: #93C5FD !important;
+}
+
+.excalidraw.theme--light {
+  --canvas-bg: var(--sk-white) !important;
+  background-color: var(--sk-white) !important;
+  --color-surface-lowest: var(--sk-white) !important;
+  --color-surface-low: var(--sk-surface-light) !important;
+  --color-surface-mid: var(--sk-surface-light-2) !important;
+  --color-surface-high: #F1F5F9 !important;
+  --color-surface-primary-container: #DBEAFE !important;
+  --color-on-primary-container: #1D4ED8 !important;
 }
 
 /* --------------------------------------------------------------------------
-   2. BUTTONS, ICONS & MICRO-INTERACTIONS
+   2. BUTTONS, ICONS & TOOLBAR
    -------------------------------------------------------------------------- */
 
-/* Standard & Primary Buttons */
+/* Standard & Primary Buttons (Solid #2563EB per brand guide rules) */
 .excalidraw .btn--primary, 
-.excalidraw button.primary,
-.excalidraw .Island .ToolIcon_type_radio:checked + label {
-  background: var(--sketion-gradient) !important;
+.excalidraw button.primary {
+  background: var(--sk-primary) !important;
   color: #FFFFFF !important;
   border: none !important;
   font-weight: 600 !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 14px var(--sketion-cyan-glow) !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: var(--sk-radius-sm) !important;
+  box-shadow: var(--sk-shadow-primary) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .excalidraw .btn--primary:hover, 
 .excalidraw button.primary:hover {
-  transform: translateY(-1px) scale(1.02) !important;
-  box-shadow: 0 6px 20px var(--sketion-violet-glow) !important;
-  filter: brightness(1.1) !important;
+  background: var(--sk-primary-dark) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--sk-shadow-primary-hover) !important;
 }
 
 .excalidraw .btn--primary:active, 
 .excalidraw button.primary:active {
-  transform: translateY(0) scale(0.98) !important;
+  transform: translateY(0) !important;
 }
 
-/* Toolbar Buttons & Micro-animations */
+/* Toolbar Active Buttons (Checked Tool / Radio) */
+.excalidraw .ToolIcon_type_radio:checked + label,
+.excalidraw .ToolIcon_type_toggle.ToolIcon--checked .ToolIcon__icon,
+.excalidraw .ToolIcon_type_radio:checked + .ToolIcon__icon {
+  background: var(--sk-primary) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3) !important;
+}
+
+.excalidraw .ToolIcon_type_toggle.ToolIcon--checked .ToolIcon__icon svg,
+.excalidraw .ToolIcon_type_radio:checked + label svg {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* Toolbar Buttons Hover */
 .excalidraw .ToolIcon_type_radio + label,
 .excalidraw .ToolIcon_type_button,
 .excalidraw .button-list label,
 .excalidraw .dropdown-menu-item {
-  border-radius: 8px !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: var(--sk-radius-sm) !important;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .excalidraw .ToolIcon_type_radio + label:hover,
 .excalidraw .ToolIcon_type_button:hover,
 .excalidraw .button-list label:hover {
-  background-color: rgba(6, 182, 212, 0.12) !important;
-  color: var(--sketion-cyan) !important;
+  background-color: rgba(37, 99, 235, 0.1) !important;
+  color: var(--sk-primary) !important;
   transform: translateY(-1px) !important;
 }
 
-.excalidraw .ToolIcon_type_radio:checked + label {
-  background: var(--sketion-gradient) !important;
+/* --------------------------------------------------------------------------
+   3. SIDEBAR, TABS & LIBRARY MENU
+   -------------------------------------------------------------------------- */
+
+/* Sidebar Tab Triggers (Library, Layers, Comments) */
+.excalidraw .sidebar-tab-trigger[data-state="active"],
+.excalidraw .sidebar-triggers .sidebar-tab-trigger[data-state="active"] {
+  background-color: var(--sk-primary) !important;
   color: #FFFFFF !important;
-  box-shadow: 0 2px 10px var(--sketion-cyan-glow) !important;
+  border-radius: var(--sk-radius-sm) !important;
 }
+
+.excalidraw .sidebar-tab-trigger[data-state="active"] svg {
+  color: #FFFFFF !important;
+}
+
+/* Library Section Headers */
+.excalidraw .library-menu-items-container__header,
+.excalidraw .library-menu-items__no-items__label {
+  color: var(--sk-primary) !important;
+  font-family: var(--sk-font-display) !important;
+  font-weight: 700 !important;
+}
+
+/* Library Browse / Action Button */
+.excalidraw .library-menu-browse-button {
+  background-color: var(--sk-primary) !important;
+  color: #FFFFFF !important;
+  border-radius: var(--sk-radius-sm) !important;
+  box-shadow: var(--sk-shadow-primary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.excalidraw .library-menu-browse-button:hover {
+  background-color: var(--sk-primary-dark) !important;
+  box-shadow: var(--sk-shadow-primary-hover) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Color swatch & theme picker selected border */
+.excalidraw .color-picker-swatch.active,
+.excalidraw .buttonList label.active,
+.excalidraw .theme-toggle .active {
+  background-color: var(--sk-primary) !important;
+  color: #FFFFFF !important;
+}
+
+.excalidraw .color-picker-control-radios .active {
+  outline: 2px solid var(--sk-primary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. POPOVERS, MENUS & ISLANDS
+   -------------------------------------------------------------------------- */
 
 /* Light Theme Popovers, Sidebar & Islands */
 .excalidraw.theme--light .dropdown-menu,
@@ -118,13 +225,13 @@ button,
 .excalidraw.theme--light .context-menu,
 .excalidraw.theme--light .Island,
 .excalidraw.theme--light .layer-ui__wrapper .Island {
-  background: rgba(255, 255, 255, 0.9) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-radius: 14px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
-  color: #1A1F26 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--sk-border-light) !important;
+  border-radius: var(--sk-radius-md) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+  color: var(--sk-text-light) !important;
 }
 
 /* Dark Theme Popovers, Sidebar & Islands */
@@ -133,37 +240,35 @@ button,
 .excalidraw.theme--dark .context-menu,
 .excalidraw.theme--dark .Island,
 .excalidraw.theme--dark .layer-ui__wrapper .Island {
-  background: rgba(26, 31, 38, 0.9) !important;
+  background: rgba(11, 15, 22, 0.92) !important;
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(242, 244, 247, 0.1) !important;
-  border-radius: 14px !important;
-  box-shadow: var(--sketion-shadow-card) !important;
-  color: #F2F4F7 !important;
+  border: 1px solid var(--sk-border-dark) !important;
+  border-radius: var(--sk-radius-md) !important;
+  box-shadow: var(--sk-shadow-card) !important;
+  color: var(--sk-text-dark) !important;
 }
 
-/* Dropdown Menu Item Hover Glow */
+/* Dropdown Menu Item Hover */
 .excalidraw .dropdown-menu-item:hover,
 .excalidraw .dropdown-menu-item.highlighted {
-  border-left: 3px solid var(--sketion-cyan) !important;
+  border-left: 3px solid var(--sk-primary) !important;
   padding-left: 12px !important;
 }
 
-/* Light Theme highlighted styles */
 .excalidraw.theme--light .dropdown-menu-item:hover,
 .excalidraw.theme--light .dropdown-menu-item.highlighted {
-  background: rgba(124, 58, 237, 0.1) !important;
-  color: #7C3AED !important;
+  background: rgba(37, 99, 235, 0.08) !important;
+  color: var(--sk-primary) !important;
 }
 .excalidraw.theme--light .dropdown-menu-item:hover *,
 .excalidraw.theme--light .dropdown-menu-item.highlighted * {
-  color: #7C3AED !important;
+  color: var(--sk-primary) !important;
 }
 
-/* Dark Theme highlighted styles */
 .excalidraw.theme--dark .dropdown-menu-item:hover,
 .excalidraw.theme--dark .dropdown-menu-item.highlighted {
-  background: rgba(124, 58, 237, 0.25) !important;
+  background: rgba(37, 99, 235, 0.18) !important;
   color: #FFFFFF !important;
 }
 .excalidraw.theme--dark .dropdown-menu-item:hover *,
@@ -172,72 +277,79 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   4. APP FOOTER & STATUS BAR
+   5. APP FOOTER & STATUS BAR
    -------------------------------------------------------------------------- */
 
-/* Light Theme Footer */
 .excalidraw.theme--light .footer-center,
 .excalidraw.theme--light .footer-right,
 .excalidraw.theme--light .App-bottom-bar {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(16px) !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: var(--sk-radius-md) !important;
+  border: 1px solid var(--sk-border-light) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Dark Theme Footer */
 .excalidraw.theme--dark .footer-center,
 .excalidraw.theme--dark .footer-right,
 .excalidraw.theme--dark .App-bottom-bar {
-  background: rgba(26, 31, 38, 0.9) !important;
+  background: rgba(11, 15, 22, 0.92) !important;
   backdrop-filter: blur(16px) !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(242, 244, 247, 0.08) !important;
+  border-radius: var(--sk-radius-md) !important;
+  border: 1px solid var(--sk-border-dark) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* --------------------------------------------------------------------------
-   5. WELCOME SCREEN & LOGO CLASSES
+   6. WELCOME SCREEN & LOGO CLASSES
    -------------------------------------------------------------------------- */
 .sketion-welcome-heading {
   text-align: center;
-  font-family: var(--sketion-font-family);
+  font-family: var(--sk-font-display);
 }
 
 .sketion-welcome-title {
-  font-size: 2.6rem;
+  font-size: 2.75rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--sketion-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+  color: var(--sk-text-dark);
+  margin: 0;
+}
+
+.excalidraw.theme--light .sketion-welcome-title {
+  color: var(--sk-text-light);
 }
 
 .sketion-welcome-subtitle {
-  font-size: 0.85rem;
-  color: var(--sketion-text-light);
-  opacity: 0.7;
+  font-size: 0.9rem;
+  color: var(--sk-text-dark-muted);
   margin-top: 6px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  font-family: var(--sk-font-body);
+}
+
+.excalidraw.theme--light .sketion-welcome-subtitle {
+  color: var(--sk-text-light-muted);
 }
 
 .sketion-logo-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
 .sketion-logo-img {
-  width: 80px;
-  height: 80px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
-  filter: drop-shadow(0 6px 20px var(--sketion-cyan-glow));
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), filter 0.25s ease;
+  filter: drop-shadow(0 4px 16px rgba(37, 99, 235, 0.25));
 }
 
 .sketion-logo-img:hover {
-  transform: scale(1.08) rotate(3deg);
-  filter: drop-shadow(0 8px 28px var(--sketion-violet-glow));
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 24px rgba(37, 99, 235, 0.4));
 }
