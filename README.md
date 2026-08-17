@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./excalidraw/public/Sketion_principal-1.svg" width="100%" alt="Sketion — Think. Structure. Build." />
+
 # Sketion
 
 **Visual Knowledge Workspace — Think. Structure. Build.**
@@ -100,7 +102,7 @@ Las siguientes capacidades se encuentran completamente implementadas y listas pa
 | **Notas Enriquecidas** | ❌ Texto plano | 📝 **Panel lateral de especificaciones en Markdown** |
 | **Comentarios Interactivos** | ❌ No disponible | 💬 **Hilos de comentarios anclados a figuras** |
 | **Modo Presentación Cine** | ⚠️ Básico | 🎬 **Marcos estilo diapositiva + Exportación a PPTX** |
-| **Navegación & Chat Colaborativo**| ❌ No disponible | 🗺️ **Minimapa flotante + Chat lateral en tiempo real** |
+| **Navegación & Chat Colaborativo** | ❌ No disponible | 🗺️ **Minimapa flotante + Chat lateral en tiempo real** |
 | **Gestión de Cuota / Planes** | ❌ No disponible | 💳 **Persistencia de planes Pro/Empresarial** |
 
 ---
@@ -127,6 +129,7 @@ Nivel de madurez actual del ecosistema:
 ---
 
 ### 🔹 Fase 1 — Núcleo del Workspace (✅ 100% Completado)
+
 - [x] Persistencia Local-First con IndexedDB y Supabase Cloud Sync
 - [x] Motor de importación de PDFs en canvas
 - [x] Conversión de Google Sheets / CSV a tablas vectoriales
@@ -136,6 +139,7 @@ Nivel de madurez actual del ecosistema:
 ---
 
 ### 🔹 Fase 2 — Ecosistema Académico & Técnico (🚧 En Desarrollo)
+
 - [x] Motor LaTeX KaTeX básico
 - [ ] Renderizado nativo de ecuaciones LaTeX compuestas
 - [ ] Componente `GeoGebraEmbedNode` para trazado dinámico de funciones
@@ -145,6 +149,7 @@ Nivel de madurez actual del ecosistema:
 ---
 
 ### 🔹 Fase 3 — Motores Visuales & Schemas (🚧 En Progreso)
+
 - [x] Motor `matriz` (SWOT, Lean Canvas, RICE)
 - [x] Motor `board` (Kanban, Scrum, Pipelines)
 - [x] Motor `flujo` (Process, User Journey, SOP)
@@ -159,6 +164,7 @@ Nivel de madurez actual del ecosistema:
 ---
 
 ### 🔹 Fase 4 — Generación Asistida por IA & Skills (📝 Investigación)
+
 - [x] Clasificador de intenciones por lenguaje natural (`aiSkillEngine.ts`)
 - [ ] Generación automática de diagramas complejos a partir de prompts estructurados
 - [ ] Asistente de resumen e inteligencia espacial para notas y PDFs
