@@ -7,11 +7,14 @@ export type TemplateCategorySlug =
   | "diseno_ux"
   | "productividad";
 
+export type TemplateTier = "core" | "specialized" | "expert";
+
 export interface TemplateCategoryInfo {
   slug: TemplateCategorySlug;
   name: string;
   icon: string;
   description: string;
+  count?: number;
 }
 
 export interface TemplateMetadata {
@@ -21,6 +24,9 @@ export interface TemplateMetadata {
   icon: string;
   category: string;
   categorySlug: TemplateCategorySlug;
+  subcategory?: string;
+  tier: TemplateTier;
+  complexity?: "low" | "medium" | "high" | "expert" | "extreme";
   tags?: string[];
   isFeatured?: boolean;
   filePath: string;

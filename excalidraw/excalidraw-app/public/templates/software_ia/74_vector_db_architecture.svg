@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1475.6 535.0" width="1475.6" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1475.6" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1395.6" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · DATA &amp; AI · INTER VECTORIAL</text>
+  <rect x="40.0" y="160.0" width="240.0" height="120.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="52.0" y="170.0" width="52.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="56.0" y="182.0" fill="#475569" font-size="10px" font-weight="400">EMBED</text>
+  <text x="54.0" y="212.0" fill="#0F172A" font-size="14px" font-weight="600">Embedding Engine</text>
+  <text x="54.0" y="232.9" fill="#475569" font-size="12px" font-weight="400">Model: text-embedding-3
+Dimension: 1536d</text>
+  <line x1="280.0" y1="220.0" x2="380.0" y2="220.0" stroke="#D93829" stroke-width="2.0" marker-end="url(#arrowhead-hero)" />
+  <rect x="380.0" y="80.0" width="560.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="2.0" />
+  <text x="400.0" y="117.0" fill="#D93829" font-size="12px" font-weight="400">INDICE VECTORIAL HNSW (GRAFO MULTICAPA)</text>
+  <rect x="400.0" y="140.0" width="240.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="412.0" y="150.0" width="80.8" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="416.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">TOP LAYER</text>
+  <text x="414.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Layer 2 (Coarse)</text>
+  <text x="414.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Saltos largos de exploracion</text>
+  <rect x="680.0" y="140.0" width="240.0" height="110.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="692.0" y="150.0" width="88.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="696.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">BASE LAYER</text>
+  <text x="694.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">Layer 0 (Dense)</text>
+  <text x="694.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Grafo completo de vecinos</text>
+  <line x1="640.0" y1="195.0" x2="680.0" y2="195.0" stroke="#D93829" stroke-width="1.5" marker-end="url(#arrowhead-hero)" />
+  <line x1="940.0" y1="220.0" x2="1040.0" y2="220.0" stroke="#D93829" stroke-width="2.0" marker-end="url(#arrowhead-hero)" />
+  <rect x="1040.0" y="140.0" width="320.0" height="150.0" rx="6.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <ellipse cx="1200.0" cy="140.0" rx="160.0" ry="10.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <line x1="1050.0" y1="284.0" x2="1350.0" y2="284.0" stroke="#2563EB" stroke-width="1.0" stroke-dasharray="6,6" />
+  <rect x="1054.0" y="150.0" width="73.6" height="20.0" rx="6.0" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.0" />
+  <text x="1058.0" y="162.0" fill="#1D4ED8" font-size="10px" font-weight="400">DATABASE</text>
+  <text x="1054.0" y="190.0" fill="#0F172A" font-size="14px" font-weight="600">RocksDB Storage Engine</text>
+  <text x="1054.0" y="209.0" fill="#475569" font-size="11px" font-weight="400">Vectores + Metadata JSON en NVMe</text>
+</svg>

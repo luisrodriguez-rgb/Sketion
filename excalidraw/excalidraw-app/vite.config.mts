@@ -223,7 +223,7 @@ export default defineConfig(({ mode }) => {
               },
             },
           ],
-          maximumFileSizeToCacheInBytes: 4 * 1024 ** 2, // 4MB
+          maximumFileSizeToCacheInBytes: 15 * 1024 ** 2, // 15MB
         },
         manifest: {
           short_name: "Sketion",

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1505.0 535.0" width="1505.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1505.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1425.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · SOFTWARE · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="380.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.8" />
+  <text x="60.0" y="116.0" fill="#D93829" font-size="11px" font-weight="400">CONTROL PLANE (MASTER NODE)</text>
+  <rect x="60.0" y="140.0" width="340.0" height="70.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="72.0" y="150.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="76.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">API</text>
+  <text x="74.0" y="193.0" fill="#0F172A" font-size="15px" font-weight="600">kube-apiserver</text>
+  <text x="74.0" y="214.2" fill="#475569" font-size="12px" font-weight="400">REST API &amp; Cluster State</text>
+  <rect x="60.0" y="220.0" width="340.0" height="70.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="72.0" y="230.0" width="52.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="76.0" y="242.0" fill="#475569" font-size="10px" font-weight="400">SCHED</text>
+  <text x="74.0" y="273.0" fill="#0F172A" font-size="15px" font-weight="600">kube-scheduler</text>
+  <text x="74.0" y="294.2" fill="#475569" font-size="12px" font-weight="400">Asigna pods a nodos</text>
+  <rect x="60.0" y="310.0" width="340.0" height="95.0" rx="6.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <ellipse cx="230.0" cy="310.0" rx="170.0" ry="10.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <rect x="74.0" y="320.0" width="73.6" height="20.0" rx="6.0" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.0" />
+  <text x="78.0" y="332.0" fill="#1D4ED8" font-size="10px" font-weight="400">DATABASE</text>
+  <text x="74.0" y="360.0" fill="#0F172A" font-size="14px" font-weight="600">etcd cluster</text>
+  <text x="74.0" y="379.0" fill="#475569" font-size="11px" font-weight="400">Almacen clave-valor de estado</text>
+  <line x1="420.0" y1="215.0" x2="480.0" y2="215.0" stroke="#D93829" stroke-width="2.0" marker-end="url(#arrowhead-hero)" />
+  <rect x="480.0" y="80.0" width="440.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.8" stroke-dasharray="6,6" />
+  <rect x="480.0" y="80.0" width="440.0" height="32.0" rx="6.0" fill="#FFE4E1" stroke="#D93829" stroke-width="1.0" />
+  <text x="492.0" y="99.0" fill="#D93829" font-size="11px" font-weight="400">NODE: WORKER-01 (WORKER NODE)</text>
+  <rect x="492.0" y="122.0" width="195.8" height="26.0" rx="6.0" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.0" />
+  <text x="498.0" y="137.0" fill="#475569" font-size="9px" font-weight="400">kubelet (Agent)</text>
+  <rect x="691.8" y="122.0" width="195.8" height="26.0" rx="6.0" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.0" />
+  <text x="697.8" y="137.0" fill="#475569" font-size="9px" font-weight="400">kube-proxy (IPVS)</text>
+  <rect x="492.0" y="158.0" width="196.0" height="260.0" rx="6.0" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <text x="500.0" y="176.0" fill="#0284C7" font-size="10px" font-weight="400">POD: app-api</text>
+  <text x="500.0" y="193.0" fill="#64748B" font-size="9px" font-weight="400">Image: api:v2
+Status: Running</text>
+  <rect x="696.0" y="158.0" width="196.0" height="260.0" rx="6.0" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <text x="704.0" y="176.0" fill="#0284C7" font-size="10px" font-weight="400">POD: worker-queue</text>
+  <text x="704.0" y="193.0" fill="#64748B" font-size="9px" font-weight="400">Image: worker:v1
+Status: Running</text>
+  <rect x="940.0" y="80.0" width="460.0" height="350.0" rx="6.0" fill="#F8FAFC" stroke="#0284C7" stroke-width="1.8" stroke-dasharray="6,6" />
+  <rect x="940.0" y="80.0" width="460.0" height="32.0" rx="6.0" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.0" />
+  <text x="952.0" y="99.0" fill="#0369A1" font-size="11px" font-weight="400">NODE: WORKER-02 (WORKER NODE)</text>
+  <rect x="952.0" y="122.0" width="205.4" height="26.0" rx="6.0" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.0" />
+  <text x="958.0" y="137.0" fill="#475569" font-size="9px" font-weight="400">kubelet (Agent)</text>
+  <rect x="1161.4" y="122.0" width="205.4" height="26.0" rx="6.0" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.0" />
+  <text x="1167.4" y="137.0" fill="#475569" font-size="9px" font-weight="400">kube-proxy (IPVS)</text>
+  <rect x="952.0" y="158.0" width="206.0" height="260.0" rx="6.0" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <text x="960.0" y="176.0" fill="#0284C7" font-size="10px" font-weight="400">POD: frontend</text>
+  <text x="960.0" y="193.0" fill="#64748B" font-size="9px" font-weight="400">Image: ui:v1
+Status: Running</text>
+  <rect x="1166.0" y="158.0" width="206.0" height="260.0" rx="6.0" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.2" />
+  <text x="1174.0" y="176.0" fill="#0284C7" font-size="10px" font-weight="400">POD: cache-redis</text>
+  <text x="1174.0" y="193.0" fill="#64748B" font-size="9px" font-weight="400">Image: redis:7
+Status: Running</text>
+</svg>

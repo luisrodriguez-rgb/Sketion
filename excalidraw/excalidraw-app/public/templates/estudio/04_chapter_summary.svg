@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1557.6 535.0" width="1557.6" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1557.6" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1477.6" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · ESTUDIO · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="420.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="60.0" y="117.0" fill="#D93829" font-size="12px" font-weight="400">CONCEPTOS CLAVE DEL CAPITULO</text>
+  <text x="60.0" y="156.0" fill="#334155" font-size="11px" font-weight="400">Capitulo 5: Replicacion Lider-Seguidor
+* Replicacion sincronica vs asincronica
+* Manejo de fallos de nodos (Failover)
+* Problemas de retardo de replicacion
+* Lectura de escrituras propias</text>
+  <rect x="480.0" y="80.0" width="440.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="500.0" y="117.0" fill="#0F172A" font-size="12px" font-weight="400">ECUACIONES &amp; MODELOS</text>
+  <text x="500.0" y="156.0" fill="#475569" font-size="11px" font-weight="400">Quorum: w + r &gt; n
+Donde:
+ n = numero de replicas
+ w = nodos necesarios para confirmar escritura
+ r = nodos necesarios para confirmar lectura</text>
+  <rect x="940.0" y="80.0" width="460.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="960.0" y="117.0" fill="#D93829" font-size="12px" font-weight="400">PREGUNTAS DE AUTOEVALUACION</text>
+  <text x="960.0" y="156.0" fill="#334155" font-size="11px" font-weight="400">1. Que ocurre si el lider falla durante un failover?
+2. Como se previene el problema de Split-Brain?
+3. Cual es el trade-off entre w=1 y w=all?</text>
+</svg>

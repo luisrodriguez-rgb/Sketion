@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1586.0 535.0" width="1586.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1586.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1506.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · DISEÑO &amp; UX · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="310.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="55.0" y="116.0" fill="#0F172A" font-size="11px" font-weight="400">1. OBSERVACIONES RAW</text>
+  <rect x="52.0" y="145.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="60.0" y="175.0" fill="#334155" font-size="10px" font-weight="400">&#x27;Me cuesta alinear cajas a mano.&#x27;</text>
+  <rect x="52.0" y="230.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="60.0" y="260.0" fill="#334155" font-size="10px" font-weight="400">&#x27;Pierdo tiempo buscando iconos.&#x27;</text>
+  <rect x="390.0" y="80.0" width="310.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="405.0" y="116.0" fill="#0F172A" font-size="11px" font-weight="400">2. CLUSTERS TEMATICOS</text>
+  <rect x="402.0" y="145.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="410.0" y="175.0" fill="#334155" font-size="10px" font-weight="400">Friccion de layout visual</text>
+  <rect x="402.0" y="230.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="410.0" y="260.0" fill="#334155" font-size="10px" font-weight="400">Carencia de arquetipos listos</text>
+  <rect x="740.0" y="80.0" width="310.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="755.0" y="116.0" fill="#0F172A" font-size="11px" font-weight="400">3. PATRONES CONDUCTUALES</text>
+  <rect x="752.0" y="145.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="760.0" y="175.0" fill="#334155" font-size="10px" font-weight="400">Los usuarios abandonan si el setup toma &gt; 5 min</text>
+  <rect x="752.0" y="230.0" width="285.0" height="70.0" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="760.0" y="260.0" fill="#334155" font-size="10px" font-weight="400">Prefieren exportar SVG antes que PNG</text>
+  <rect x="1090.0" y="80.0" width="310.0" height="350.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.8" />
+  <text x="1105.0" y="116.0" fill="#D93829" font-size="11px" font-weight="400">4. INSIGHTS ACCIONABLES</text>
+  <rect x="1102.0" y="145.0" width="285.0" height="70.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="1110.0" y="175.0" fill="#334155" font-size="10px" font-weight="400">La velocidad de inicio define la retencion</text>
+  <rect x="1102.0" y="230.0" width="285.0" height="70.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="1110.0" y="260.0" fill="#334155" font-size="10px" font-weight="400">Cero emojis = mayor percepcion profesional</text>
+</svg>

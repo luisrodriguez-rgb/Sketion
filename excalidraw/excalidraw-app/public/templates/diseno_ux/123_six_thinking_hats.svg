@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1614.0 535.0" width="1614.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1614.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1534.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · DESIGN THINKING · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#64748B" stroke-width="1.8" />
+  <text x="52.0" y="115.0" fill="#64748B" font-size="10px" font-weight="400">Sombrero Blanco: Datos</text>
+  <text x="52.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">212 plantillas · VCS: 99.5 · 0 emojis</text>
+  <rect x="270.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#D93829" stroke-width="1.8" />
+  <text x="282.0" y="115.0" fill="#D93829" font-size="10px" font-weight="400">Sombrero Rojo: Emocion</text>
+  <text x="282.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">Sensacion de orden, profesionalismo y confianza</text>
+  <rect x="500.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.8" />
+  <text x="512.0" y="115.0" fill="#0F172A" font-size="10px" font-weight="400">Sombrero Negro: Riesgos</text>
+  <text x="512.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">Curvas complejas de Bezier en SVG</text>
+  <rect x="730.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#D97706" stroke-width="1.8" />
+  <text x="742.0" y="115.0" fill="#D97706" font-size="10px" font-weight="400">Sombrero Amarillo: Beneficios</text>
+  <text x="742.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">Ahorro de 4h/semana en documentacion tecnica</text>
+  <rect x="960.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#059669" stroke-width="1.8" />
+  <text x="972.0" y="115.0" fill="#059669" font-size="10px" font-weight="400">Sombrero Verde: Creatividad</text>
+  <text x="972.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">Generador contextual asistido por LLM</text>
+  <rect x="1190.0" y="80.0" width="215.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.8" />
+  <text x="1202.0" y="115.0" fill="#0284C7" font-size="10px" font-weight="400">Sombrero Azul: Control</text>
+  <text x="1202.0" y="160.0" fill="#334155" font-size="10px" font-weight="400">Suite CI de regresion con 27 tests</text>
+</svg>

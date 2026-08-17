@@ -24,7 +24,10 @@ import {
   TEMPLATES,
   CATEGORIES,
   TemplateCategorySlug,
+  TemplateTier,
   getFeaturedTemplates,
+  getTemplatesByCategory,
+  getTemplatesByTier,
   searchTemplates,
 } from "../data/templates";
 import { supabase } from "../data/supabaseClient";
@@ -357,6 +360,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   // Premium Templates Hub States
   const [selectedTemplateCategory, setSelectedTemplateCategory] = useState<TemplateCategorySlug>("todos");
+  const [templateTierFilter, setTemplateTierFilter] = useState<TemplateTier | "all">("all");
   const [templateSource, setTemplateSource] = useState<"oficiales" | "equipo">("oficiales");
   const [showAllTemplates, setShowAllTemplates] = useState(false);
   const [showAiBuilderModal, setShowAiBuilderModal] = useState(false);
@@ -1483,15 +1487,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div className="templates-hub-header">
               <div className="templates-header-text">
                 <h3>Biblioteca de Plantillas</h3>
-                <p>Colección curada de 62 plantillas estructuradas de nivel profesional y diseño limpio.</p>
+                <p>Catálogo universal de 212 plantillas estructuradas de precisión y tipografía Inter.</p>
               </div>
-              <button
-                className="btn-create-with-ai"
-                onClick={() => setShowAiBuilderModal(true)}
-              >
+              <div className="ai-upcoming-badge">
                 <SparkleIcon />
-                <span>Crear con IA (Gemini)</span>
-              </button>
+                <span>AI Blueprint Generator · Próximamente</span>
+              </div>
             </div>
 
             {/* Selector de Origen: Biblioteca Oficial vs Plantillas del Equipo */}
@@ -1501,6 +1502,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 onClick={() => {
                   setTemplateSource("oficiales");
                   setSelectedTemplateCategory("todos");
+                  setTemplateTierFilter("all");
                 }}
               >
                 <TemplateIcon />
@@ -1530,6 +1532,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       >
                         <span className="cat-icon">{getCategoryIcon(cat.slug)}</span>
                         <span>{cat.name}</span>
+                        {cat.count !== undefined && (
+                          <span className="cat-count">({cat.count})</span>
+                        )}
                       </button>
                     ))}
                   </div>
@@ -1545,40 +1550,82 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </div>
                 </div>
 
+                {/* Level 2: Tier Filter Chips */}
+                <div className="tier-filter-bar">
+                  <span className="tier-filter-label">Nivel:</span>
+                  <div className="tier-filter-chips">
+                    <button
+                      className={`tier-chip ${templateTierFilter === "all" ? "active" : ""}`}
+                      onClick={() => setTemplateTierFilter("all")}
+                    >
+                      Todos ({getTemplatesByCategory(selectedTemplateCategory).length})
+                    </button>
+                    <button
+                      className={`tier-chip ${templateTierFilter === "core" ? "active" : ""}`}
+                      onClick={() => setTemplateTierFilter("core")}
+                    >
+                      Core / Destacadas ({getTemplatesByTier("core", selectedTemplateCategory).length})
+                    </button>
+                    <button
+                      className={`tier-chip ${templateTierFilter === "specialized" ? "active" : ""}`}
+                      onClick={() => setTemplateTierFilter("specialized")}
+                    >
+                      Especializadas ({getTemplatesByTier("specialized", selectedTemplateCategory).length})
+                    </button>
+                    <button
+                      className={`tier-chip ${templateTierFilter === "expert" ? "active" : ""}`}
+                      onClick={() => setTemplateTierFilter("expert")}
+                    >
+                      Expertas ({getTemplatesByTier("expert", selectedTemplateCategory).length})
+                    </button>
+                  </div>
+                </div>
+
                 {/* Grid de Plantillas Oficiales */}
-                {selectedTemplateCategory === "todos" && !templateSearchQuery && !showAllTemplates ? (
+                {selectedTemplateCategory === "todos" && !templateSearchQuery && !showAllTemplates && templateTierFilter === "all" ? (
                   <div className="featured-templates-section">
                     <div className="featured-section-banner">
                       <div className="featured-badge">
                         <StarIcon />
-                        <span>COLECCIÓN DESTACADA</span>
+                        <span>COLECCIÓN DESTACADA (TIER A)</span>
                       </div>
-                      <h4>Plantillas Más Populares & Efectivas</h4>
-                      <p>Selección rápida recomendada para arrancar tu tablero en segundos.</p>
+                      <h4>Plantillas Esenciales de Mayor Impacto</h4>
+                      <p>Selección curada de plantillas fundamentales recomendadas para arrancar cualquier proyecto en segundos.</p>
                     </div>
 
                     <div className="templates-gallery-grid">
                       {getFeaturedTemplates().map((tmpl) => (
-                        <div key={tmpl.id} className="template-card-premium">
-                          <div className="template-card-header">
-                            <span className={`tmpl-badge tmpl-badge-${tmpl.categorySlug}`}>
-                              {tmpl.category.toUpperCase()}
-                            </span>
-                            <h4>{tmpl.name}</h4>
-                          </div>
-
+                        <div key={tmpl.id} className="template-card-minimal">
                           <div
-                            className="template-thumbnail-container"
+                            className="template-thumbnail-box"
                             dangerouslySetInnerHTML={{ __html: tmpl.thumbnailSvg }}
                           />
-
-                          <p>{tmpl.description}</p>
-                          <button
-                            className="btn-use-template"
-                            onClick={() => handleCreateBoard(tmpl.id)}
-                          >
-                            Usar esta plantilla
-                          </button>
+                          <div className="template-card-body">
+                            <div className="template-card-heading">
+                              <h4 title={tmpl.name}>{tmpl.name}</h4>
+                              <div className="template-card-subheading">
+                                <span className="cat-pill">{tmpl.category}</span>
+                                {tmpl.subcategory && (
+                                  <>
+                                    <span className="dot-sep">·</span>
+                                    <span className="subcat-pill">{tmpl.subcategory}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                            <p className="template-card-desc">{tmpl.description}</p>
+                            <div className="template-card-footer">
+                              <span className={`tmpl-tier-tag tmpl-tier-${tmpl.tier}`}>
+                                {tmpl.tier === "core" ? "Core" : tmpl.tier === "expert" ? "Experto" : "Especializado"}
+                              </span>
+                              <button
+                                className="btn-open-template"
+                                onClick={() => handleCreateBoard(tmpl.id)}
+                              >
+                                Abrir plantilla
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -1588,7 +1635,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         className="btn-view-all-templates"
                         onClick={() => setShowAllTemplates(true)}
                       >
-                        Ver todas las plantillas ({TEMPLATES.length}) →
+                        Ver catálogo completo ({TEMPLATES.length} plantillas) →
                       </button>
                     </div>
                   </div>
@@ -1596,10 +1643,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <div className="all-templates-section">
                     {selectedTemplateCategory === "todos" && !templateSearchQuery && (
                       <div className="all-templates-header-actions">
-                        <span className="all-templates-count">Mostrando las {TEMPLATES.length} plantillas de la biblioteca</span>
+                        <span className="all-templates-count">
+                          Mostrando {searchTemplates(templateSearchQuery, selectedTemplateCategory, templateTierFilter).length} de {TEMPLATES.length} plantillas
+                        </span>
                         <button
                           className="btn-back-to-featured"
-                          onClick={() => setShowAllTemplates(false)}
+                          onClick={() => {
+                            setShowAllTemplates(false);
+                            setTemplateTierFilter("all");
+                          }}
                         >
                           <StarIcon />
                           <span>Ver solo destacadas</span>
@@ -1608,39 +1660,53 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     )}
 
                     <div className="templates-gallery-grid">
-                      {searchTemplates(templateSearchQuery, selectedTemplateCategory).map((tmpl) => (
-                        <div key={tmpl.id} className="template-card-premium">
-                          <div className="template-card-header">
-                            <span className={`tmpl-badge tmpl-badge-${tmpl.categorySlug}`}>
-                              {tmpl.category.toUpperCase()}
-                            </span>
-                            <h4>{tmpl.name}</h4>
-                          </div>
-
+                      {searchTemplates(templateSearchQuery, selectedTemplateCategory, templateTierFilter).map((tmpl) => (
+                        <div key={tmpl.id} className="template-card-minimal">
                           <div
-                            className="template-thumbnail-container"
+                            className="template-thumbnail-box"
                             dangerouslySetInnerHTML={{ __html: tmpl.thumbnailSvg }}
                           />
-
-                          <p>{tmpl.description}</p>
-                          <button
-                            className="btn-use-template"
-                            onClick={() => handleCreateBoard(tmpl.id)}
-                          >
-                            Usar esta plantilla
-                          </button>
+                          <div className="template-card-body">
+                            <div className="template-card-heading">
+                              <h4 title={tmpl.name}>{tmpl.name}</h4>
+                              <div className="template-card-subheading">
+                                <span className="cat-pill">{tmpl.category}</span>
+                                {tmpl.subcategory && (
+                                  <>
+                                    <span className="dot-sep">·</span>
+                                    <span className="subcat-pill">{tmpl.subcategory}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                            <p className="template-card-desc">{tmpl.description}</p>
+                            <div className="template-card-footer">
+                              <span className={`tmpl-tier-tag tmpl-tier-${tmpl.tier}`}>
+                                {tmpl.tier === "core" ? "Core" : tmpl.tier === "expert" ? "Experto" : "Especializado"}
+                              </span>
+                              <button
+                                className="btn-open-template"
+                                onClick={() => handleCreateBoard(tmpl.id)}
+                              >
+                                Abrir plantilla
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
 
-                    {searchTemplates(templateSearchQuery, selectedTemplateCategory).length === 0 && (
+                    {searchTemplates(templateSearchQuery, selectedTemplateCategory, templateTierFilter).length === 0 && (
                       <div className="templates-empty-search">
-                        <p>No se encontraron plantillas que coincidan con "<strong>{templateSearchQuery}</strong>".</p>
+                        <p>No se encontraron plantillas que coincidan con "<strong>{templateSearchQuery}</strong>" en este nivel o categoría.</p>
                         <button
                           className="btn-clear-search"
-                          onClick={() => setTemplateSearchQuery("")}
+                          onClick={() => {
+                            setTemplateSearchQuery("");
+                            setTemplateTierFilter("all");
+                          }}
                         >
-                          Limpiar búsqueda
+                          Limpiar filtros
                         </button>
                       </div>
                     )}

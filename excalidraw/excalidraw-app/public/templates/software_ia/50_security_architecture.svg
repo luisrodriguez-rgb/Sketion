@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1525.0 395.0" width="1525.0" height="395.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1525.0" height="395.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1445.0" height="315.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · SOFTWARE · INTER VECTORIAL</text>
+  <rect x="40.0" y="180.0" width="180.0" height="70.0" rx="6.0" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5" />
+  <ellipse cx="70.0" cy="208.0" rx="18.0" ry="18.0" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2" />
+  <text x="98.0" y="206.0" fill="#0F172A" font-size="14px" font-weight="600">Usuario Final</text>
+  <text x="98.0" y="220.0" fill="#64748B" font-size="10px" font-weight="400">HTTPS / TLS 1.3</text>
+  <line x1="220.0" y1="215.0" x2="300.0" y2="215.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="300.0" y="140.0" width="200.0" height="150.0" rx="6.0" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5" stroke-dasharray="6,6" />
+  <rect x="300.0" y="140.0" width="200.0" height="32.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="338.0" y="160.0" fill="#0F172A" font-size="12px" font-weight="400">CLOUDFLARE WAF (WAF)</text>
+  <text x="316.0" y="193.0" fill="#334155" font-size="11px" font-weight="400">• DDoS Mitigation</text>
+  <text x="316.0" y="215.0" fill="#334155" font-size="11px" font-weight="400">• Bot Defense</text>
+  <text x="316.0" y="237.0" fill="#334155" font-size="11px" font-weight="400">• IP Rate Limit</text>
+  <line x1="500.0" y1="215.0" x2="580.0" y2="215.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="580.0" y="150.0" width="240.0" height="130.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="592.0" y="160.0" width="66.4" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="596.0" y="172.0" fill="#475569" font-size="10px" font-weight="400">GATEWAY</text>
+  <text x="594.0" y="202.0" fill="#0F172A" font-size="14px" font-weight="600">Envoy API Gateway</text>
+  <text x="594.0" y="222.9" fill="#475569" font-size="12px" font-weight="400">JWT Verification
+mTLS Mesh Ingress</text>
+  <line x1="820.0" y1="215.0" x2="900.0" y2="215.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="900.0" y="150.0" width="240.0" height="130.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="912.0" y="160.0" width="66.4" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="916.0" y="172.0" fill="#475569" font-size="10px" font-weight="400">SERVICE</text>
+  <text x="914.0" y="202.0" fill="#0F172A" font-size="14px" font-weight="600">Core Service</text>
+  <text x="914.0" y="222.9" fill="#475569" font-size="12px" font-weight="400">RBAC Policy Engine
+Zero-Trust Runtime</text>
+  <line x1="1140.0" y1="215.0" x2="1220.0" y2="215.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="1220.0" y="160.0" width="200.0" height="110.0" rx="6.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <ellipse cx="1320.0" cy="160.0" rx="100.0" ry="10.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <line x1="1230.0" y1="264.0" x2="1410.0" y2="264.0" stroke="#2563EB" stroke-width="1.0" stroke-dasharray="6,6" />
+  <rect x="1234.0" y="170.0" width="73.6" height="20.0" rx="6.0" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.0" />
+  <text x="1238.0" y="182.0" fill="#1D4ED8" font-size="10px" font-weight="400">DATABASE</text>
+  <text x="1234.0" y="210.0" fill="#0F172A" font-size="14px" font-weight="600">Encrypted DB</text>
+  <text x="1234.0" y="229.0" fill="#475569" font-size="11px" font-weight="400">AES-256 at Rest</text>
+</svg>

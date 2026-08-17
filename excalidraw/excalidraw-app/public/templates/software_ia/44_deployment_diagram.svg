@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1465.0 535.0" width="1465.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1465.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1385.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · SOFTWARE · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="320.0" height="350.0" rx="6.0" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5" />
+  <text x="60.0" y="116.0" fill="#0F172A" font-size="11px" font-weight="400">NODO: CLIENTE (BROWSER)</text>
+  <rect x="60.0" y="150.0" width="280.0" height="80.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+  <text x="75.0" y="185.0" fill="#334155" font-size="10px" font-weight="400">&lt;&lt;artifact&gt;&gt; WebApp.bundle.js</text>
+  <line x1="360.0" y1="220.0" x2="480.0" y2="220.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="480.0" y="80.0" width="460.0" height="350.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.8" />
+  <text x="500.0" y="116.0" fill="#1D4ED8" font-size="11px" font-weight="400">NODO: AWS EC2 APPLICATION SERVER</text>
+  <rect x="500.0" y="150.0" width="420.0" height="100.0" rx="6.0" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.2" />
+  <text x="515.0" y="185.0" fill="#1D4ED8" font-size="10px" font-weight="400">&lt;&lt;execution environment&gt;&gt; Docker Daemon</text>
+  <text x="515.0" y="214.0" fill="#64748B" font-size="9px" font-weight="400">Contenedor: api-server:v2.4 (Gunicorn)</text>
+  <line x1="940.0" y1="220.0" x2="1040.0" y2="220.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="1040.0" y="150.0" width="320.0" height="160.0" rx="6.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <ellipse cx="1200.0" cy="150.0" rx="160.0" ry="10.0" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+  <line x1="1050.0" y1="304.0" x2="1350.0" y2="304.0" stroke="#2563EB" stroke-width="1.0" stroke-dasharray="6,6" />
+  <rect x="1054.0" y="160.0" width="73.6" height="20.0" rx="6.0" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.0" />
+  <text x="1058.0" y="172.0" fill="#1D4ED8" font-size="10px" font-weight="400">DATABASE</text>
+  <text x="1054.0" y="200.0" fill="#0F172A" font-size="14px" font-weight="600">NODO: AWS RDS POSTGRESQL</text>
+  <text x="1054.0" y="219.0" fill="#475569" font-size="11px" font-weight="400">Multi-AZ Replication</text>
+</svg>

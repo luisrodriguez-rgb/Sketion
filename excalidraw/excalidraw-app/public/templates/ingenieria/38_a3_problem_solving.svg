@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1505.0 535.0" width="1505.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1505.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1425.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · INGENIERÍA · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="1360.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.0" />
+  <rect x="40.0" y="80.0" width="1360.0" height="36.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.2" />
+  <text x="56.0" y="102.0" fill="#D93829" font-size="12px" font-weight="400">TOYOTA A3 PROBLEM SOLVING REPORT: REDUCCION DE RETRABAJOS EN LINEA 4</text>
+  <rect x="50.0" y="126.0" width="665.0" height="139.2" rx="6.0" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2" />
+  <text x="58.0" y="145.0" fill="#0F172A" font-size="11px" font-weight="400">1. CONTEXTO &amp; ESTADO ACTUAL</text>
+  <text x="58.0" y="168.0" fill="#475569" font-size="10px" font-weight="400">• Identificación de pérdidas de tiempo y fricción.
+• Diagrama de flujo actual del proceso.
+• Cuantificación del problema en horas/semana.</text>
+  <rect x="50.0" y="275.2" width="665.0" height="139.2" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="58.0" y="294.2" fill="#D93829" font-size="11px" font-weight="400">2. ANÁLISIS DE CAUSA RAÍZ (5 PORQUÉS)</text>
+  <text x="58.0" y="317.2" fill="#334155" font-size="10px" font-weight="400">1. ¿Por qué se retrasa? -&gt; Alineación manual lenta.
+2. ¿Por qué manual? -&gt; Sin arquetipos automáticos.
+3. ¿Por qué? -&gt; Causa raíz: Falta de generadores modulares.</text>
+  <rect x="725.0" y="126.0" width="665.0" height="139.2" rx="6.0" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" />
+  <text x="743.0" y="145.0" fill="#166534" font-size="11px" font-weight="400">3. CONTRAMEDIDAS PROPUESTAS</text>
+  <text x="743.0" y="168.0" fill="#15803D" font-size="10px" font-weight="400">[+] Constructor de 150 plantillas ricas especializadas.
+[+] Eliminación del 100% de placeholders genéricos.
+[+] Auditoría continua de consistencia visual VCS &gt;= 99.</text>
+  <rect x="725.0" y="275.2" width="665.0" height="139.2" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+  <text x="743.0" y="294.2" fill="#0F172A" font-size="11px" font-weight="400">4. PLAN DE EJECUCIÓN &amp; SEGUIMIENTO (PDCA)</text>
+  <text x="743.0" y="317.2" fill="#475569" font-size="10px" font-weight="400">• Semana 1: Regenerar las 150 plantillas con datos reales.
+• Semana 2: Validación cruzada de SVG y Excalidraw.
+• Métricas: VCS &gt; 99.0 | 0 Emojis | 100% Diversidad.</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1215.0 490.9" width="1215.0" height="490.9">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1215.0" height="490.9" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1135.0" height="410.9" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · INGENIERÍA · INTER VECTORIAL</text>
+  <rect x="600.0" y="70.0" width="260.0" height="80.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="2.0" />
+  <rect x="612.0" y="80.0" width="45.0" height="20.0" rx="6.0" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.0" />
+  <text x="616.0" y="92.0" fill="#D93829" font-size="10px" font-weight="400">EXT</text>
+  <text x="614.0" y="122.0" fill="#0F172A" font-size="14px" font-weight="600">EVENTO TOPE (FALLO)</text>
+  <text x="614.0" y="142.9" fill="#475569" font-size="12px" font-weight="400">Perdida de Presion de Linea</text>
+  <polygon points="730.0,180.0 770.0,220.0 730.0,260.0 690.0,220.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.8" />
+  <text x="710.0" y="222.0" fill="#D93829" font-size="12px" font-weight="400">OR</text>
+  <line x1="730.0" y1="150.0" x2="730.0" y2="180.0" stroke="#D93829" stroke-width="1.5" marker-end="url(#arrowhead-hero)" />
+  <rect x="350.0" y="300.0" width="260.0" height="80.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="362.0" y="310.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="366.0" y="322.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="364.0" y="352.0" fill="#0F172A" font-size="14px" font-weight="600">Fallo Bomba Primaria</text>
+  <text x="364.0" y="372.9" fill="#475569" font-size="12px" font-weight="400">Cavitacion Mecanica</text>
+  <rect x="850.0" y="300.0" width="260.0" height="80.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="862.0" y="310.0" width="45.0" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="866.0" y="322.0" fill="#475569" font-size="10px" font-weight="400">EXT</text>
+  <text x="864.0" y="352.0" fill="#0F172A" font-size="14px" font-weight="600">Rotura de Valvula</text>
+  <text x="864.0" y="372.9" fill="#475569" font-size="12px" font-weight="400">Fatiga de Material</text>
+  <line x1="730.0" y1="260.0" x2="480.0" y2="300.0" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <line x1="730.0" y1="260.0" x2="980.0" y2="300.0" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arrowhead)" />
+</svg>

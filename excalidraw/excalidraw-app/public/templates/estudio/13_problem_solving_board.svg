@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1572.4 395.0" width="1572.4" height="395.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1572.4" height="395.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1492.4" height="315.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · ESTUDIO · INTER VECTORIAL</text>
+  <rect x="40.0" y="140.0" width="260.0" height="150.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="52.0" y="150.0" width="59.2" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="56.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">PASO 1</text>
+  <text x="54.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">1. Comprender el Enunciado</text>
+  <text x="54.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Notas de resolucion y pruebas</text>
+  <line x1="300.0" y1="215.0" x2="315.0" y2="215.0" stroke="#94A3B8" stroke-width="1.8" marker-end="url(#arrowhead)" />
+  <rect x="315.0" y="140.0" width="260.0" height="150.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="327.0" y="150.0" width="59.2" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="331.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">PASO 2</text>
+  <text x="329.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">2. Identificar Restricciones</text>
+  <text x="329.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Notas de resolucion y pruebas</text>
+  <line x1="575.0" y1="215.0" x2="590.0" y2="215.0" stroke="#94A3B8" stroke-width="1.8" marker-end="url(#arrowhead)" />
+  <rect x="590.0" y="140.0" width="260.0" height="150.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="2.0" />
+  <rect x="602.0" y="150.0" width="59.2" height="20.0" rx="6.0" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.0" />
+  <text x="606.0" y="162.0" fill="#D93829" font-size="10px" font-weight="400">PASO 3</text>
+  <text x="604.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">3. Proponer Algoritmo</text>
+  <text x="604.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Notas de resolucion y pruebas</text>
+  <line x1="850.0" y1="215.0" x2="865.0" y2="215.0" stroke="#D93829" stroke-width="1.8" marker-end="url(#arrowhead-hero)" />
+  <rect x="865.0" y="140.0" width="260.0" height="150.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="877.0" y="150.0" width="59.2" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="881.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">PASO 4</text>
+  <text x="879.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">4. Implementar &amp; Verificar</text>
+  <text x="879.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Notas de resolucion y pruebas</text>
+  <line x1="1125.0" y1="215.0" x2="1140.0" y2="215.0" stroke="#94A3B8" stroke-width="1.8" marker-end="url(#arrowhead)" />
+  <rect x="1140.0" y="140.0" width="260.0" height="150.0" rx="6.0" fill="#FFFFFF" stroke="#0C0C0C" stroke-width="1.5" />
+  <rect x="1152.0" y="150.0" width="59.2" height="20.0" rx="6.0" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.0" />
+  <text x="1156.0" y="162.0" fill="#475569" font-size="10px" font-weight="400">PASO 5</text>
+  <text x="1154.0" y="192.0" fill="#0F172A" font-size="14px" font-weight="600">5. Calcular Complejidad</text>
+  <text x="1154.0" y="212.9" fill="#475569" font-size="12px" font-weight="400">Notas de resolucion y pruebas</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1505.0 535.0" width="1505.0" height="535.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1505.0" height="535.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1425.0" height="455.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · INGENIERÍA · INTER VECTORIAL</text>
+  <rect x="40.0" y="80.0" width="1360.0" height="350.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <line x1="100.0" y1="380.0" x2="1300.0" y2="380.0" stroke="#0F172A" stroke-width="1.5" />
+  <rect x="200.0" y="340.0" width="110.0" height="40.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="235.0" y="330.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=40</text>
+  <text x="225.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">19.85</text>
+  <rect x="340.0" y="290.0" width="110.0" height="90.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="375.0" y="280.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=90</text>
+  <text x="365.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">19.90</text>
+  <rect x="480.0" y="200.0" width="110.0" height="180.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="515.0" y="190.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=180</text>
+  <text x="505.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">19.95</text>
+  <rect x="620.0" y="120.0" width="110.0" height="260.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="655.0" y="110.0" fill="#D93829" font-size="10px" font-weight="400">n=260</text>
+  <text x="645.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">20.00</text>
+  <rect x="760.0" y="190.0" width="110.0" height="190.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="795.0" y="180.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=190</text>
+  <text x="785.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">20.05</text>
+  <rect x="900.0" y="295.0" width="110.0" height="85.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="935.0" y="285.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=85</text>
+  <text x="925.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">20.10</text>
+  <rect x="1040.0" y="345.0" width="110.0" height="35.0" rx="6.0" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+  <text x="1075.0" y="335.0" fill="#1D4ED8" font-size="10px" font-weight="400">n=35</text>
+  <text x="1065.0" y="405.0" fill="#64748B" font-size="10px" font-weight="400">20.15</text>
+</svg>

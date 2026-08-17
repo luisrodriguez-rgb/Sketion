@@ -1,0 +1,2494 @@
+{
+  "version": "2.0.0",
+  "total_templates": 150,
+  "total_categories": 10,
+  "grand_total_ecosystem": 212,
+  "standards": {
+    "emojis": 0,
+    "typography": "Inter (fontFamily: 3)",
+    "orthogonal_routing": "90 degrees",
+    "min_padding": "35px",
+    "vcs_benchmark": ">= 99.0 / 100"
+  },
+  "templates": [
+    {
+      "id": 1,
+      "slug": "01_study_planner",
+      "title": "Study Planner",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "columns",
+      "primary_structures": [
+        "cards",
+        "timebox"
+      ],
+      "node_count": 74,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/01_study_planner.svg",
+      "excalidraw_file": "01_estudio_educacion/01_study_planner.excalidraw"
+    },
+    {
+      "id": 2,
+      "slug": "02_subject_dashboard",
+      "title": "Subject Dashboard",
+      "category": "01_estudio_educacion",
+      "complexity": "low",
+      "layout_type": "grid",
+      "primary_structures": [
+        "cards",
+        "kpi"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/02_subject_dashboard.svg",
+      "excalidraw_file": "01_estudio_educacion/02_subject_dashboard.excalidraw"
+    },
+    {
+      "id": 3,
+      "slug": "03_course_map",
+      "title": "Course Map",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "horizontal_flow",
+      "primary_structures": [
+        "nodes",
+        "connectors"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "01_estudio_educacion/03_course_map.svg",
+      "excalidraw_file": "01_estudio_educacion/03_course_map.excalidraw"
+    },
+    {
+      "id": 4,
+      "slug": "04_chapter_summary",
+      "title": "Chapter Summary",
+      "category": "01_estudio_educacion",
+      "complexity": "low",
+      "layout_type": "grid",
+      "primary_structures": [
+        "cards",
+        "text"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/04_chapter_summary.svg",
+      "excalidraw_file": "01_estudio_educacion/04_chapter_summary.excalidraw"
+    },
+    {
+      "id": 5,
+      "slug": "05_book_analysis",
+      "title": "Book Analysis",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "panels_4",
+      "primary_structures": [
+        "literary_metadata",
+        "character_map",
+        "themes"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/05_book_analysis.svg",
+      "excalidraw_file": "01_estudio_educacion/05_book_analysis.excalidraw"
+    },
+    {
+      "id": 6,
+      "slug": "06_article_analysis",
+      "title": "Article Analysis",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "columns_4",
+      "primary_structures": [
+        "abstract",
+        "methodology",
+        "findings"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/06_article_analysis.svg",
+      "excalidraw_file": "01_estudio_educacion/06_article_analysis.excalidraw"
+    },
+    {
+      "id": 7,
+      "slug": "07_thesis_statement_builder",
+      "title": "Thesis Statement Builder",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "horizontal_flow",
+      "primary_structures": [
+        "nodes",
+        "connectors"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "01_estudio_educacion/07_thesis_statement_builder.svg",
+      "excalidraw_file": "01_estudio_educacion/07_thesis_statement_builder.excalidraw"
+    },
+    {
+      "id": 8,
+      "slug": "08_argument_map",
+      "title": "Argument Map",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "hierarchical_tree",
+      "primary_structures": [
+        "nodes",
+        "connectors"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "01_estudio_educacion/08_argument_map.svg",
+      "excalidraw_file": "01_estudio_educacion/08_argument_map.excalidraw"
+    },
+    {
+      "id": 9,
+      "slug": "09_debate_map",
+      "title": "Debate Map",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "split_debate",
+      "primary_structures": [
+        "pros",
+        "cons"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/09_debate_map.svg",
+      "excalidraw_file": "01_estudio_educacion/09_debate_map.excalidraw"
+    },
+    {
+      "id": 10,
+      "slug": "10_comparison_study",
+      "title": "Comparison Study",
+      "category": "01_estudio_educacion",
+      "complexity": "high",
+      "layout_type": "venn_triple",
+      "primary_structures": [
+        "circles",
+        "intersections"
+      ],
+      "node_count": 9,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/10_comparison_study.svg",
+      "excalidraw_file": "01_estudio_educacion/10_comparison_study.excalidraw"
+    },
+    {
+      "id": 11,
+      "slug": "11_timeline_study",
+      "title": "Timeline Study",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "timeline_axis",
+      "primary_structures": [
+        "axis",
+        "milestones"
+      ],
+      "node_count": 23,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/11_timeline_study.svg",
+      "excalidraw_file": "01_estudio_educacion/11_timeline_study.excalidraw"
+    },
+    {
+      "id": 12,
+      "slug": "12_formula_sheet",
+      "title": "Formula Sheet",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "grid",
+      "primary_structures": [
+        "cards",
+        "math"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/12_formula_sheet.svg",
+      "excalidraw_file": "01_estudio_educacion/12_formula_sheet.excalidraw"
+    },
+    {
+      "id": 13,
+      "slug": "13_problem_solving_board",
+      "title": "Problem Solving Board",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "horizontal_flow",
+      "primary_structures": [
+        "nodes",
+        "connectors"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "01_estudio_educacion/13_problem_solving_board.svg",
+      "excalidraw_file": "01_estudio_educacion/13_problem_solving_board.excalidraw"
+    },
+    {
+      "id": 14,
+      "slug": "14_question_bank",
+      "title": "Question Bank",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "columns_3",
+      "primary_structures": [
+        "shelves",
+        "questions"
+      ],
+      "node_count": 20,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/14_question_bank.svg",
+      "excalidraw_file": "01_estudio_educacion/14_question_bank.excalidraw"
+    },
+    {
+      "id": 15,
+      "slug": "15_exam_question_matrix",
+      "title": "Exam Question Matrix",
+      "category": "01_estudio_educacion",
+      "complexity": "high",
+      "layout_type": "matrix_table",
+      "primary_structures": [
+        "table",
+        "taxonomy"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/15_exam_question_matrix.svg",
+      "excalidraw_file": "01_estudio_educacion/15_exam_question_matrix.excalidraw"
+    },
+    {
+      "id": 16,
+      "slug": "16_spaced_repetition_board",
+      "title": "Spaced Repetition Board",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "columns",
+      "primary_structures": [
+        "cards",
+        "intervals"
+      ],
+      "node_count": 27,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/16_spaced_repetition_board.svg",
+      "excalidraw_file": "01_estudio_educacion/16_spaced_repetition_board.excalidraw"
+    },
+    {
+      "id": 17,
+      "slug": "17_learning_progress_tracker",
+      "title": "Learning Progress Tracker",
+      "category": "01_estudio_educacion",
+      "complexity": "high",
+      "layout_type": "radar_spider",
+      "primary_structures": [
+        "polar_polygon",
+        "axes"
+      ],
+      "node_count": 44,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/17_learning_progress_tracker.svg",
+      "excalidraw_file": "01_estudio_educacion/17_learning_progress_tracker.excalidraw"
+    },
+    {
+      "id": 18,
+      "slug": "18_concept_dependency_map",
+      "title": "Concept Dependency Map",
+      "category": "01_estudio_educacion",
+      "complexity": "high",
+      "layout_type": "dag_graph",
+      "primary_structures": [
+        "nodes",
+        "dependencies"
+      ],
+      "node_count": 32,
+      "connector_count": 5,
+      "svg_file": "01_estudio_educacion/18_concept_dependency_map.svg",
+      "excalidraw_file": "01_estudio_educacion/18_concept_dependency_map.excalidraw"
+    },
+    {
+      "id": 19,
+      "slug": "19_lab_report_canvas",
+      "title": "Lab Report Canvas",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "grid",
+      "primary_structures": [
+        "canvas_blocks",
+        "text"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/19_lab_report_canvas.svg",
+      "excalidraw_file": "01_estudio_educacion/19_lab_report_canvas.excalidraw"
+    },
+    {
+      "id": 20,
+      "slug": "20_academic_project_canvas",
+      "title": "Academic Project Canvas",
+      "category": "01_estudio_educacion",
+      "complexity": "medium",
+      "layout_type": "capstone_grid",
+      "primary_structures": [
+        "research_question",
+        "deliverables"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "01_estudio_educacion/20_academic_project_canvas.svg",
+      "excalidraw_file": "01_estudio_educacion/20_academic_project_canvas.excalidraw"
+    },
+    {
+      "id": 21,
+      "slug": "21_value_added_flow_analysis",
+      "title": "Value Added Flow Analysis",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "columns",
+      "primary_structures": [
+        "value_stream",
+        "waste"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/21_value_added_flow_analysis.svg",
+      "excalidraw_file": "02_ingenieria_procesos/21_value_added_flow_analysis.excalidraw"
+    },
+    {
+      "id": 22,
+      "slug": "22_swimlane_process_map",
+      "title": "Swimlane Process Map",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "swimlane_4",
+      "primary_structures": [
+        "lanes",
+        "flow_nodes"
+      ],
+      "node_count": 33,
+      "connector_count": 3,
+      "svg_file": "02_ingenieria_procesos/22_swimlane_process_map.svg",
+      "excalidraw_file": "02_ingenieria_procesos/22_swimlane_process_map.excalidraw"
+    },
+    {
+      "id": 23,
+      "slug": "23_decision_analysis_tree",
+      "title": "Decision Analysis Tree",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "decision_tree",
+      "primary_structures": [
+        "nodes",
+        "branches"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "02_ingenieria_procesos/23_decision_analysis_tree.svg",
+      "excalidraw_file": "02_ingenieria_procesos/23_decision_analysis_tree.excalidraw"
+    },
+    {
+      "id": 24,
+      "slug": "24_process_analysis_matrix",
+      "title": "Process Analysis Matrix",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "matrix_table",
+      "primary_structures": [
+        "table",
+        "cells"
+      ],
+      "node_count": 31,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/24_process_analysis_matrix.svg",
+      "excalidraw_file": "02_ingenieria_procesos/24_process_analysis_matrix.excalidraw"
+    },
+    {
+      "id": 25,
+      "slug": "25_spaghetti_diagram",
+      "title": "Spaghetti Diagram",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "layout_map",
+      "primary_structures": [
+        "zones",
+        "trajectories"
+      ],
+      "node_count": 25,
+      "connector_count": 7,
+      "svg_file": "02_ingenieria_procesos/25_spaghetti_diagram.svg",
+      "excalidraw_file": "02_ingenieria_procesos/25_spaghetti_diagram.excalidraw"
+    },
+    {
+      "id": 26,
+      "slug": "26_takt_time_analysis",
+      "title": "Takt Time Analysis",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "cards_metrics",
+      "primary_structures": [
+        "metrics",
+        "thresholds"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/26_takt_time_analysis.svg",
+      "excalidraw_file": "02_ingenieria_procesos/26_takt_time_analysis.excalidraw"
+    },
+    {
+      "id": 27,
+      "slug": "27_cycle_time_analysis",
+      "title": "Cycle Time Analysis",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "barchart_ct",
+      "primary_structures": [
+        "bars",
+        "limits"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/27_cycle_time_analysis.svg",
+      "excalidraw_file": "02_ingenieria_procesos/27_cycle_time_analysis.excalidraw"
+    },
+    {
+      "id": 28,
+      "slug": "28_line_balancing",
+      "title": "Line Balancing",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "split_balance",
+      "primary_structures": [
+        "efficiency",
+        "workstations"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/28_line_balancing.svg",
+      "excalidraw_file": "02_ingenieria_procesos/28_line_balancing.excalidraw"
+    },
+    {
+      "id": 29,
+      "slug": "29_bottleneck_analysis",
+      "title": "Bottleneck Analysis",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "horizontal_flow",
+      "primary_structures": [
+        "toc_nodes",
+        "constraint"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "02_ingenieria_procesos/29_bottleneck_analysis.svg",
+      "excalidraw_file": "02_ingenieria_procesos/29_bottleneck_analysis.excalidraw"
+    },
+    {
+      "id": 30,
+      "slug": "30_oee_dashboard",
+      "title": "OEE Dashboard",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "kpi_cards",
+      "primary_structures": [
+        "kpi",
+        "gauges"
+      ],
+      "node_count": 18,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/30_oee_dashboard.svg",
+      "excalidraw_file": "02_ingenieria_procesos/30_oee_dashboard.excalidraw"
+    },
+    {
+      "id": 31,
+      "slug": "31_quality_control_plan",
+      "title": "Quality Control Plan",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "matrix_table",
+      "primary_structures": [
+        "table",
+        "controls"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/31_quality_control_plan.svg",
+      "excalidraw_file": "02_ingenieria_procesos/31_quality_control_plan.excalidraw"
+    },
+    {
+      "id": 32,
+      "slug": "32_control_chart",
+      "title": "Control Chart",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "spc_chart",
+      "primary_structures": [
+        "axes",
+        "control_limits",
+        "points"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/32_control_chart.svg",
+      "excalidraw_file": "02_ingenieria_procesos/32_control_chart.excalidraw"
+    },
+    {
+      "id": 33,
+      "slug": "33_histogram_analysis",
+      "title": "Histogram Analysis",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "histogram",
+      "primary_structures": [
+        "bars",
+        "distribution"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/33_histogram_analysis.svg",
+      "excalidraw_file": "02_ingenieria_procesos/33_histogram_analysis.excalidraw"
+    },
+    {
+      "id": 34,
+      "slug": "34_scatter_diagram",
+      "title": "Scatter Diagram",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "scatter",
+      "primary_structures": [
+        "points",
+        "correlation"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/34_scatter_diagram.svg",
+      "excalidraw_file": "02_ingenieria_procesos/34_scatter_diagram.excalidraw"
+    },
+    {
+      "id": 35,
+      "slug": "35_process_capability",
+      "title": "Process Capability",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "split_capability",
+      "primary_structures": [
+        "indices",
+        "six_sigma"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/35_process_capability.svg",
+      "excalidraw_file": "02_ingenieria_procesos/35_process_capability.excalidraw"
+    },
+    {
+      "id": 36,
+      "slug": "36_failure_tree_analysis_fta",
+      "title": "Failure Tree Analysis (FTA)",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "tree_logic",
+      "primary_structures": [
+        "gates",
+        "root_events"
+      ],
+      "node_count": 22,
+      "connector_count": 3,
+      "svg_file": "02_ingenieria_procesos/36_failure_tree_analysis_fta.svg",
+      "excalidraw_file": "02_ingenieria_procesos/36_failure_tree_analysis_fta.excalidraw"
+    },
+    {
+      "id": 37,
+      "slug": "37_8d_problem_solving",
+      "title": "8D Problem Solving",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "grid_steps",
+      "primary_structures": [
+        "8d_blocks",
+        "cards"
+      ],
+      "node_count": 42,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/37_8d_problem_solving.svg",
+      "excalidraw_file": "02_ingenieria_procesos/37_8d_problem_solving.excalidraw"
+    },
+    {
+      "id": 38,
+      "slug": "38_a3_problem_solving",
+      "title": "A3 Problem Solving",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "a3_report",
+      "primary_structures": [
+        "a3_sections",
+        "pdca"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/38_a3_problem_solving.svg",
+      "excalidraw_file": "02_ingenieria_procesos/38_a3_problem_solving.excalidraw"
+    },
+    {
+      "id": 39,
+      "slug": "39_kaizen_board",
+      "title": "Kaizen Board",
+      "category": "02_ingenieria_procesos",
+      "complexity": "medium",
+      "layout_type": "kanban",
+      "primary_structures": [
+        "suggestions",
+        "impact"
+      ],
+      "node_count": 34,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/39_kaizen_board.svg",
+      "excalidraw_file": "02_ingenieria_procesos/39_kaizen_board.excalidraw"
+    },
+    {
+      "id": 40,
+      "slug": "40_standard_work_combination",
+      "title": "Standard Work Combination Sheet",
+      "category": "02_ingenieria_procesos",
+      "complexity": "high",
+      "layout_type": "timeline_bars",
+      "primary_structures": [
+        "manual_time",
+        "auto_time"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "02_ingenieria_procesos/40_standard_work_combination.svg",
+      "excalidraw_file": "02_ingenieria_procesos/40_standard_work_combination.excalidraw"
+    },
+    {
+      "id": 41,
+      "slug": "41_c4_system_context",
+      "title": "C4 System Context",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "c4_context",
+      "primary_structures": [
+        "systems",
+        "actors",
+        "boundaries"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/41_c4_system_context.svg",
+      "excalidraw_file": "03_software_architecture/41_c4_system_context.excalidraw"
+    },
+    {
+      "id": 42,
+      "slug": "42_c4_container_diagram",
+      "title": "C4 Container Diagram",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "c4_container",
+      "primary_structures": [
+        "containers",
+        "dbs",
+        "protocols"
+      ],
+      "node_count": 28,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/42_c4_container_diagram.svg",
+      "excalidraw_file": "03_software_architecture/42_c4_container_diagram.excalidraw"
+    },
+    {
+      "id": 43,
+      "slug": "43_c4_component_diagram",
+      "title": "C4 Component Diagram",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "c4_component",
+      "primary_structures": [
+        "controllers",
+        "services",
+        "repos"
+      ],
+      "node_count": 27,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/43_c4_component_diagram.svg",
+      "excalidraw_file": "03_software_architecture/43_c4_component_diagram.excalidraw"
+    },
+    {
+      "id": 44,
+      "slug": "44_deployment_diagram",
+      "title": "Deployment Diagram",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "deployment_nodes",
+      "primary_structures": [
+        "client_node",
+        "server_node",
+        "db_node"
+      ],
+      "node_count": 21,
+      "connector_count": 2,
+      "svg_file": "03_software_architecture/44_deployment_diagram.svg",
+      "excalidraw_file": "03_software_architecture/44_deployment_diagram.excalidraw"
+    },
+    {
+      "id": 45,
+      "slug": "45_component_architecture",
+      "title": "Component Architecture",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "hexagonal",
+      "primary_structures": [
+        "ports",
+        "adapters",
+        "domain_core"
+      ],
+      "node_count": 27,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/45_component_architecture.svg",
+      "excalidraw_file": "03_software_architecture/45_component_architecture.excalidraw"
+    },
+    {
+      "id": 46,
+      "slug": "46_class_diagram",
+      "title": "Class Diagram",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "uml_classes",
+      "primary_structures": [
+        "classes",
+        "attributes",
+        "associations"
+      ],
+      "node_count": 40,
+      "connector_count": 2,
+      "svg_file": "03_software_architecture/46_class_diagram.svg",
+      "excalidraw_file": "03_software_architecture/46_class_diagram.excalidraw"
+    },
+    {
+      "id": 47,
+      "slug": "47_activity_diagram",
+      "title": "Activity Diagram",
+      "category": "03_software_architecture",
+      "complexity": "medium",
+      "layout_type": "activity_flow",
+      "primary_structures": [
+        "fork_join",
+        "swimlanes"
+      ],
+      "node_count": 32,
+      "connector_count": 7,
+      "svg_file": "03_software_architecture/47_activity_diagram.svg",
+      "excalidraw_file": "03_software_architecture/47_activity_diagram.excalidraw"
+    },
+    {
+      "id": 48,
+      "slug": "48_state_machine_diagram",
+      "title": "State Machine Diagram",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "state_machine",
+      "primary_structures": [
+        "states",
+        "transitions",
+        "events"
+      ],
+      "node_count": 16,
+      "connector_count": 4,
+      "svg_file": "03_software_architecture/48_state_machine_diagram.svg",
+      "excalidraw_file": "03_software_architecture/48_state_machine_diagram.excalidraw"
+    },
+    {
+      "id": 49,
+      "slug": "49_use_case_diagram",
+      "title": "Use Case Diagram",
+      "category": "03_software_architecture",
+      "complexity": "medium",
+      "layout_type": "use_cases",
+      "primary_structures": [
+        "actors",
+        "system_boundary"
+      ],
+      "node_count": 26,
+      "connector_count": 2,
+      "svg_file": "03_software_architecture/49_use_case_diagram.svg",
+      "excalidraw_file": "03_software_architecture/49_use_case_diagram.excalidraw"
+    },
+    {
+      "id": 50,
+      "slug": "50_security_architecture",
+      "title": "Security Architecture",
+      "category": "03_software_architecture",
+      "complexity": "extreme",
+      "layout_type": "pipeline_security",
+      "primary_structures": [
+        "waf",
+        "mtls",
+        "zero_trust"
+      ],
+      "node_count": 36,
+      "connector_count": 4,
+      "svg_file": "03_software_architecture/50_security_architecture.svg",
+      "excalidraw_file": "03_software_architecture/50_security_architecture.excalidraw"
+    },
+    {
+      "id": 51,
+      "slug": "51_network_architecture",
+      "title": "Network Architecture",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "network_tiers",
+      "primary_structures": [
+        "dmz",
+        "subnets",
+        "firewall"
+      ],
+      "node_count": 27,
+      "connector_count": 1,
+      "svg_file": "03_software_architecture/51_network_architecture.svg",
+      "excalidraw_file": "03_software_architecture/51_network_architecture.excalidraw"
+    },
+    {
+      "id": 52,
+      "slug": "52_package_diagram",
+      "title": "Package Diagram",
+      "category": "03_software_architecture",
+      "complexity": "medium",
+      "layout_type": "package_tree",
+      "primary_structures": [
+        "packages",
+        "imports"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/52_package_diagram.svg",
+      "excalidraw_file": "03_software_architecture/52_package_diagram.excalidraw"
+    },
+    {
+      "id": 53,
+      "slug": "53_infrastructure_architecture",
+      "title": "Infrastructure Architecture",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "infrastructure",
+      "primary_structures": [
+        "servers",
+        "storage",
+        "dc"
+      ],
+      "node_count": 31,
+      "connector_count": 1,
+      "svg_file": "03_software_architecture/53_infrastructure_architecture.svg",
+      "excalidraw_file": "03_software_architecture/53_infrastructure_architecture.excalidraw"
+    },
+    {
+      "id": 54,
+      "slug": "54_cloud_architecture",
+      "title": "Cloud Architecture",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "cloud_multi_az",
+      "primary_structures": [
+        "vpc",
+        "az",
+        "services"
+      ],
+      "node_count": 33,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/54_cloud_architecture.svg",
+      "excalidraw_file": "03_software_architecture/54_cloud_architecture.excalidraw"
+    },
+    {
+      "id": 55,
+      "slug": "55_aws_architecture",
+      "title": "AWS Architecture",
+      "category": "03_software_architecture",
+      "complexity": "extreme",
+      "layout_type": "aws_stack",
+      "primary_structures": [
+        "aws_services",
+        "vpc",
+        "iam"
+      ],
+      "node_count": 28,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/55_aws_architecture.svg",
+      "excalidraw_file": "03_software_architecture/55_aws_architecture.excalidraw"
+    },
+    {
+      "id": 56,
+      "slug": "56_azure_architecture",
+      "title": "Azure Architecture",
+      "category": "03_software_architecture",
+      "complexity": "extreme",
+      "layout_type": "azure_stack",
+      "primary_structures": [
+        "vnet",
+        "aks",
+        "cosmos"
+      ],
+      "node_count": 28,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/56_azure_architecture.svg",
+      "excalidraw_file": "03_software_architecture/56_azure_architecture.excalidraw"
+    },
+    {
+      "id": 57,
+      "slug": "57_gcp_architecture",
+      "title": "GCP Architecture",
+      "category": "03_software_architecture",
+      "complexity": "extreme",
+      "layout_type": "gcp_stack",
+      "primary_structures": [
+        "gke",
+        "spanner",
+        "pubsub"
+      ],
+      "node_count": 28,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/57_gcp_architecture.svg",
+      "excalidraw_file": "03_software_architecture/57_gcp_architecture.excalidraw"
+    },
+    {
+      "id": 58,
+      "slug": "58_cicd_pipeline",
+      "title": "CI/CD Pipeline",
+      "category": "03_software_architecture",
+      "complexity": "high",
+      "layout_type": "pipeline",
+      "primary_structures": [
+        "stages",
+        "artifacts",
+        "gates"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "03_software_architecture/58_cicd_pipeline.svg",
+      "excalidraw_file": "03_software_architecture/58_cicd_pipeline.excalidraw"
+    },
+    {
+      "id": 59,
+      "slug": "59_kubernetes_architecture",
+      "title": "Kubernetes Architecture",
+      "category": "03_software_architecture",
+      "complexity": "extreme",
+      "layout_type": "k8s_cluster",
+      "primary_structures": [
+        "pods",
+        "deployments",
+        "ingress"
+      ],
+      "node_count": 48,
+      "connector_count": 1,
+      "svg_file": "03_software_architecture/59_kubernetes_architecture.svg",
+      "excalidraw_file": "03_software_architecture/59_kubernetes_architecture.excalidraw"
+    },
+    {
+      "id": 60,
+      "slug": "60_docker_architecture",
+      "title": "Docker Architecture",
+      "category": "03_software_architecture",
+      "complexity": "medium",
+      "layout_type": "docker_engine",
+      "primary_structures": [
+        "containers",
+        "daemon",
+        "volumes"
+      ],
+      "node_count": 26,
+      "connector_count": 2,
+      "svg_file": "03_software_architecture/60_docker_architecture.svg",
+      "excalidraw_file": "03_software_architecture/60_docker_architecture.excalidraw"
+    },
+    {
+      "id": 61,
+      "slug": "61_dfd_level_0",
+      "title": "Data Flow Diagram Level 0",
+      "category": "04_data_apis_ai",
+      "complexity": "medium",
+      "layout_type": "dfd_context",
+      "primary_structures": [
+        "external_entities",
+        "process",
+        "flows"
+      ],
+      "node_count": 16,
+      "connector_count": 2,
+      "svg_file": "04_data_apis_ai/61_dfd_level_0.svg",
+      "excalidraw_file": "04_data_apis_ai/61_dfd_level_0.excalidraw"
+    },
+    {
+      "id": 62,
+      "slug": "62_dfd_level_1",
+      "title": "Data Flow Diagram Level 1",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "dfd_decomp",
+      "primary_structures": [
+        "subprocesses",
+        "datastores"
+      ],
+      "node_count": 13,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/62_dfd_level_1.svg",
+      "excalidraw_file": "04_data_apis_ai/62_dfd_level_1.excalidraw"
+    },
+    {
+      "id": 63,
+      "slug": "63_data_pipeline_architecture",
+      "title": "Data Pipeline Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "data_pipeline",
+      "primary_structures": [
+        "sources",
+        "lakehouse",
+        "analytics"
+      ],
+      "node_count": 32,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/63_data_pipeline_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/63_data_pipeline_architecture.excalidraw"
+    },
+    {
+      "id": 64,
+      "slug": "64_data_warehouse_architecture",
+      "title": "Data Warehouse Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "dwh_tiers",
+      "primary_structures": [
+        "staging",
+        "star_schema",
+        "datamarts"
+      ],
+      "node_count": 35,
+      "connector_count": 2,
+      "svg_file": "04_data_apis_ai/64_data_warehouse_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/64_data_warehouse_architecture.excalidraw"
+    },
+    {
+      "id": 65,
+      "slug": "65_data_lake_architecture",
+      "title": "Data Lake Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "lakehouse",
+      "primary_structures": [
+        "raw",
+        "bronze",
+        "silver",
+        "gold"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "04_data_apis_ai/65_data_lake_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/65_data_lake_architecture.excalidraw"
+    },
+    {
+      "id": 66,
+      "slug": "66_etl_pipeline",
+      "title": "ETL Pipeline",
+      "category": "04_data_apis_ai",
+      "complexity": "medium",
+      "layout_type": "etl_flow",
+      "primary_structures": [
+        "extract",
+        "transform",
+        "load",
+        "dq"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/66_etl_pipeline.svg",
+      "excalidraw_file": "04_data_apis_ai/66_etl_pipeline.excalidraw"
+    },
+    {
+      "id": 67,
+      "slug": "67_api_request_flow",
+      "title": "API Request Flow",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "sequence_flow",
+      "primary_structures": [
+        "client",
+        "gateway",
+        "controller",
+        "db"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "04_data_apis_ai/67_api_request_flow.svg",
+      "excalidraw_file": "04_data_apis_ai/67_api_request_flow.excalidraw"
+    },
+    {
+      "id": 68,
+      "slug": "68_api_integration_map",
+      "title": "API Integration Map",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "integration_map",
+      "primary_structures": [
+        "internal_services",
+        "external_apis"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "04_data_apis_ai/68_api_integration_map.svg",
+      "excalidraw_file": "04_data_apis_ai/68_api_integration_map.excalidraw"
+    },
+    {
+      "id": 69,
+      "slug": "69_webhook_architecture",
+      "title": "Webhook Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "webhook_pipeline",
+      "primary_structures": [
+        "publisher",
+        "queue",
+        "dlq",
+        "worker"
+      ],
+      "node_count": 29,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/69_webhook_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/69_webhook_architecture.excalidraw"
+    },
+    {
+      "id": 70,
+      "slug": "70_oauth_authentication_flow",
+      "title": "OAuth Authentication Flow",
+      "category": "04_data_apis_ai",
+      "complexity": "extreme",
+      "layout_type": "oauth_sequence",
+      "primary_structures": [
+        "user",
+        "client",
+        "auth_server",
+        "api"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "04_data_apis_ai/70_oauth_authentication_flow.svg",
+      "excalidraw_file": "04_data_apis_ai/70_oauth_authentication_flow.excalidraw"
+    },
+    {
+      "id": 71,
+      "slug": "71_jwt_authentication_flow",
+      "title": "JWT Authentication Flow",
+      "category": "04_data_apis_ai",
+      "complexity": "medium",
+      "layout_type": "jwt_flow",
+      "primary_structures": [
+        "token_issue",
+        "verify",
+        "refresh"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/71_jwt_authentication_flow.svg",
+      "excalidraw_file": "04_data_apis_ai/71_jwt_authentication_flow.excalidraw"
+    },
+    {
+      "id": 72,
+      "slug": "72_multi_agent_system",
+      "title": "Multi-Agent System",
+      "category": "04_data_apis_ai",
+      "complexity": "extreme",
+      "layout_type": "multi_agent_hub",
+      "primary_structures": [
+        "orchestrator",
+        "specialists",
+        "memory"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/72_multi_agent_system.svg",
+      "excalidraw_file": "04_data_apis_ai/72_multi_agent_system.excalidraw"
+    },
+    {
+      "id": 73,
+      "slug": "73_llm_app_architecture",
+      "title": "LLM App Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "llm_stack",
+      "primary_structures": [
+        "semantic_cache",
+        "guardrails",
+        "routing"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/73_llm_app_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/73_llm_app_architecture.excalidraw"
+    },
+    {
+      "id": 74,
+      "slug": "74_vector_db_architecture",
+      "title": "Vector Database Architecture",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "vector_index",
+      "primary_structures": [
+        "hnsw_layers",
+        "scalar_quantization"
+      ],
+      "node_count": 30,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/74_vector_db_architecture.svg",
+      "excalidraw_file": "04_data_apis_ai/74_vector_db_architecture.excalidraw"
+    },
+    {
+      "id": 75,
+      "slug": "75_ai_evaluation_pipeline",
+      "title": "AI Evaluation Pipeline",
+      "category": "04_data_apis_ai",
+      "complexity": "high",
+      "layout_type": "eval_pipeline",
+      "primary_structures": [
+        "test_dataset",
+        "ragas_metrics",
+        "eval_report"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "04_data_apis_ai/75_ai_evaluation_pipeline.svg",
+      "excalidraw_file": "04_data_apis_ai/75_ai_evaluation_pipeline.excalidraw"
+    },
+    {
+      "id": 76,
+      "slug": "76_pestel_analysis",
+      "title": "PESTEL Analysis",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "columns_6",
+      "primary_structures": [
+        "macro_factors",
+        "trends"
+      ],
+      "node_count": 20,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/76_pestel_analysis.svg",
+      "excalidraw_file": "05_negocios_estrategia/76_pestel_analysis.excalidraw"
+    },
+    {
+      "id": 77,
+      "slug": "77_porters_five_forces",
+      "title": "Porter's Five Forces",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "five_forces",
+      "primary_structures": [
+        "central_rivalry",
+        "forces"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "05_negocios_estrategia/77_porters_five_forces.svg",
+      "excalidraw_file": "05_negocios_estrategia/77_porters_five_forces.excalidraw"
+    },
+    {
+      "id": 78,
+      "slug": "78_bcg_matrix",
+      "title": "BCG Matrix",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "matrix_2x2",
+      "primary_structures": [
+        "stars",
+        "cash_cows",
+        "question_marks",
+        "dogs"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/78_bcg_matrix.svg",
+      "excalidraw_file": "05_negocios_estrategia/78_bcg_matrix.excalidraw"
+    },
+    {
+      "id": 79,
+      "slug": "79_ansoff_matrix",
+      "title": "Ansoff Matrix",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "matrix_2x2",
+      "primary_structures": [
+        "penetration",
+        "dev_market",
+        "dev_product",
+        "diversification"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/79_ansoff_matrix.svg",
+      "excalidraw_file": "05_negocios_estrategia/79_ansoff_matrix.excalidraw"
+    },
+    {
+      "id": 80,
+      "slug": "80_value_proposition_canvas",
+      "title": "Value Proposition Canvas",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "split_duel",
+      "primary_structures": [
+        "value_map",
+        "customer_profile"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/80_value_proposition_canvas.svg",
+      "excalidraw_file": "05_negocios_estrategia/80_value_proposition_canvas.excalidraw"
+    },
+    {
+      "id": 81,
+      "slug": "81_business_strategy_map",
+      "title": "Business Strategy Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "strategy_layers",
+      "primary_structures": [
+        "financial",
+        "customer",
+        "internal",
+        "learning"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/81_business_strategy_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/81_business_strategy_map.excalidraw"
+    },
+    {
+      "id": 82,
+      "slug": "82_strategic_objectives_map",
+      "title": "Strategic Objectives Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "tree",
+      "primary_structures": [
+        "strategic_goals",
+        "initiatives"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "05_negocios_estrategia/82_strategic_objectives_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/82_strategic_objectives_map.excalidraw"
+    },
+    {
+      "id": 83,
+      "slug": "83_strategy_to_execution_map",
+      "title": "Strategy to Execution Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "horizontal_flow",
+      "primary_structures": [
+        "cascade_levels",
+        "connectors"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "05_negocios_estrategia/83_strategy_to_execution_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/83_strategy_to_execution_map.excalidraw"
+    },
+    {
+      "id": 84,
+      "slug": "84_product_portfolio_map",
+      "title": "Product Portfolio Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "portfolio_matrix",
+      "primary_structures": [
+        "growth",
+        "profitability",
+        "bubble_size"
+      ],
+      "node_count": 13,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/84_product_portfolio_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/84_product_portfolio_map.excalidraw"
+    },
+    {
+      "id": 85,
+      "slug": "85_customer_segmentation_map",
+      "title": "Customer Segmentation Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "high_value",
+        "growth_potential"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/85_customer_segmentation_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/85_customer_segmentation_map.excalidraw"
+    },
+    {
+      "id": 86,
+      "slug": "86_business_ecosystem_map",
+      "title": "Business Ecosystem Map",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "ecosystem_network",
+      "primary_structures": [
+        "partners",
+        "company",
+        "regulators",
+        "tech"
+      ],
+      "node_count": 31,
+      "connector_count": 4,
+      "svg_file": "05_negocios_estrategia/86_business_ecosystem_map.svg",
+      "excalidraw_file": "05_negocios_estrategia/86_business_ecosystem_map.excalidraw"
+    },
+    {
+      "id": 87,
+      "slug": "87_cost_vs_benefit_matrix",
+      "title": "Cost vs Benefit Matrix",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "high_benefit",
+        "low_cost"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/87_cost_vs_benefit_matrix.svg",
+      "excalidraw_file": "05_negocios_estrategia/87_cost_vs_benefit_matrix.excalidraw"
+    },
+    {
+      "id": 88,
+      "slug": "88_scenario_planning",
+      "title": "Scenario Planning",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "matrix_2x2",
+      "primary_structures": [
+        "plausible_futures",
+        "adaptations"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/88_scenario_planning.svg",
+      "excalidraw_file": "05_negocios_estrategia/88_scenario_planning.excalidraw"
+    },
+    {
+      "id": 89,
+      "slug": "89_competitive_analysis",
+      "title": "Competitive Analysis",
+      "category": "05_negocios_estrategia",
+      "complexity": "medium",
+      "layout_type": "comparison_table",
+      "primary_structures": [
+        "competitors",
+        "features"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/89_competitive_analysis.svg",
+      "excalidraw_file": "05_negocios_estrategia/89_competitive_analysis.excalidraw"
+    },
+    {
+      "id": 90,
+      "slug": "90_business_architecture",
+      "title": "Business Architecture",
+      "category": "05_negocios_estrategia",
+      "complexity": "high",
+      "layout_type": "capability_map",
+      "primary_structures": [
+        "core_capabilities",
+        "supporting"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "05_negocios_estrategia/90_business_architecture.svg",
+      "excalidraw_file": "05_negocios_estrategia/90_business_architecture.excalidraw"
+    },
+    {
+      "id": 91,
+      "slug": "91_product_discovery_canvas",
+      "title": "Product Discovery Canvas",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "discovery_canvas",
+      "primary_structures": [
+        "user_problem",
+        "assumptions",
+        "experiments"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/91_product_discovery_canvas.svg",
+      "excalidraw_file": "06_producto_pm/91_product_discovery_canvas.excalidraw"
+    },
+    {
+      "id": 92,
+      "slug": "92_prd_canvas",
+      "title": "PRD Canvas",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "prd_layers",
+      "primary_structures": [
+        "overview",
+        "requirements",
+        "out_of_scope"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/92_prd_canvas.svg",
+      "excalidraw_file": "06_producto_pm/92_prd_canvas.excalidraw"
+    },
+    {
+      "id": 93,
+      "slug": "93_product_backlog",
+      "title": "Product Backlog",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "backlog_tree",
+      "primary_structures": [
+        "epics",
+        "user_stories",
+        "tasks"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "06_producto_pm/93_product_backlog.svg",
+      "excalidraw_file": "06_producto_pm/93_product_backlog.excalidraw"
+    },
+    {
+      "id": 94,
+      "slug": "94_user_story_map",
+      "title": "User Story Map",
+      "category": "06_producto_pm",
+      "complexity": "high",
+      "layout_type": "story_map",
+      "primary_structures": [
+        "backbone_activities",
+        "releases"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/94_user_story_map.svg",
+      "excalidraw_file": "06_producto_pm/94_user_story_map.excalidraw"
+    },
+    {
+      "id": 95,
+      "slug": "95_feature_prioritization_matrix",
+      "title": "Feature Prioritization Matrix",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "quick_wins",
+        "strategic"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/95_feature_prioritization_matrix.svg",
+      "excalidraw_file": "06_producto_pm/95_feature_prioritization_matrix.excalidraw"
+    },
+    {
+      "id": 96,
+      "slug": "96_feature_comparison_matrix",
+      "title": "Feature Comparison Matrix",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "matrix_table",
+      "primary_structures": [
+        "feature_list",
+        "competitors"
+      ],
+      "node_count": 31,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/96_feature_comparison_matrix.svg",
+      "excalidraw_file": "06_producto_pm/96_feature_comparison_matrix.excalidraw"
+    },
+    {
+      "id": 97,
+      "slug": "97_product_opportunity_canvas",
+      "title": "Product Opportunity Canvas",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "opportunity_canvas",
+      "primary_structures": [
+        "market_size",
+        "timing",
+        "risks"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/97_product_opportunity_canvas.svg",
+      "excalidraw_file": "06_producto_pm/97_product_opportunity_canvas.excalidraw"
+    },
+    {
+      "id": 98,
+      "slug": "98_pmf_canvas",
+      "title": "PMF Canvas",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "matrix_2x2",
+      "primary_structures": [
+        "market_pull",
+        "retention"
+      ],
+      "node_count": 8,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/98_pmf_canvas.svg",
+      "excalidraw_file": "06_producto_pm/98_pmf_canvas.excalidraw"
+    },
+    {
+      "id": 99,
+      "slug": "99_product_lifecycle_map",
+      "title": "Product Lifecycle Map",
+      "category": "06_producto_pm",
+      "complexity": "high",
+      "layout_type": "lifecycle_curve",
+      "primary_structures": [
+        "stages",
+        "strategies"
+      ],
+      "node_count": 19,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/99_product_lifecycle_map.svg",
+      "excalidraw_file": "06_producto_pm/99_product_lifecycle_map.excalidraw"
+    },
+    {
+      "id": 100,
+      "slug": "100_release_plan",
+      "title": "Release Plan",
+      "category": "06_producto_pm",
+      "complexity": "high",
+      "layout_type": "gantt_releases",
+      "primary_structures": [
+        "versions",
+        "deadlines",
+        "features"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/100_release_plan.svg",
+      "excalidraw_file": "06_producto_pm/100_release_plan.excalidraw"
+    },
+    {
+      "id": 101,
+      "slug": "101_sprint_planning_board",
+      "title": "Sprint Planning Board",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "sprint_board",
+      "primary_structures": [
+        "capacity",
+        "story_points"
+      ],
+      "node_count": 34,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/101_sprint_planning_board.svg",
+      "excalidraw_file": "06_producto_pm/101_sprint_planning_board.excalidraw"
+    },
+    {
+      "id": 102,
+      "slug": "102_sprint_goal_canvas",
+      "title": "Sprint Goal Canvas",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "goal_canvas",
+      "primary_structures": [
+        "sprint_goal",
+        "success_criteria"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "06_producto_pm/102_sprint_goal_canvas.svg",
+      "excalidraw_file": "06_producto_pm/102_sprint_goal_canvas.excalidraw"
+    },
+    {
+      "id": 103,
+      "slug": "103_epic_breakdown",
+      "title": "Epic Breakdown",
+      "category": "06_producto_pm",
+      "complexity": "medium",
+      "layout_type": "epic_tree",
+      "primary_structures": [
+        "epic",
+        "stories",
+        "subtasks"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "06_producto_pm/103_epic_breakdown.svg",
+      "excalidraw_file": "06_producto_pm/103_epic_breakdown.excalidraw"
+    },
+    {
+      "id": 104,
+      "slug": "104_product_metrics_tree",
+      "title": "Product Metrics Tree",
+      "category": "06_producto_pm",
+      "complexity": "high",
+      "layout_type": "metric_tree",
+      "primary_structures": [
+        "north_star",
+        "input_metrics"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "06_producto_pm/104_product_metrics_tree.svg",
+      "excalidraw_file": "06_producto_pm/104_product_metrics_tree.excalidraw"
+    },
+    {
+      "id": 105,
+      "slug": "105_north_star_metric",
+      "title": "North Star Metric Framework",
+      "category": "06_producto_pm",
+      "complexity": "high",
+      "layout_type": "north_star_hub",
+      "primary_structures": [
+        "nsm",
+        "drivers",
+        "kpis"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "06_producto_pm/105_north_star_metric.svg",
+      "excalidraw_file": "06_producto_pm/105_north_star_metric.excalidraw"
+    },
+    {
+      "id": 106,
+      "slug": "106_research_affinity_cluster",
+      "title": "Research Affinity Cluster",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "affinity_clusters",
+      "primary_structures": [
+        "raw_data",
+        "clusters",
+        "insights"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/106_research_affinity_cluster.svg",
+      "excalidraw_file": "07_ux_research/106_research_affinity_cluster.excalidraw"
+    },
+    {
+      "id": 107,
+      "slug": "107_service_blueprint",
+      "title": "Service Blueprint",
+      "category": "07_ux_research",
+      "complexity": "extreme",
+      "layout_type": "service_blueprint",
+      "primary_structures": [
+        "physical_evidence",
+        "frontstage",
+        "backstage",
+        "support"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/107_service_blueprint.svg",
+      "excalidraw_file": "07_ux_research/107_service_blueprint.excalidraw"
+    },
+    {
+      "id": 108,
+      "slug": "108_experience_map",
+      "title": "Experience Map",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "experience_map",
+      "primary_structures": [
+        "phases",
+        "touchpoints",
+        "emotional_curve"
+      ],
+      "node_count": 17,
+      "connector_count": 3,
+      "svg_file": "07_ux_research/108_experience_map.svg",
+      "excalidraw_file": "07_ux_research/108_experience_map.excalidraw"
+    },
+    {
+      "id": 109,
+      "slug": "109_touchpoint_map",
+      "title": "Touchpoint Map",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "touchpoint_grid",
+      "primary_structures": [
+        "channels",
+        "stages"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/109_touchpoint_map.svg",
+      "excalidraw_file": "07_ux_research/109_touchpoint_map.excalidraw"
+    },
+    {
+      "id": 110,
+      "slug": "110_ux_research_synthesis",
+      "title": "UX Research Synthesis",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "synthesis_layers",
+      "primary_structures": [
+        "executive_summary",
+        "key_findings",
+        "recommendations"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/110_ux_research_synthesis.svg",
+      "excalidraw_file": "07_ux_research/110_ux_research_synthesis.excalidraw"
+    },
+    {
+      "id": 111,
+      "slug": "111_research_findings_board",
+      "title": "Research Findings Board",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "findings_board",
+      "primary_structures": [
+        "verbatims",
+        "metrics",
+        "heuristics"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/111_research_findings_board.svg",
+      "excalidraw_file": "07_ux_research/111_research_findings_board.excalidraw"
+    },
+    {
+      "id": 112,
+      "slug": "112_usability_testing_board",
+      "title": "Usability Testing Board",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "usability_table",
+      "primary_structures": [
+        "task_success",
+        "time_on_task"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/112_usability_testing_board.svg",
+      "excalidraw_file": "07_ux_research/112_usability_testing_board.excalidraw"
+    },
+    {
+      "id": 113,
+      "slug": "113_user_interview_canvas",
+      "title": "User Interview Canvas",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "interview_blocks",
+      "primary_structures": [
+        "questions",
+        "quotes",
+        "body_language"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/113_user_interview_canvas.svg",
+      "excalidraw_file": "07_ux_research/113_user_interview_canvas.excalidraw"
+    },
+    {
+      "id": 114,
+      "slug": "114_research_plan",
+      "title": "Research Plan",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "research_plan",
+      "primary_structures": [
+        "goals",
+        "methodology",
+        "recruiting"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/114_research_plan.svg",
+      "excalidraw_file": "07_ux_research/114_research_plan.excalidraw"
+    },
+    {
+      "id": 115,
+      "slug": "115_research_question_map",
+      "title": "Research Question Map",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "question_tree",
+      "primary_structures": [
+        "core_question",
+        "subquestions"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "07_ux_research/115_research_question_map.svg",
+      "excalidraw_file": "07_ux_research/115_research_question_map.excalidraw"
+    },
+    {
+      "id": 116,
+      "slug": "116_insight_to_opportunity",
+      "title": "Insight to Opportunity Map",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "translation_flow",
+      "primary_structures": [
+        "findings",
+        "insights",
+        "opportunities"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "07_ux_research/116_insight_to_opportunity.svg",
+      "excalidraw_file": "07_ux_research/116_insight_to_opportunity.excalidraw"
+    },
+    {
+      "id": 117,
+      "slug": "117_problem_statement_canvas",
+      "title": "Problem Statement Canvas",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "problem_canvas",
+      "primary_structures": [
+        "who",
+        "where",
+        "impact"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/117_problem_statement_canvas.svg",
+      "excalidraw_file": "07_ux_research/117_problem_statement_canvas.excalidraw"
+    },
+    {
+      "id": 118,
+      "slug": "118_design_opportunity_map",
+      "title": "Design Opportunity Map",
+      "category": "07_ux_research",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "high_impact",
+        "high_feasibility"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/118_design_opportunity_map.svg",
+      "excalidraw_file": "07_ux_research/118_design_opportunity_map.excalidraw"
+    },
+    {
+      "id": 119,
+      "slug": "119_ux_benchmark_matrix",
+      "title": "UX Benchmark Matrix",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "benchmark_table",
+      "primary_structures": [
+        "heuristics",
+        "scores"
+      ],
+      "node_count": 31,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/119_ux_benchmark_matrix.svg",
+      "excalidraw_file": "07_ux_research/119_ux_benchmark_matrix.excalidraw"
+    },
+    {
+      "id": 120,
+      "slug": "120_user_mental_model",
+      "title": "User Mental Model",
+      "category": "07_ux_research",
+      "complexity": "high",
+      "layout_type": "mental_model_venn",
+      "primary_structures": [
+        "user_mental_model",
+        "system_model"
+      ],
+      "node_count": 7,
+      "connector_count": 0,
+      "svg_file": "07_ux_research/120_user_mental_model.svg",
+      "excalidraw_file": "07_ux_research/120_user_mental_model.excalidraw"
+    },
+    {
+      "id": 121,
+      "slug": "121_brainstorming_board",
+      "title": "Brainstorming Board",
+      "category": "08_design_thinking_ideation",
+      "complexity": "low",
+      "layout_type": "sticky_notes",
+      "primary_structures": [
+        "idea_cards",
+        "color_clusters"
+      ],
+      "node_count": 34,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/121_brainstorming_board.svg",
+      "excalidraw_file": "08_design_thinking_ideation/121_brainstorming_board.excalidraw"
+    },
+    {
+      "id": 122,
+      "slug": "122_scamper",
+      "title": "SCAMPER",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "scamper_columns",
+      "primary_structures": [
+        "scamper_prompts",
+        "cards"
+      ],
+      "node_count": 23,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/122_scamper.svg",
+      "excalidraw_file": "08_design_thinking_ideation/122_scamper.excalidraw"
+    },
+    {
+      "id": 123,
+      "slug": "123_six_thinking_hats",
+      "title": "Six Thinking Hats",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "perspective_hats",
+      "primary_structures": [
+        "hats",
+        "reflections"
+      ],
+      "node_count": 20,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/123_six_thinking_hats.svg",
+      "excalidraw_file": "08_design_thinking_ideation/123_six_thinking_hats.excalidraw"
+    },
+    {
+      "id": 124,
+      "slug": "124_crazy_8s",
+      "title": "Crazy 8s",
+      "category": "08_design_thinking_ideation",
+      "complexity": "low",
+      "layout_type": "crazy_8_grid",
+      "primary_structures": [
+        "8_cells",
+        "sketch_zones"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/124_crazy_8s.svg",
+      "excalidraw_file": "08_design_thinking_ideation/124_crazy_8s.excalidraw"
+    },
+    {
+      "id": 125,
+      "slug": "125_how_might_we_board",
+      "title": "How Might We Board",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "hmw_matrix",
+      "primary_structures": [
+        "hmw_prompts",
+        "vote_chips"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/125_how_might_we_board.svg",
+      "excalidraw_file": "08_design_thinking_ideation/125_how_might_we_board.excalidraw"
+    },
+    {
+      "id": 126,
+      "slug": "126_reverse_brainstorming",
+      "title": "Reverse Brainstorming",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "split_duel",
+      "primary_structures": [
+        "how_to_break",
+        "how_to_fix"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/126_reverse_brainstorming.svg",
+      "excalidraw_file": "08_design_thinking_ideation/126_reverse_brainstorming.excalidraw"
+    },
+    {
+      "id": 127,
+      "slug": "127_lotus_diagram",
+      "title": "Lotus Diagram",
+      "category": "08_design_thinking_ideation",
+      "complexity": "high",
+      "layout_type": "lotus_matrix",
+      "primary_structures": [
+        "central_theme",
+        "subthemes"
+      ],
+      "node_count": 28,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/127_lotus_diagram.svg",
+      "excalidraw_file": "08_design_thinking_ideation/127_lotus_diagram.excalidraw"
+    },
+    {
+      "id": 128,
+      "slug": "128_how_now_wow_matrix",
+      "title": "How Now Wow Matrix",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "now_normal",
+        "how_future",
+        "wow_breakthrough"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/128_how_now_wow_matrix.svg",
+      "excalidraw_file": "08_design_thinking_ideation/128_how_now_wow_matrix.excalidraw"
+    },
+    {
+      "id": 129,
+      "slug": "129_idea_prioritization_matrix",
+      "title": "Idea Prioritization Matrix",
+      "category": "08_design_thinking_ideation",
+      "complexity": "medium",
+      "layout_type": "quadrant",
+      "primary_structures": [
+        "impact",
+        "effort",
+        "votes"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/129_idea_prioritization_matrix.svg",
+      "excalidraw_file": "08_design_thinking_ideation/129_idea_prioritization_matrix.excalidraw"
+    },
+    {
+      "id": 130,
+      "slug": "130_idea_evaluation_canvas",
+      "title": "Idea Evaluation Canvas",
+      "category": "08_design_thinking_ideation",
+      "complexity": "high",
+      "layout_type": "venn_3_sets",
+      "primary_structures": [
+        "viability",
+        "feasibility",
+        "desirability"
+      ],
+      "node_count": 9,
+      "connector_count": 0,
+      "svg_file": "08_design_thinking_ideation/130_idea_evaluation_canvas.svg",
+      "excalidraw_file": "08_design_thinking_ideation/130_idea_evaluation_canvas.excalidraw"
+    },
+    {
+      "id": 131,
+      "slug": "131_agile_release_train",
+      "title": "Agile Release Train",
+      "category": "09_agile_proyectos",
+      "complexity": "high",
+      "layout_type": "release_train",
+      "primary_structures": [
+        "pi_cadence",
+        "sprints"
+      ],
+      "node_count": 24,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/131_agile_release_train.svg",
+      "excalidraw_file": "09_agile_proyectos/131_agile_release_train.excalidraw"
+    },
+    {
+      "id": 132,
+      "slug": "132_sprint_review",
+      "title": "Sprint Review",
+      "category": "09_agile_proyectos",
+      "complexity": "medium",
+      "layout_type": "swimlane",
+      "primary_structures": [
+        "demo_features",
+        "feedback"
+      ],
+      "node_count": 34,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/132_sprint_review.svg",
+      "excalidraw_file": "09_agile_proyectos/132_sprint_review.excalidraw"
+    },
+    {
+      "id": 133,
+      "slug": "133_daily_standup_board",
+      "title": "Daily Standup Board",
+      "category": "09_agile_proyectos",
+      "complexity": "low",
+      "layout_type": "columns_3",
+      "primary_structures": [
+        "yesterday",
+        "today",
+        "blockers"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/133_daily_standup_board.svg",
+      "excalidraw_file": "09_agile_proyectos/133_daily_standup_board.excalidraw"
+    },
+    {
+      "id": 134,
+      "slug": "134_release_planning",
+      "title": "Release Planning",
+      "category": "09_agile_proyectos",
+      "complexity": "high",
+      "layout_type": "gantt",
+      "primary_structures": [
+        "quarterly_timeline",
+        "releases"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/134_release_planning.svg",
+      "excalidraw_file": "09_agile_proyectos/134_release_planning.excalidraw"
+    },
+    {
+      "id": 135,
+      "slug": "135_project_timeline",
+      "title": "Project Timeline",
+      "category": "09_agile_proyectos",
+      "complexity": "medium",
+      "layout_type": "timeline",
+      "primary_structures": [
+        "milestones",
+        "dates"
+      ],
+      "node_count": 23,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/135_project_timeline.svg",
+      "excalidraw_file": "09_agile_proyectos/135_project_timeline.excalidraw"
+    },
+    {
+      "id": 136,
+      "slug": "136_gantt_chart",
+      "title": "Gantt Chart",
+      "category": "09_agile_proyectos",
+      "complexity": "high",
+      "layout_type": "gantt_detailed",
+      "primary_structures": [
+        "tasks",
+        "bars",
+        "dependencies"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/136_gantt_chart.svg",
+      "excalidraw_file": "09_agile_proyectos/136_gantt_chart.excalidraw"
+    },
+    {
+      "id": 137,
+      "slug": "137_project_dependency_map",
+      "title": "Project Dependency Map",
+      "category": "09_agile_proyectos",
+      "complexity": "high",
+      "layout_type": "critical_path",
+      "primary_structures": [
+        "task_nodes",
+        "dependencies"
+      ],
+      "node_count": 32,
+      "connector_count": 5,
+      "svg_file": "09_agile_proyectos/137_project_dependency_map.svg",
+      "excalidraw_file": "09_agile_proyectos/137_project_dependency_map.excalidraw"
+    },
+    {
+      "id": 138,
+      "slug": "138_project_status_dashboard",
+      "title": "Project Status Dashboard",
+      "category": "09_agile_proyectos",
+      "complexity": "medium",
+      "layout_type": "rag_dashboard",
+      "primary_structures": [
+        "budget",
+        "schedule",
+        "quality",
+        "risks"
+      ],
+      "node_count": 18,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/138_project_status_dashboard.svg",
+      "excalidraw_file": "09_agile_proyectos/138_project_status_dashboard.excalidraw"
+    },
+    {
+      "id": 139,
+      "slug": "139_raid_log",
+      "title": "RAID Log",
+      "category": "09_agile_proyectos",
+      "complexity": "medium",
+      "layout_type": "columns_4",
+      "primary_structures": [
+        "risks",
+        "assumptions",
+        "issues",
+        "dependencies"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/139_raid_log.svg",
+      "excalidraw_file": "09_agile_proyectos/139_raid_log.excalidraw"
+    },
+    {
+      "id": 140,
+      "slug": "140_raci_matrix",
+      "title": "RACI Matrix",
+      "category": "09_agile_proyectos",
+      "complexity": "high",
+      "layout_type": "matrix_table",
+      "primary_structures": [
+        "roles",
+        "raci_codes"
+      ],
+      "node_count": 25,
+      "connector_count": 0,
+      "svg_file": "09_agile_proyectos/140_raci_matrix.svg",
+      "excalidraw_file": "09_agile_proyectos/140_raci_matrix.excalidraw"
+    },
+    {
+      "id": 141,
+      "slug": "141_monthly_planner",
+      "title": "Monthly Planner",
+      "category": "10_productividad_personal",
+      "complexity": "low",
+      "layout_type": "calendar_grid",
+      "primary_structures": [
+        "days_30",
+        "events"
+      ],
+      "node_count": 62,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/141_monthly_planner.svg",
+      "excalidraw_file": "10_productividad_personal/141_monthly_planner.excalidraw"
+    },
+    {
+      "id": 142,
+      "slug": "142_yearly_planner",
+      "title": "Yearly Planner",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "quarters_4",
+      "primary_structures": [
+        "quarters",
+        "annual_goals"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/142_yearly_planner.svg",
+      "excalidraw_file": "10_productividad_personal/142_yearly_planner.excalidraw"
+    },
+    {
+      "id": 143,
+      "slug": "143_goal_planner",
+      "title": "Goal Planner",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "smart_goals",
+      "primary_structures": [
+        "specific",
+        "measurable",
+        "achievable",
+        "relevant",
+        "time_bound"
+      ],
+      "node_count": 17,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/143_goal_planner.svg",
+      "excalidraw_file": "10_productividad_personal/143_goal_planner.excalidraw"
+    },
+    {
+      "id": 144,
+      "slug": "144_goal_breakdown",
+      "title": "Goal Breakdown",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "goal_tree",
+      "primary_structures": [
+        "annual_goal",
+        "monthly_milestones",
+        "daily_habits"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "10_productividad_personal/144_goal_breakdown.svg",
+      "excalidraw_file": "10_productividad_personal/144_goal_breakdown.excalidraw"
+    },
+    {
+      "id": 145,
+      "slug": "145_personal_okr",
+      "title": "Personal OKR",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "okr_canvas",
+      "primary_structures": [
+        "objective",
+        "key_results"
+      ],
+      "node_count": 11,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/145_personal_okr.svg",
+      "excalidraw_file": "10_productividad_personal/145_personal_okr.excalidraw"
+    },
+    {
+      "id": 146,
+      "slug": "146_task_dependency_map",
+      "title": "Task Dependency Map",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "task_graph",
+      "primary_structures": [
+        "tasks",
+        "dependencies"
+      ],
+      "node_count": 25,
+      "connector_count": 3,
+      "svg_file": "10_productividad_personal/146_task_dependency_map.svg",
+      "excalidraw_file": "10_productividad_personal/146_task_dependency_map.excalidraw"
+    },
+    {
+      "id": 147,
+      "slug": "147_meeting_agenda",
+      "title": "Meeting Agenda",
+      "category": "10_productividad_personal",
+      "complexity": "low",
+      "layout_type": "agenda_blocks",
+      "primary_structures": [
+        "time_slots",
+        "topics"
+      ],
+      "node_count": 16,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/147_meeting_agenda.svg",
+      "excalidraw_file": "10_productividad_personal/147_meeting_agenda.excalidraw"
+    },
+    {
+      "id": 148,
+      "slug": "148_meeting_retrospective",
+      "title": "Meeting Retrospective",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "swimlane",
+      "primary_structures": [
+        "effectiveness",
+        "actions"
+      ],
+      "node_count": 26,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/148_meeting_retrospective.svg",
+      "excalidraw_file": "10_productividad_personal/148_meeting_retrospective.excalidraw"
+    },
+    {
+      "id": 149,
+      "slug": "149_decision_log",
+      "title": "Decision Log",
+      "category": "10_productividad_personal",
+      "complexity": "medium",
+      "layout_type": "timeline_adr",
+      "primary_structures": [
+        "decision_id",
+        "context",
+        "consequences"
+      ],
+      "node_count": 13,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/149_decision_log.svg",
+      "excalidraw_file": "10_productividad_personal/149_decision_log.excalidraw"
+    },
+    {
+      "id": 150,
+      "slug": "150_personal_dashboard",
+      "title": "Personal Dashboard",
+      "category": "10_productividad_personal",
+      "complexity": "high",
+      "layout_type": "personal_dashboard",
+      "primary_structures": [
+        "daily_focus",
+        "metrics",
+        "habits",
+        "projects"
+      ],
+      "node_count": 14,
+      "connector_count": 0,
+      "svg_file": "10_productividad_personal/150_personal_dashboard.svg",
+      "excalidraw_file": "10_productividad_personal/150_personal_dashboard.excalidraw"
+    }
+  ]
+}

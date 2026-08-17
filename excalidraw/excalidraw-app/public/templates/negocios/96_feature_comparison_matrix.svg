@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.0 -30.0 1525.0 525.0" width="1525.0" height="525.0">
+  <defs>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+      text { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563EB" />
+    </marker>
+    <marker id="arrowhead-hero" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D93829" />
+    </marker>
+    <marker id="arrowhead-danger" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#DC2626" />
+    </marker>
+  </defs>
+  <rect x="-30.0" y="-30.0" width="1525.0" height="525.0" fill="#F8FAFC" />
+  <rect x="10.0" y="10.0" width="1445.0" height="445.0" rx="0.0" fill="transparent" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="30.0" y="46.0" fill="#64748B" font-size="11px" font-weight="400">SKETION EXPANSION LIBRARY V2 · PRODUCTO · INTER VECTORIAL</text>
+  <text x="40.0" y="96.0" fill="#64748B" font-size="11px" font-weight="400">FUNCIONALIDAD</text>
+  <text x="320.0" y="96.0" fill="#64748B" font-size="11px" font-weight="400">SKETION V10</text>
+  <text x="580.0" y="96.0" fill="#64748B" font-size="11px" font-weight="400">EXCALIDRAW WEB</text>
+  <text x="840.0" y="96.0" fill="#64748B" font-size="11px" font-weight="400">MIRO</text>
+  <text x="1100.0" y="96.0" fill="#64748B" font-size="11px" font-weight="400">LUCIDCHART</text>
+  <rect x="30.0" y="130.0" width="1390.0" height="65.0" rx="6.0" fill="#FFF5F2" stroke="#D93829" stroke-width="1.5" />
+  <text x="40.0" y="163.0" fill="#D93829" font-size="11px" font-weight="400">Biblioteca de Plantillas</text>
+  <text x="320.0" y="163.0" fill="#0F172A" font-size="11px" font-weight="400">212 Vectoriales</text>
+  <text x="580.0" y="163.0" fill="#0F172A" font-size="11px" font-weight="400">Comunidad (~40)</text>
+  <text x="840.0" y="163.0" fill="#0F172A" font-size="11px" font-weight="400">150+ (Cloud)</text>
+  <text x="1100.0" y="163.0" fill="#0F172A" font-size="11px" font-weight="400">200+ (Cloud)</text>
+  <rect x="30.0" y="205.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="40.0" y="238.0" fill="#0F172A" font-size="11px" font-weight="400">Renderizado Offline</text>
+  <text x="320.0" y="238.0" fill="#0F172A" font-size="11px" font-weight="400">Si (100% Local)</text>
+  <text x="580.0" y="238.0" fill="#0F172A" font-size="11px" font-weight="400">Parcial (Browser)</text>
+  <text x="840.0" y="238.0" fill="#0F172A" font-size="11px" font-weight="400">No (Requiere Red)</text>
+  <text x="1100.0" y="238.0" fill="#0F172A" font-size="11px" font-weight="400">No (Requiere Red)</text>
+  <rect x="30.0" y="280.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="40.0" y="313.0" fill="#0F172A" font-size="11px" font-weight="400">Politica de Cero Emojis</text>
+  <text x="320.0" y="313.0" fill="#0F172A" font-size="11px" font-weight="400">Si (Estricto)</text>
+  <text x="580.0" y="313.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+  <text x="840.0" y="313.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+  <text x="1100.0" y="313.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+  <rect x="30.0" y="355.0" width="1390.0" height="65.0" rx="6.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+  <text x="40.0" y="388.0" fill="#0F172A" font-size="11px" font-weight="400">Integracion CLI / SDK</text>
+  <text x="320.0" y="388.0" fill="#0F172A" font-size="11px" font-weight="400">Si (Python Native)</text>
+  <text x="580.0" y="388.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+  <text x="840.0" y="388.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+  <text x="1100.0" y="388.0" fill="#0F172A" font-size="11px" font-weight="400">No</text>
+</svg>
