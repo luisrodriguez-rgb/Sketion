@@ -16,7 +16,7 @@ import { useUIAppState } from "@excalidraw/excalidraw/context/ui-appState";
 import { useCopyStatus } from "@excalidraw/excalidraw/hooks/useCopiedIndicator";
 import { useI18n } from "@excalidraw/excalidraw/i18n";
 import { KEYS, getFrame } from "@excalidraw/common";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { atom, useAtom, useAtomValue } from "../app-jotai";
 import { activeRoomLinkAtom } from "../collab/Collab";
@@ -69,10 +69,25 @@ const ActiveRoomDialog = ({
   const ref = useRef<HTMLInputElement>(null);
   const isShareSupported = "share" in navigator;
   const { onCopy, copyStatus } = useCopyStatus();
+  const [selectedRole, setSelectedRole] = useState<"editor" | "commenter" | "viewer">("editor");
+
+  const currentShareLink = useMemo(() => {
+    try {
+      const url = new URL(activeRoomLink);
+      if (selectedRole !== "editor") {
+        url.searchParams.set("role", selectedRole);
+      } else {
+        url.searchParams.delete("role");
+      }
+      return url.toString();
+    } catch {
+      return activeRoomLink;
+    }
+  }, [activeRoomLink, selectedRole]);
 
   const copyRoomLink = async () => {
     try {
-      await copyTextToSystemClipboard(activeRoomLink);
+      await copyTextToSystemClipboard(currentShareLink);
     } catch (e) {
       collabAPI.setCollabError(t("errors.copyToSystemClipboardFailed"));
     }
@@ -95,7 +110,7 @@ const ActiveRoomDialog = ({
       await navigator.share({
         title: t("roomDialog.shareTitle"),
         text: t("roomDialog.shareTitle"),
-        url: activeRoomLink,
+        url: currentShareLink,
       });
     } catch (error: any) {
       // Just ignore.
@@ -109,24 +124,24 @@ const ActiveRoomDialog = ({
       </h3>
       <TextField
         defaultValue={collabAPI.getUsername()}
-        placeholder="Your name"
-        label="Your name"
+        placeholder="Tu nombre"
+        label="Tu nombre"
         onChange={collabAPI.setUsername}
         onKeyDown={(event) => event.key === KEYS.ENTER && handleClose()}
       />
       <div className="ShareDialog__active__linkRow">
         <TextField
           ref={ref}
-          label="Link"
+          label="Enlace de la sala"
           readonly
           fullWidth
-          value={activeRoomLink}
+          value={currentShareLink}
         />
         {isShareSupported && (
           <FilledButton
             size="large"
             variant="icon"
-            label="Share"
+            label="Compartir"
             icon={getShareIcon()}
             className="ShareDialog__active__share"
             onClick={shareRoomLink}
@@ -144,7 +159,7 @@ const ActiveRoomDialog = ({
         />
       </div>
 
-      {/* Role Selection Selector for Collaboration / Sharing */}
+      {/* Selector de Roles y Permisos de Colaboración */}
       <div
         className="ShareDialog__role_selector"
         style={{
@@ -152,52 +167,73 @@ const ActiveRoomDialog = ({
           flexDirection: "column",
           gap: "8px",
           marginTop: "12px",
-          marginBottom: "8px",
+          marginBottom: "12px",
           padding: "12px 14px",
           backgroundColor: "#f8fafc",
           borderRadius: "12px",
-          border: "1px solid rgba(239, 68, 68, 0.2)",
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+          border: "1px solid #e2e8f0",
+          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.03)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
-          <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#1e293b", letterSpacing: "-0.01em" }}>
+          <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#0f172a", letterSpacing: "-0.01em" }}>
             Permisos de Colaboración
           </label>
         </div>
-        <select
-          defaultValue="editor"
-          onChange={(e) => {
-            const role = e.target.value;
-            const url = new URL(activeRoomLink);
-            url.searchParams.set("role", role);
-          }}
-          style={{
-            width: "100%",
-            padding: "9px 12px",
-            borderRadius: "8px",
-            border: "1px solid #cbd5e1",
-            backgroundColor: "#ffffff",
-            fontSize: "13px",
-            color: "#0f172a",
-            fontWeight: "600",
-            cursor: "pointer",
-            outline: "none",
-            boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
-            fontFamily: "'Outfit', 'Inter', sans-serif",
-            transition: "border-color 0.2s ease",
-          }}
-        >
-          <option value="editor">Editor — Puede dibujar y modificar todo</option>
-          <option value="commenter">Comentador — Solo añadir notas y comentarios</option>
-          <option value="viewer">Solo Lectura — No puede editar ni modificar</option>
-        </select>
+        <div style={{ position: "relative" }}>
+          <select
+            value={selectedRole}
+            onChange={(e) => {
+              setSelectedRole(e.target.value as any);
+            }}
+            style={{
+              width: "100%",
+              padding: "9px 32px 9px 12px",
+              borderRadius: "8px",
+              border: "1px solid #cbd5e1",
+              backgroundColor: "#ffffff",
+              fontSize: "13px",
+              color: "#0f172a",
+              fontWeight: "600",
+              cursor: "pointer",
+              outline: "none",
+              boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04)",
+              fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
+              transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+              appearance: "none",
+              WebkitAppearance: "none",
+            }}
+          >
+            <option value="editor">Editor — Puede dibujar y modificar todo</option>
+            <option value="commenter">Comentador — Solo añadir notas y comentarios</option>
+            <option value="viewer">Solo Lectura — No puede editar ni modificar</option>
+          </select>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#64748b"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              position: "absolute",
+              right: "12px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              pointerEvents: "none",
+            }}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
 
-      <QRCode value={activeRoomLink} />
+      <QRCode value={currentShareLink} />
       <div className="ShareDialog__active__description">
         <p>
           <span

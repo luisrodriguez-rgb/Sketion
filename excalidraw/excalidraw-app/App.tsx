@@ -3717,42 +3717,57 @@ const ExcalidrawWrapper = () => {
       {/* Add Comment Dialog Modal */}
       {showAddCommentModal && (
         <div
+          onClick={() => {
+            setShowAddCommentModal(false);
+            setNewCommentCoords(null);
+          }}
           style={{
             position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(15, 23, 42, 0.4)",
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
+            inset: 0,
+            backgroundColor: "rgba(15, 23, 42, 0.65)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             zIndex: 9999999,
+            fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
           }}
         >
           <div
+            onClick={(e) => e.stopPropagation()}
             style={{
-              backgroundColor: "var(--bg-primary, white)",
-              padding: "24px",
-              borderRadius: "14px",
-              width: "360px",
-              boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)",
-              border: "1px solid var(--border-color, #e2e8f0)",
-              color: "var(--text-primary, black)",
-              fontFamily: "var(--font-family, sans-serif)",
+              backgroundColor: "#ffffff",
+              padding: "26px",
+              borderRadius: "18px",
+              width: "380px",
+              maxWidth: "90vw",
+              boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25)",
+              border: "1px solid #e2e8f0",
+              color: "#0f172a",
+              fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
             }}
           >
-            <h3
-              style={{
-                margin: "0 0 16px 0",
-                fontSize: "16px",
-                fontWeight: "700",
-              }}
-            >
-              Dejar un Comentario
-            </h3>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
+              <div style={{ width: "34px", height: "34px", borderRadius: "9px", backgroundColor: "#eff6ff", color: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    margin: 0,
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    color: "#0f172a",
+                  }}
+                >
+                  Dejar un Comentario
+                </h3>
+                <p style={{ margin: 0, fontSize: "12px", color: "#64748b" }}>Anclado a tu posición en el lienzo</p>
+              </div>
+            </div>
 
             <div style={{ marginBottom: "14px" }}>
               <label
@@ -3760,7 +3775,7 @@ const ExcalidrawWrapper = () => {
                   display: "block",
                   fontSize: "12px",
                   fontWeight: 600,
-                  color: "var(--text-secondary, #64748b)",
+                  color: "#475569",
                   marginBottom: "6px",
                 }}
               >
@@ -3774,13 +3789,15 @@ const ExcalidrawWrapper = () => {
                 style={{
                   width: "100%",
                   padding: "10px 12px",
-                  border: "1px solid var(--border-color, #cbd5e1)",
-                  borderRadius: "8px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "9px",
                   fontSize: "13px",
                   outline: "none",
-                  backgroundColor: "var(--bg-primary, white)",
-                  color: "var(--text-primary, black)",
+                  backgroundColor: "#ffffff",
+                  color: "#0f172a",
                   boxSizing: "border-box",
+                  fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
+                  transition: "border-color 0.2s ease",
                 }}
               />
             </div>
@@ -3791,7 +3808,7 @@ const ExcalidrawWrapper = () => {
                   display: "block",
                   fontSize: "12px",
                   fontWeight: 600,
-                  color: "var(--text-secondary, #64748b)",
+                  color: "#475569",
                   marginBottom: "6px",
                 }}
               >
@@ -3805,14 +3822,16 @@ const ExcalidrawWrapper = () => {
                 style={{
                   width: "100%",
                   padding: "10px 12px",
-                  border: "1px solid var(--border-color, #cbd5e1)",
-                  borderRadius: "8px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "9px",
                   fontSize: "13px",
                   outline: "none",
                   resize: "none",
-                  backgroundColor: "var(--bg-primary, white)",
-                  color: "var(--text-primary, black)",
+                  backgroundColor: "#ffffff",
+                  color: "#0f172a",
                   boxSizing: "border-box",
+                  fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
+                  transition: "border-color 0.2s ease",
                 }}
                 autoFocus
               />
@@ -3831,14 +3850,14 @@ const ExcalidrawWrapper = () => {
                   setNewCommentCoords(null);
                 }}
                 style={{
-                  padding: "8px 16px",
+                  padding: "9px 16px",
                   fontSize: "13px",
-                  backgroundColor: "rgba(0,0,0,0.05)",
-                  border: "none",
-                  borderRadius: "8px",
+                  backgroundColor: "#f8fafc",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "9px",
                   cursor: "pointer",
                   fontWeight: "600",
-                  color: "var(--text-secondary, #64748b)",
+                  color: "#64748b",
                   transition: "all 0.15s ease",
                 }}
               >
@@ -3847,15 +3866,15 @@ const ExcalidrawWrapper = () => {
               <button
                 onClick={handleCreateCommentConfirm}
                 style={{
-                  padding: "8px 18px",
+                  padding: "9px 20px",
                   fontSize: "13px",
-                  backgroundColor: "#a855f7",
-                  color: "white",
+                  backgroundColor: "#2563eb",
+                  color: "#ffffff",
                   border: "none",
-                  borderRadius: "8px",
+                  borderRadius: "9px",
                   cursor: "pointer",
                   fontWeight: "600",
-                  boxShadow: "0 4px 6px -1px rgba(168, 85, 247, 0.2)",
+                  boxShadow: "0 4px 12px rgba(37, 99, 235, 0.25)",
                   transition: "all 0.15s ease",
                 }}
               >

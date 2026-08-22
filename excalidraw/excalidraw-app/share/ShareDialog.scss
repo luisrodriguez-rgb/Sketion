@@ -100,7 +100,7 @@
         font-size: 1.2rem;
         line-height: 130%;
 
-        color: #ef4444;
+        color: #0f172a;
         letter-spacing: -0.01em;
 
         &::before {
@@ -108,7 +108,7 @@
           display: block;
           width: 3px;
           height: 1.2rem;
-          background: #ef4444;
+          background: #2563eb;
           border-radius: 2px;
           margin-right: 0.5rem;
           flex-shrink: 0;
@@ -137,15 +137,14 @@
         align-items: center;
         justify-content: center;
 
-        /* Override Excalidraw's default button to use our red accent */
         button.FilledButton {
-          background: #ef4444 !important;
-          border-color: #ef4444 !important;
+          background: #2563eb !important;
+          border-color: #2563eb !important;
 
           &:hover {
-            background: #dc2626 !important;
-            border-color: #dc2626 !important;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+            background: #1d4ed8 !important;
+            border-color: #1d4ed8 !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
           }
         }
       }
@@ -164,7 +163,7 @@
         margin: 0;
         font-size: 1.1rem;
         font-weight: 800;
-        color: #ef4444;
+        color: #0f172a;
         letter-spacing: -0.01em;
         display: flex;
         align-items: center;
@@ -175,7 +174,7 @@
           display: block;
           width: 3px;
           height: 1.1rem;
-          background: #ef4444;
+          background: #2563eb;
           border-radius: 2px;
           flex-shrink: 0;
         }
@@ -186,6 +185,16 @@
         flex-direction: row;
         align-items: flex-end;
         gap: 0.75rem;
+
+        button.FilledButton {
+          background: #2563eb !important;
+          border-color: #2563eb !important;
+
+          &:hover {
+            background: #1d4ed8 !important;
+            border-color: #1d4ed8 !important;
+          }
+        }
       }
 
       &__qrcode {
@@ -196,8 +205,8 @@
         padding: 1rem;
         background: #fff;
         border-radius: 0.75rem;
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 
         $size: 150px;
         width: $size;

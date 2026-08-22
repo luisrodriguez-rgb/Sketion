@@ -27,7 +27,7 @@ export const ACADEMIC_DECKS: FlashcardDeck[] = [
   {
     id: "deck_arquitectura",
     title: "Arquitectura & Cloud",
-    icon: "🏗️",
+    icon: "",
     cards: [
       {
         id: "arq_1",
@@ -58,7 +58,7 @@ export const ACADEMIC_DECKS: FlashcardDeck[] = [
   {
     id: "deck_optimizacion",
     title: "Optimización & IO",
-    icon: "📐",
+    icon: "",
     cards: [
       {
         id: "opt_1",
@@ -83,7 +83,7 @@ export const ACADEMIC_DECKS: FlashcardDeck[] = [
   {
     id: "deck_sketion",
     title: "Sketion Workspace",
-    icon: "⚡",
+    icon: "",
     cards: [
       {
         id: "sk_1",
@@ -142,7 +142,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
     } catch {
       setCompletedIds([]);
     }
-  }, [storageKey, selectedDeckId]);
+  }, [selectedDeckId, storageKey]);
 
   if (!isOpen) return null;
 
@@ -181,13 +181,14 @@ export const StudyMode: React.FC<StudyModeProps> = ({
       style={{
         position: "fixed",
         inset: 0,
-        backgroundColor: "rgba(15, 23, 42, 0.75)",
-        backdropFilter: "blur(6px)",
+        backgroundColor: "rgba(15, 23, 42, 0.65)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
         zIndex: 9999999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontFamily: "'Outfit', 'Inter', sans-serif",
+        fontFamily: "'Outfit', 'Inter', -apple-system, sans-serif",
       }}
       onClick={onClose}
     >
@@ -198,7 +199,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
           width: "100%",
           maxWidth: "600px",
           padding: "26px",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+          boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25)",
           border: "1px solid #e2e8f0",
           display: "flex",
           flexDirection: "column",
@@ -209,7 +210,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#fef2f2", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#eff6ff", color: "#2563eb", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -240,21 +241,21 @@ export const StudyMode: React.FC<StudyModeProps> = ({
                   setIsFlipped(false);
                 }}
                 style={{
-                  padding: "6px 12px",
-                  borderRadius: "8px",
-                  border: selectedDeckId === deck.id ? "1.5px solid #ef4444" : "1px solid #e2e8f0",
-                  backgroundColor: selectedDeckId === deck.id ? "#fef2f2" : "#f8fafc",
-                  color: selectedDeckId === deck.id ? "#991b1b" : "#475569",
+                  padding: "7px 14px",
+                  borderRadius: "10px",
+                  border: selectedDeckId === deck.id ? "1.5px solid #2563eb" : "1px solid #e2e8f0",
+                  backgroundColor: selectedDeckId === deck.id ? "#eff6ff" : "#f8fafc",
+                  color: selectedDeckId === deck.id ? "#1d4ed8" : "#475569",
                   fontSize: "12px",
                   fontWeight: 600,
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
-                  gap: "5px",
+                  gap: "6px",
                   whiteSpace: "nowrap",
+                  transition: "all 0.15s ease",
                 }}
               >
-                <span>{deck.icon}</span>
                 <span>{deck.title}</span>
               </button>
             ))}
@@ -279,7 +280,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
             </div>
           </div>
           <div style={{ width: "100%", height: "6px", backgroundColor: "#f1f5f9", borderRadius: "3px", overflow: "hidden" }}>
-            <div style={{ width: `${progressPercent}%`, height: "100%", backgroundColor: "#ef4444", transition: "width 0.3s ease" }} />
+            <div style={{ width: `${progressPercent}%`, height: "100%", backgroundColor: "#2563eb", transition: "width 0.3s ease" }} />
           </div>
         </div>
 
@@ -290,8 +291,8 @@ export const StudyMode: React.FC<StudyModeProps> = ({
             style={{
               minHeight: "220px",
               borderRadius: "16px",
-              border: isFlipped ? "2px solid #fecaca" : "2px solid #e2e8f0",
-              backgroundColor: isFlipped ? "#fff1f2" : "#f8fafc",
+              border: isFlipped ? "2px solid #93c5fd" : "2px solid #e2e8f0",
+              backgroundColor: isFlipped ? "#f8fafc" : "#ffffff",
               padding: "24px",
               display: "flex",
               flexDirection: "column",
@@ -300,12 +301,12 @@ export const StudyMode: React.FC<StudyModeProps> = ({
               textAlign: "center",
               cursor: "pointer",
               transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
+              boxShadow: "0 4px 14px rgba(0, 0, 0, 0.04)",
               position: "relative",
             }}
           >
             {currentCard.topic && (
-              <span style={{ position: "absolute", top: "14px", left: "16px", fontSize: "11px", fontWeight: 700, color: "#ef4444", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+              <span style={{ position: "absolute", top: "14px", left: "16px", fontSize: "11px", fontWeight: 700, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                 {currentCard.topic}
               </span>
             )}
@@ -323,17 +324,17 @@ export const StudyMode: React.FC<StudyModeProps> = ({
                   position: "absolute",
                   top: "12px",
                   right: "12px",
-                  padding: "5px 9px",
+                  padding: "5px 10px",
                   borderRadius: "7px",
-                  border: "1px solid #ef4444",
-                  backgroundColor: "#ffffff",
-                  color: "#ef4444",
+                  border: "1px solid #2563eb",
+                  backgroundColor: "#eff6ff",
+                  color: "#2563eb",
                   fontSize: "11px",
                   fontWeight: 600,
                   cursor: "pointer",
                 }}
               >
-                👁️ Ver en Canvas
+                Ver en Canvas
               </button>
             )}
 
@@ -343,7 +344,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
               </span>
             )}
 
-            <p style={{ fontSize: "15.5px", fontWeight: isFlipped ? 500 : 700, color: isFlipped ? "#991b1b" : "#0f172a", margin: 0, lineHeight: 1.55 }}>
+            <p style={{ fontSize: "15.5px", fontWeight: isFlipped ? 500 : 700, color: isFlipped ? "#1e293b" : "#0f172a", margin: 0, lineHeight: 1.55, maxWidth: "480px" }}>
               {isFlipped ? currentCard.answer : currentCard.question}
             </p>
           </div>
@@ -363,6 +364,7 @@ export const StudyMode: React.FC<StudyModeProps> = ({
               fontWeight: 600,
               color: "#475569",
               cursor: "pointer",
+              transition: "all 0.15s ease",
             }}
           >
             Revisar Luego
@@ -374,12 +376,13 @@ export const StudyMode: React.FC<StudyModeProps> = ({
               padding: "11px",
               borderRadius: "10px",
               border: "none",
-              backgroundColor: "#ef4444",
+              backgroundColor: "#2563eb",
               color: "#ffffff",
               fontSize: "13px",
               fontWeight: 700,
               cursor: "pointer",
-              boxShadow: "0 4px 12px rgba(239, 68, 68, 0.25)",
+              boxShadow: "0 4px 12px rgba(37, 99, 235, 0.25)",
+              transition: "all 0.15s ease",
             }}
           >
             Dominado
