@@ -8,23 +8,37 @@ const indexFile = path.join("build", "index.html");
 const versionDate = (date) => date.toISOString().replace(".000", "");
 
 const commitHash = () => {
+  if (process.env.VERCEL_GIT_COMMIT_SHA) {
+    return process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7);
+  }
   try {
     return require("child_process")
-      .execSync("git rev-parse --short HEAD")
+      .execSync("git rev-parse --short HEAD", {
+        stdio: ["ignore", "pipe", "ignore"],
+        timeout: 2000,
+      })
       .toString()
       .trim();
   } catch {
-    return "none";
+    return "production";
   }
 };
 
 const commitDate = (hash) => {
+  if (process.env.VERCEL_GIT_COMMIT_DATE) {
+    try {
+      return versionDate(new Date(process.env.VERCEL_GIT_COMMIT_DATE));
+    } catch {}
+  }
   try {
     const unix = require("child_process")
-      .execSync(`git show -s --format=%ct ${hash}`)
+      .execSync(`git show -s --format=%ct ${hash}`, {
+        stdio: ["ignore", "pipe", "ignore"],
+        timeout: 2000,
+      })
       .toString()
       .trim();
-    const date = new Date(parseInt(unix) * 1000);
+    const date = new Date(parseInt(unix, 10) * 1000);
     return versionDate(date);
   } catch {
     return versionDate(new Date());
