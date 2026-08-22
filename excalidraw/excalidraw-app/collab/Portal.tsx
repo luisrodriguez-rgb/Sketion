@@ -241,7 +241,7 @@ class Portal {
 
   isOpen() {
     return !!(
-      (this.socketInitialized || this.supabaseChannel) &&
+      this.socketInitialized &&
       this.roomId &&
       this.roomKey
     );
@@ -267,7 +267,7 @@ class Portal {
       }
 
       // Broadcast over Supabase Realtime channel (instant E2EE)
-      if (this.supabaseChannel) {
+      if (this.supabaseChannel && this.socketInitialized) {
         this.supabaseChannel.send({
           type: "broadcast",
           event: "collab",

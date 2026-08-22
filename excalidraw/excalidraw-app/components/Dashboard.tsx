@@ -392,6 +392,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const [showTagsModal, setShowTagsModal] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showTemplatesModal, setShowTemplatesModal] = useState(false);
+  const quickImportFileRef = useRef<HTMLInputElement>(null);
 
   const [session, setSession] = useState<any>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -735,27 +736,28 @@ export const Dashboard: React.FC<DashboardProps> = ({
     if (!fileList || fileList.length === 0) return;
 
     const file = fileList[0];
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      try {
-        const text = e.target?.result as string;
-        const importedData = JSON.parse(text);
+    try {
+      const text = await file.text();
+      const importedData = JSON.parse(text);
 
-        const name = file.name.replace(/\.excalidraw$|\.json$/, "") || "Tablero Importado";
-        const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
+      const name = file.name.replace(/\.excalidraw$|\.json$/, "") || "Tablero Importado";
+      const id = `board_${crypto.randomUUID().replace(/-/g, "").substring(0, 12)}`;
 
-        const elements = importedData.elements || [];
-        const appState = importedData.appState || {};
-        const files = importedData.files || {};
+      const elements = importedData.elements || [];
+      const appState = importedData.appState || {};
+      const files = importedData.files || {};
 
-        await saveBoard(id, { name }, elements, appState, files);
-        loadBoards();
-      } catch (error) {
-        console.error("Error al importar el archivo:", error);
-        alert("El archivo no es válido o está corrupto.");
+      await saveBoard(id, { name }, elements, appState, files);
+      await loadBoards();
+      onSelectBoard(id);
+    } catch (error) {
+      console.error("Error al importar el archivo:", error);
+      alert("El archivo no es válido o está corrupto.");
+    } finally {
+      if (event.target) {
+        event.target.value = "";
       }
-    };
-    reader.readAsText(file);
+    }
   };
 
   const handleJoinRoomConfirm = () => {
@@ -1322,19 +1324,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <button
                     className="quick-item"
                     onClick={() => {
-                      document.getElementById("quick-import-file")?.click();
                       setShowQuickAddMenu(false);
+                      setTimeout(() => {
+                        quickImportFileRef.current?.click();
+                      }, 50);
                     }}
                   >
                     <span><ImportIcon /></span> Importar .excalidraw
                   </button>
-                  <input
-                    type="file"
-                    id="quick-import-file"
-                    accept=".excalidraw,.json"
-                    style={{ display: "none" }}
-                    onChange={handleImport}
-                  />
                   <button
                     className="quick-item"
                     onClick={() => {
@@ -2257,16 +2254,26 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       )}
 
+      {/* Hidden file input for dashboard import */}
+      <input
+        type="file"
+        ref={quickImportFileRef}
+        accept=".excalidraw,.json"
+        style={{ display: "none" }}
+        onChange={handleImport}
+      />
+
       {/* Join Room Modal */}
       {showJoinModal && (
-        <div className="dialog-overlay">
-          <div className="dialog-box">
+        <div className="dialog-overlay" onClick={() => setShowJoinModal(false)}>
+          <div className="dialog-box" onClick={(e) => e.stopPropagation()}>
             <h3>Unirse a Sala Colaborativa</h3>
+            <p className="dialog-desc">Pega el enlace o código de la sesión para colaborar en tiempo real:</p>
             <div className="form-group">
               <label>Enlace o Hash de la Sala:</label>
               <input
                 type="text"
-                placeholder="Pega el enlace de colaboración aquí..."
+                placeholder="https://sketion.vercel.app/#room=... o código de sala"
                 value={roomUrlInput}
                 onChange={(e) => setRoomUrlInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleJoinRoomConfirm()}
@@ -2287,8 +2294,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
-        <div className="dialog-overlay">
-          <div className="dialog-box">
+        <div className="dialog-overlay" onClick={() => setShowDeleteModal(false)}>
+          <div className="dialog-box" onClick={(e) => e.stopPropagation()}>
             <h3>{activeTab === "papelera" ? "Eliminar Permanentemente" : "Mover a la Papelera"}</h3>
             <p className="dialog-warning-text">
               {activeTab === "papelera"
@@ -2313,8 +2320,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Tags Selection Modal */}
       {showTagsModal && (
-        <div className="dialog-overlay">
-          <div className="dialog-box">
+        <div className="dialog-overlay" onClick={() => setShowTagsModal(false)}>
+          <div className="dialog-box" onClick={(e) => e.stopPropagation()}>
             <h3>Editar Etiquetas</h3>
             <p className="dialog-desc">Selecciona las etiquetas para organizar este tablero:</p>
             <div className="tags-selection-list">
@@ -2343,8 +2350,18 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* Templates Modal */}
       {showTemplatesModal && (
-        <div className="dialog-overlay">
-          <div className="dialog-box templates-dialog" style={{ maxWidth: "680px" }}>
+        <div className="dialog-overlay" onClick={() => setShowTemplatesModal(false)}>
+          <div
+            className="dialog-box templates-dialog"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: "760px",
+              width: "92%",
+              maxHeight: "85vh",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <div className="dialog-header-with-action">
               <h3>Crear Nuevo Tablero</h3>
               <button
@@ -2359,7 +2376,18 @@ export const Dashboard: React.FC<DashboardProps> = ({
               </button>
             </div>
             <p className="dialog-desc">Selecciona un punto de partida para tu tablero:</p>
-            <div className="templates-grid">
+            <div
+              className="templates-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                gap: "14px",
+                maxHeight: "420px",
+                overflowY: "auto",
+                paddingRight: "6px",
+                marginBottom: "20px",
+              }}
+            >
               <div
                 className="template-card blank"
                 onClick={() => {
