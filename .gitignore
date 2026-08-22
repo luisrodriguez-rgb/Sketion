@@ -2,6 +2,14 @@ node_modules
 .DS_Store
 package-lock.json
 *.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials.json
+service-account*.json
 
 # Opcional: Descomenta la siguiente línea si no quieres subir el índice de Codebase Memory a GitHub
 # .codebase-memory/

@@ -34,6 +34,7 @@ import { supabase } from "../data/supabaseClient";
 import { exportToSvg } from "@excalidraw/excalidraw";
 
 import { AuthModal } from "./AuthModal";
+import { hashPassword, verifyPassword } from "../data/passwordSecurity";
 
 import "./Dashboard.scss";
 
@@ -885,8 +886,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
     }
   };
 
-  const handlePasswordPromptConfirm = () => {
-    if (passwordPromptInput === correctPassword) {
+  const handlePasswordPromptConfirm = async () => {
+    const isCorrect = await verifyPassword(passwordPromptInput, correctPassword);
+    if (isCorrect) {
       setShowPasswordPromptModal(false);
       if (boardIdToPrompt) {
         onSelectBoard(boardIdToPrompt);
@@ -920,8 +922,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   const handlePasswordSetConfirm = async () => {
     if (selectedBoardId) {
+      const trimmed = passwordSetInput.trim();
+      const hashedPassword = trimmed ? await hashPassword(trimmed) : undefined;
       await saveBoard(selectedBoardId, {
-        password: passwordSetInput.trim() || undefined,
+        password: hashedPassword,
       });
       setShowPasswordSetModal(false);
       setSelectedBoardId(null);
@@ -2073,7 +2077,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                                   className="menu-item"
                                   onClick={() => {
                                     setSelectedBoardId(board.id);
-                                    setPasswordSetInput(board.password || "");
+                                    setPasswordSetInput("");
                                     setShowPasswordSetModal(true);
                                     setActiveCardMenuId(null);
                                   }}

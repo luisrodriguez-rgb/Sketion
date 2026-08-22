@@ -1,6 +1,4 @@
 *
-!.env.development
-!.env.production
 !.eslintrc.json
 !.npmrc
 !.prettierrc

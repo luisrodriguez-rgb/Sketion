@@ -197,7 +197,7 @@ class Portal {
       this.socket.on("init-room", () => {
         if (this.socket) {
           const urlRole = new URLSearchParams(window.location.search).get("role") || "editor";
-          this.socket.emit("join-room", this.roomId, urlRole);
+          this.socket.emit("join-room", this.roomId, urlRole, this.roomKey);
         }
       });
       this.socket.on("new-user", async (_socketId: string) => {

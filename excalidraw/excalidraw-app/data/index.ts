@@ -183,11 +183,11 @@ export const exportToBackend = async (
     }
     const payloadBase64 = btoa(binary);
 
-    // Store in Supabase shared_links table
+    // CN-003: Store only encrypted payload in Supabase (Zero-Knowledge E2E encryption).
+    // The encryption key remains exclusively in the client-side URL hash.
     const { error } = await supabase.from("shared_links").insert({
       id,
       data: payloadBase64,
-      encryption_key: encryptionKey,
     });
 
     if (error) {

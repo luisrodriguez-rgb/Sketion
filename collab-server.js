@@ -54,14 +54,41 @@ const io = new Server(server, {
 });
 
 
+// CN-001: Active collaboration room registry for strict server-side authorization
+const activeRooms = new Map();
+
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  socket.on("join-room", (roomId, role) => {
+  socket.on("join-room", (roomId, requestedRole, roomKey) => {
     socket.join(roomId);
     socket.data = socket.data || {};
-    socket.data.role = role || "editor";
-    console.log(`User ${socket.id} joined room ${roomId} with role: ${socket.data.role}`);
+    
+    // Si la sala no existe en el registro del servidor, el primer socket que la abre es el host (editor)
+    if (!activeRooms.has(roomId)) {
+      activeRooms.set(roomId, {
+        hostId: socket.id,
+        roomKey: roomKey || null,
+        clients: new Map([[socket.id, "editor"]]),
+      });
+      socket.data.role = "editor";
+    } else {
+      const roomInfo = activeRooms.get(roomId);
+      // Solo permitir rol editor si es el anfitrión o si no se especificó restricción de viewer/commenter
+      if (socket.id === roomInfo.hostId) {
+        socket.data.role = "editor";
+      } else if (requestedRole === "viewer") {
+        socket.data.role = "viewer";
+      } else if (requestedRole === "commenter") {
+        socket.data.role = "commenter";
+      } else {
+        // Si no se envió rol restrictivo, hereda editor por defecto en enlaces estándar
+        socket.data.role = "editor";
+      }
+      roomInfo.clients.set(socket.id, socket.data.role);
+    }
+
+    console.log(`[Collab] User ${socket.id} joined room ${roomId} with role: ${socket.data.role}`);
 
     const room = io.sockets.adapter.rooms.get(roomId);
     const clients = Array.from(room || []);
@@ -73,14 +100,14 @@ io.on("connection", (socket) => {
 
   socket.on("server-broadcast", (roomId, encryptedBuffer, iv) => {
     if (!broadcastLimiter(socket.id)) return; // CN-005: rate limit
-    // Bloquear edición si el socket tiene rol viewer o commenter
+    // Bloquear estrictamente edición si el socket tiene rol viewer o commenter
     if (socket.data?.role === "viewer" || socket.data?.role === "commenter") return;
     socket.to(roomId).emit("client-broadcast", encryptedBuffer, iv);
   });
 
   socket.on("server-volatile-broadcast", (roomId, encryptedBuffer, iv) => {
     if (!broadcastLimiter(socket.id)) return; // CN-005: rate limit
-    // Bloquear edición volátil si el socket tiene rol viewer o commenter
+    // Bloquear estrictamente edición volátil si el socket tiene rol viewer o commenter
     if (socket.data?.role === "viewer" || socket.data?.role === "commenter") return;
     socket.to(roomId).emit("client-broadcast", encryptedBuffer, iv);
   });
@@ -89,7 +116,6 @@ io.on("connection", (socket) => {
     if (!chatLimiter(socket.id)) return; // CN-013: rate limit chat messages
     socket.to(roomId).emit("client-chat", data);
   });
-
 
   socket.on("server-comment-create", (roomId, encryptedBuffer, iv) => {
     // Viewers no pueden crear comentarios
@@ -117,6 +143,12 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
+    for (const [roomId, roomInfo] of activeRooms.entries()) {
+      roomInfo.clients.delete(socket.id);
+      if (roomInfo.clients.size === 0) {
+        activeRooms.delete(roomId);
+      }
+    }
   });
 });
 

@@ -53,9 +53,19 @@
     ALTER TABLE public.boards ENABLE ROW LEVEL SECURITY;
 
     DROP POLICY IF EXISTS "Allow users to manage their own boards" ON public.boards;
-    CREATE POLICY "Allow users to manage their own boards"
+    DROP POLICY IF EXISTS "Allow owners and members to access boards" ON public.boards;
+    CREATE POLICY "Allow owners and members to access boards"
         ON public.boards FOR ALL
-        USING (auth.uid() = user_id);
+        USING (
+            auth.uid() = user_id OR
+            (
+                to_regclass('public.board_members') IS NOT NULL AND
+                EXISTS (
+                    SELECT 1 FROM public.board_members bm
+                    WHERE bm.board_id = boards.id AND bm.user_id = auth.uid()
+                )
+            )
+        );
 
     -- 3. Tabla de Biblioteca Compartida (Formas)
     CREATE TABLE IF NOT EXISTS public.libraries (
@@ -86,13 +96,15 @@
       END IF;
     END $$;
 
-    -- 5. Tabla de Enlaces Compartidos (Shared Links)
+    -- 5. Tabla de Enlaces Compartidos (Shared Links - Zero-Knowledge E2E)
     CREATE TABLE IF NOT EXISTS public.shared_links (
         id TEXT PRIMARY KEY,
         data TEXT NOT NULL,
-        encryption_key TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
+
+    -- CN-003: Asegurar eliminación de columna encryption_key si existía en esquemas previos
+    ALTER TABLE public.shared_links DROP COLUMN IF EXISTS encryption_key;
 
     -- Habilitar RLS para shared_links
     ALTER TABLE public.shared_links ENABLE ROW LEVEL SECURITY;
@@ -109,14 +121,14 @@
         WITH CHECK (auth.uid() IS NOT NULL);
 
 
-    -- Función de mantenimiento para auto-eliminar enlaces compartidos de más de 30 días
+    -- CN-009: Función de mantenimiento para auto-eliminar enlaces compartidos de más de 30 días con search_path seguro
     CREATE OR REPLACE FUNCTION public.clean_old_shared_links()
     RETURNS void AS $$
     BEGIN
       DELETE FROM public.shared_links
       WHERE created_at < NOW() - INTERVAL '30 days';
     END;
-    $$ LANGUAGE plpgsql SECURITY DEFINER;
+    $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp;
 
     -- Garantizar que la columna is_template existe en bases de datos ya creadas
     ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS is_template BOOLEAN NOT NULL DEFAULT FALSE;
