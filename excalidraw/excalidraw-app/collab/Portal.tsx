@@ -61,7 +61,11 @@ class Portal {
           try {
             const encryptedBuffer = new Uint8Array(payload.encryptedBuffer).buffer;
             const iv = new Uint8Array(payload.iv);
-            await this.collab.handleIncomingEncryptedPayload(encryptedBuffer, iv);
+            await this.collab.handleIncomingEncryptedPayload(
+              encryptedBuffer,
+              iv,
+              this.collab.scenePromise,
+            );
           } catch (err) {
             console.error("Error handling broadcast collab message:", err);
           }
@@ -141,11 +145,16 @@ class Portal {
         const userIds = Object.keys(state) as SocketId[];
         this.collab.setCollaborators(userIds);
       })
-      .on("presence", { event: "join" }, ({ key, newPresences }: any) => {
+      .on("presence", { event: "join" }, async ({ key, newPresences }: any) => {
         if (key !== this.clientId && newPresences?.length > 0) {
           window.dispatchEvent(
             new CustomEvent("collab-user-join", { detail: { socketId: key } }),
           );
+          // Emitir inmediatamente el lienzo completo al nuevo colaborador que se conecta
+          const elements = this.collab.getSceneElementsIncludingDeleted();
+          if (elements && elements.length > 0) {
+            await this.broadcastScene(WS_SUBTYPES.INIT, elements, true);
+          }
         }
       })
       .on("presence", { event: "leave" }, ({ key }: any) => {
@@ -164,12 +173,19 @@ class Portal {
               username: this.collab.state.username || "Colaborador",
               onlineAt: Date.now(),
             });
-            // Request existing scene from connected peers
-            this.supabaseChannel.send({
-              type: "broadcast",
-              event: "request-scene",
-              payload: { senderId: this.clientId },
-            });
+            // Solicitar el lienzo existente al anfitrión con reintentos para asegurar recepción
+            const sendSceneRequest = () => {
+              if (this.supabaseChannel) {
+                this.supabaseChannel.send({
+                  type: "broadcast",
+                  event: "request-scene",
+                  payload: { senderId: this.clientId },
+                });
+              }
+            };
+            sendSceneRequest();
+            setTimeout(sendSceneRequest, 400);
+            setTimeout(sendSceneRequest, 1200);
           } catch (e) {
             console.error("Error tracking presence in collab room:", e);
           }
