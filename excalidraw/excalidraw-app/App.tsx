@@ -254,9 +254,14 @@ const initializeScene = async (opts: {
   const externalUrlMatch = window.location.hash.match(/^#url=(.*)$/);
 
   let localDataState = null;
-  if (opts.activeBoardId && opts.activeBoardId !== "collab_room") {
-    const board = await getBoard(opts.activeBoardId);
-    if (board) {
+  const boardToLoad =
+    opts.activeBoardId ||
+    localStorage.getItem("my-excalidraw-last-board-id") ||
+    "board_default";
+
+  if (boardToLoad && boardToLoad !== "collab_room") {
+    const board = await getBoard(boardToLoad);
+    if (board && board.elements && board.elements.length > 0) {
       localDataState = {
         elements: board.elements,
         appState: {
@@ -577,16 +582,11 @@ const ExcalidrawWrapper = () => {
       return urlBoardId;
     }
 
-    // Check if we are loading with a library import
-    const isAddingLib = window.location.hash.includes("addLibrary") || params.has("addLibrary");
-    if (isAddingLib) {
-      const lastBoard = localStorage.getItem("my-excalidraw-last-board-id");
-      if (lastBoard && lastBoard !== "collab_room") {
-        return lastBoard;
-      }
-      return "board_default";
+    const lastBoard = localStorage.getItem("my-excalidraw-last-board-id");
+    if (lastBoard && lastBoard !== "collab_room") {
+      return lastBoard;
     }
-    return null;
+    return "board_default";
   });
   const [activeBoardName, setActiveBoardName] = useState("");
   const [boardsList, setBoardsList] = useState<any[]>([]);
@@ -725,6 +725,46 @@ const ExcalidrawWrapper = () => {
             files: currentFiles,
           });
           (excalidrawAPI as any).scrollToContent?.(elements, { fitToViewport: true });
+
+          // Subida asíncrona a Supabase Storage en segundo plano
+          const boardFolder = activeBoardId || "local_board";
+          images.forEach(async (img: any) => {
+            try {
+              const bucketName = "board-files";
+              const filePath = `${boardFolder}/${img.id}.jpg`;
+              const { error } = await supabase.storage
+                .from(bucketName)
+                .upload(filePath, img.blob, {
+                  contentType: "image/jpeg",
+                  upsert: true,
+                });
+              if (!error) {
+                const { data } = supabase.storage
+                  .from(bucketName)
+                  .getPublicUrl(filePath);
+                if (excalidrawAPI && data?.publicUrl) {
+                  const filesStore = excalidrawAPI.getFiles();
+                  excalidrawAPI.addFiles([
+                    {
+                      id: img.id,
+                      dataURL: data.publicUrl as any,
+                      mimeType: "image/jpeg",
+                      created: Date.now(),
+                    },
+                  ]);
+                  (excalidrawAPI as any).updateScene({
+                    files: {
+                      ...filesStore,
+                      [img.id]: {
+                        ...filesStore[img.id],
+                        dataURL: data.publicUrl as any,
+                      },
+                    },
+                  });
+                }
+              }
+            } catch (_err) {}
+          });
         } catch (err) {
           console.error("PDF Drag & Drop import error:", err);
           alert("Ocurrió un error al importar el archivo PDF.");
@@ -1913,10 +1953,17 @@ const ExcalidrawWrapper = () => {
       collabAPI.syncElements(elements);
     }
 
-    if (activeBoardId && activeBoardId !== "collab_room") {
-      const boardName = activeBoardName || appState.name || "Workspace";
+    const targetBoardId =
+      activeBoardId && activeBoardId !== "collab_room"
+        ? activeBoardId
+        : !collabAPI?.isCollaborating()
+        ? "board_default"
+        : null;
+
+    if (targetBoardId) {
+      const boardName = activeBoardName || appState.name || "Mi Pizarra";
       // Debounced: write to IndexedDB/Supabase only after user pauses 1.5s
-      debouncedSaveBoard(activeBoardId, boardName, elements, appState, files);
+      debouncedSaveBoard(targetBoardId, boardName, elements, appState, files);
 
       // Instant broadcast for real-time collaboration (bypasses RLS)
       if (
@@ -1927,7 +1974,9 @@ const ExcalidrawWrapper = () => {
         const sceneVersion = getSceneVersion(elements);
         if (sceneVersion !== lastBroadcastSceneVersionRef.current) {
           lastBroadcastSceneVersionRef.current = sceneVersion;
-          const currentFiles = excalidrawAPI ? { ...excalidrawAPI.getFiles(), ...files } : files;
+          const currentFiles = excalidrawAPI
+            ? { ...excalidrawAPI.getFiles(), ...files }
+            : files;
           throttledBroadcastCanvas(
             broadcastChannelRef.current,
             (broadcastChannelRef.current as any).__socketId ?? "anon",
@@ -3013,25 +3062,28 @@ const ExcalidrawWrapper = () => {
                   const boardFolder = activeBoardId || "local_board";
                   images.forEach(async (img: any) => {
                     try {
-                      const bucketName = "excalidraw-files";
+                      const bucketName = "board-files";
                       const filePath = `${boardFolder}/${img.id}.jpg`;
-                      
+
                       const { error } = await supabase.storage
                         .from(bucketName)
                         .upload(filePath, img.blob, {
                           contentType: "image/jpeg",
                           upsert: true,
                         });
-                      
+
                       if (error) {
-                        console.warn(`[Background Storage] Error al subir ${img.id}:`, error.message);
+                        console.warn(
+                          `[Background Storage] Error al subir ${img.id}:`,
+                          error.message,
+                        );
                         return;
                       }
 
                       const { data } = supabase.storage
                         .from(bucketName)
                         .getPublicUrl(filePath);
-                      
+
                       const publicUrl = data.publicUrl;
 
                       if (excalidrawAPI) {
@@ -3044,24 +3096,24 @@ const ExcalidrawWrapper = () => {
                           },
                         };
 
-                        excalidrawAPI.addFiles([{
-                          id: img.id,
-                          dataURL: publicUrl as any,
-                          mimeType: "image/jpeg",
-                          created: Date.now(),
-                        }]);
+                        excalidrawAPI.addFiles([
+                          {
+                            id: img.id,
+                            dataURL: publicUrl as any,
+                            mimeType: "image/jpeg",
+                            created: Date.now(),
+                          },
+                        ]);
 
                         (excalidrawAPI as any).updateScene({
                           files: updatedFiles,
                         });
-
-                        // Liberar Blob URL de la memoria del navegador
-                        if (img.dataURL?.startsWith("blob:")) {
-                          URL.revokeObjectURL(img.dataURL);
-                        }
                       }
                     } catch (uploadErr) {
-                      console.error(`[Background Storage] Fallo en carga para ${img.id}:`, uploadErr);
+                      console.error(
+                        `[Background Storage] Fallo en carga para ${img.id}:`,
+                        uploadErr,
+                      );
                     }
                   });
                 } catch (err) {

@@ -61,7 +61,8 @@ export const importPDFToCanvas = async (
       viewport,
     }).promise;
 
-    // OPTIMIZACIÓN: Generar Blob local en lugar de DataURL Base64 gigante
+    // Generar DataURL persistente (evita que las imágenes se rompan al recargar la página)
+    const dataURL = canvas.toDataURL("image/jpeg", 0.75);
     const blob = await new Promise<Blob | null>((resolve) => {
       canvas.toBlob(resolve, "image/jpeg", 0.75);
     });
@@ -70,9 +71,8 @@ export const importPDFToCanvas = async (
     canvas.width = 0;
     canvas.height = 0;
 
-    if (!blob) continue;
+    if (!dataURL || !blob) continue;
 
-    const dataURL = URL.createObjectURL(blob);
     const fileId = `pdf_page_${Date.now()}_${i}_${Math.random().toString(36).substring(2, 9)}`;
 
     // Extracción de Texto usando PDF.js

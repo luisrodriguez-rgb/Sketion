@@ -81,38 +81,59 @@ const PDFPageTextLayer: React.FC<PDFPageTextLayerProps> = ({
     let active = true;
 
     const renderText = async () => {
-      // Dynamic load PDF.js client libraries if not already in window
-      const pdfjs = await loadPdfJs();
-      if (!active) return;
+      try {
+        const pdfjs = await loadPdfJs();
+        if (!active) return;
 
-      const container = containerRef.current;
-      if (!container || !textContent || !viewBox) return;
+        const container = containerRef.current;
+        if (!container || !textContent || !viewBox) return;
 
-      const renderId = `${element.id}_${element.updated}`;
-      if (renderedRef.current === renderId) return;
-      renderedRef.current = renderId;
+        const renderId = `${element.id}_${element.updated}`;
+        if (renderedRef.current === renderId) return;
+        renderedRef.current = renderId;
 
-      // Clean up previous elements
-      container.innerHTML = "";
+        // Limpiar elementos anteriores
+        container.innerHTML = "";
 
-      const viewport = new pdfjs.PageViewport({
-        viewBox,
-        scale,
-        rotation,
-      });
+        let viewport: any = null;
+        if (typeof pdfjs.PageViewport === "function") {
+          viewport = new pdfjs.PageViewport({
+            viewBox,
+            scale: scale || 1,
+            rotation: rotation || 0,
+          });
+        } else {
+          viewport = {
+            width: element.width,
+            height: element.height,
+            scale: scale || 1,
+            rotation: rotation || 0,
+            viewBox,
+            transform: [scale || 1, 0, 0, -(scale || 1), 0, element.height],
+          };
+        }
 
-      const textLayer = new pdfjs.TextLayer({
-        container,
-        textContentSource: textContent,
-        viewport,
-      });
-
-      await textLayer.render();
+        if (typeof pdfjs.renderTextLayer === "function") {
+          await pdfjs.renderTextLayer({
+            textContent,
+            container,
+            viewport,
+            textDivs: [],
+          }).promise;
+        } else if (typeof pdfjs.TextLayer === "function") {
+          const textLayer = new pdfjs.TextLayer({
+            container,
+            textContentSource: textContent,
+            viewport,
+          });
+          await textLayer.render();
+        }
+      } catch (_err) {
+        // Silenciar errores menores de selección de texto para mantener el canvas limpio
+      }
     };
 
-    renderText().catch((err) => {
-      console.error("[PDFTextLayer] Error rendering:", err);
-    });
+    renderText();
 
     return () => {
       active = false;
