@@ -256,23 +256,30 @@ const initializeScene = async (opts: {
   let localDataState = null;
   const boardToLoad =
     opts.activeBoardId ||
-    localStorage.getItem("my-excalidraw-last-board-id") ||
-    "board_default";
+    new URLSearchParams(window.location.search).get("boardId") ||
+    null;
 
   if (boardToLoad && boardToLoad !== "collab_room") {
     const board = await getBoard(boardToLoad);
-    if (board && board.elements && board.elements.length > 0) {
+    if (board) {
       localDataState = {
-        elements: board.elements,
+        elements: board.elements || [],
         appState: {
           ...(board.appState || {}),
           name: board.name,
         },
       };
+    } else {
+      localDataState = {
+        elements: [],
+        appState: {
+          viewBackgroundColor: "#F8FAFC",
+        },
+      };
     }
   }
 
-  if (!localDataState) {
+  if (!localDataState && !boardToLoad) {
     localDataState = importFromLocalStorage();
   }
 
@@ -1029,6 +1036,35 @@ const ExcalidrawWrapper = () => {
       window.history.pushState({}, "", url.pathname + url.search + url.hash);
     }
   }, [activeBoardId]);
+
+  // Synchronize canvas scene when activeBoardId changes
+  useEffect(() => {
+    if (!excalidrawAPI || !activeBoardId || activeBoardId === "collab_room") {
+      return;
+    }
+    getBoard(activeBoardId).then((board) => {
+      if (board) {
+        excalidrawAPI.updateScene({
+          elements: restoreElements(board.elements || [], null, {
+            repairBindings: true,
+          }),
+          appState: restoreAppState(
+            {
+              ...(board.appState || {}),
+              name: board.name,
+              viewBackgroundColor:
+                board.appState?.viewBackgroundColor || "#F8FAFC",
+            },
+            null,
+          ),
+          captureUpdate: CaptureUpdateAction.IMMEDIATELY,
+        });
+        if (board.files) {
+          excalidrawAPI.addFiles(Object.values(board.files));
+        }
+      }
+    });
+  }, [activeBoardId, excalidrawAPI]);
 
   // Intercept element link clicks for bi-directional linking
   useEffect(() => {
