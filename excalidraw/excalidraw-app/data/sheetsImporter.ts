@@ -1,6 +1,6 @@
 /**
- * Google Sheets / CSV Importer Utility for My-Excalidraw
- * Parses CSV/TSV data and generates clean, styled Excalidraw Table Grid elements.
+ * sheetsImporter.ts — Google Sheets / CSV Importer Utility for My-Excalidraw
+ * Parsea datos TSV/CSV y genera tablas vectoriales proporcionales con ancho dinámico de columnas.
  */
 
 export interface SheetTableResult {
@@ -17,7 +17,7 @@ export const parseSheetDataToExcalidraw = (
   const lines = rawText.trim().split(/\r?\n/).filter((line) => line.length > 0);
   if (lines.length === 0) return { elements: [], width: 0, height: 0 };
 
-  // Detect delimiter (Tab for Google Sheets/Excel copy-paste, Comma or Semicolon for CSV)
+  // Detección automática del delimitador (Tabulación para Sheets/Excel, coma o punto y coma para CSV)
   const firstLine = lines[0];
   let delimiter = "\t";
   if (firstLine.includes("\t")) {
@@ -35,16 +35,36 @@ export const parseSheetDataToExcalidraw = (
   const numRows = grid.length;
   const numCols = Math.max(...grid.map((row) => row.length));
 
-  const CELL_WIDTH = 160;
+  // 1. Calcular ancho dinámico por columna según la longitud del texto
+  const colWidths: number[] = [];
+  for (let c = 0; c < numCols; c++) {
+    let maxCharLen = 6;
+    for (let r = 0; r < numRows; r++) {
+      const textLen = (grid[r][c] || "").length;
+      if (textLen > maxCharLen) maxCharLen = textLen;
+    }
+    // Ancho proporcional: mínimo 120px, máximo 340px
+    const estimatedWidth = Math.min(340, Math.max(120, maxCharLen * 9 + 30));
+    colWidths.push(estimatedWidth);
+  }
+
+  // Pre-calcular posiciones X de cada columna
+  const colXPositions: number[] = [startX];
+  for (let c = 0; c < numCols - 1; c++) {
+    colXPositions.push(colXPositions[c] + colWidths[c]);
+  }
+
   const CELL_HEIGHT = 44;
   const elements: any[] = [];
   const baseTime = Date.now();
+  const groupId = `sheet_group_${baseTime}`;
 
   for (let r = 0; r < numRows; r++) {
     const isHeader = r === 0;
     for (let c = 0; c < numCols; c++) {
       const cellText = grid[r][c] || "";
-      const cellX = startX + c * CELL_WIDTH;
+      const cellWidth = colWidths[c];
+      const cellX = colXPositions[c];
       const cellY = startY + r * CELL_HEIGHT;
       const rectId = `sheet_rect_${baseTime}_${r}_${c}`;
       const textId = `sheet_text_${baseTime}_${r}_${c}`;
@@ -54,16 +74,16 @@ export const parseSheetDataToExcalidraw = (
         type: "rectangle",
         x: cellX,
         y: cellY,
-        width: CELL_WIDTH,
+        width: cellWidth,
         height: CELL_HEIGHT,
         strokeColor: isHeader ? "#ef4444" : "#cbd5e1",
-        backgroundColor: isHeader ? "#fef2f2" : "#ffffff",
+        backgroundColor: isHeader ? "#fef2f2" : r % 2 === 1 ? "#f8fafc" : "#ffffff",
         fillStyle: "solid",
         strokeWidth: isHeader ? 2 : 1,
         strokeStyle: "solid",
         roughness: 0,
         opacity: 100,
-        groupIds: [`sheet_group_${baseTime}`],
+        groupIds: [groupId],
         frameId: null,
         roundness: { type: 3 },
         isDeleted: false,
@@ -76,9 +96,9 @@ export const parseSheetDataToExcalidraw = (
       const textElement = {
         id: textId,
         type: "text",
-        x: cellX + 8,
+        x: cellX + 10,
         y: cellY + (CELL_HEIGHT - 20) / 2,
-        width: CELL_WIDTH - 16,
+        width: cellWidth - 20,
         height: 20,
         angle: 0,
         strokeColor: isHeader ? "#991b1b" : "#1e293b",
@@ -88,7 +108,7 @@ export const parseSheetDataToExcalidraw = (
         strokeStyle: "solid",
         roughness: 0,
         opacity: 100,
-        groupIds: [`sheet_group_${baseTime}`],
+        groupIds: [groupId],
         frameId: null,
         roundness: null,
         isDeleted: false,
@@ -96,24 +116,26 @@ export const parseSheetDataToExcalidraw = (
         updated: baseTime,
         link: null,
         locked: false,
-        fontSize: isHeader ? 15 : 13,
+        fontSize: isHeader ? 14 : 12.5,
         fontFamily: 1,
         text: cellText,
         originalText: cellText,
-        textAlign: "center",
+        textAlign: isHeader ? "center" : "left",
         verticalAlign: "middle",
         containerId: rectId,
         lineHeight: 1.2,
-        baseline: 14,
       };
 
       elements.push(rectElement, textElement);
     }
   }
 
+  const totalWidth = colWidths.reduce((a, b) => a + b, 0);
+  const totalHeight = numRows * CELL_HEIGHT;
+
   return {
     elements,
-    width: numCols * CELL_WIDTH,
-    height: numRows * CELL_HEIGHT,
+    width: totalWidth,
+    height: totalHeight,
   };
 };

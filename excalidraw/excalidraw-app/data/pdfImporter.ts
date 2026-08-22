@@ -65,6 +65,11 @@ export const importPDFToCanvas = async (
     const blob = await new Promise<Blob | null>((resolve) => {
       canvas.toBlob(resolve, "image/jpeg", 0.75);
     });
+
+    // Liberar explícitamente el buffer del canvas 2D
+    canvas.width = 0;
+    canvas.height = 0;
+
     if (!blob) continue;
 
     const dataURL = URL.createObjectURL(blob);

@@ -57,9 +57,11 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  socket.on("join-room", (roomId) => {
+  socket.on("join-room", (roomId, role) => {
     socket.join(roomId);
-    console.log(`User ${socket.id} joined room ${roomId}`);
+    socket.data = socket.data || {};
+    socket.data.role = role || "editor";
+    console.log(`User ${socket.id} joined room ${roomId} with role: ${socket.data.role}`);
 
     const room = io.sockets.adapter.rooms.get(roomId);
     const clients = Array.from(room || []);
@@ -71,11 +73,15 @@ io.on("connection", (socket) => {
 
   socket.on("server-broadcast", (roomId, encryptedBuffer, iv) => {
     if (!broadcastLimiter(socket.id)) return; // CN-005: rate limit
+    // Bloquear edición si el socket tiene rol viewer o commenter
+    if (socket.data?.role === "viewer" || socket.data?.role === "commenter") return;
     socket.to(roomId).emit("client-broadcast", encryptedBuffer, iv);
   });
 
   socket.on("server-volatile-broadcast", (roomId, encryptedBuffer, iv) => {
     if (!broadcastLimiter(socket.id)) return; // CN-005: rate limit
+    // Bloquear edición volátil si el socket tiene rol viewer o commenter
+    if (socket.data?.role === "viewer" || socket.data?.role === "commenter") return;
     socket.to(roomId).emit("client-broadcast", encryptedBuffer, iv);
   });
 
@@ -85,12 +91,16 @@ io.on("connection", (socket) => {
   });
 
 
-  socket.on("server-comment-create", (roomId, comment) => {
-    socket.to(roomId).emit("client-comment-create", comment);
+  socket.on("server-comment-create", (roomId, encryptedBuffer, iv) => {
+    // Viewers no pueden crear comentarios
+    if (socket.data?.role === "viewer") return;
+    socket.to(roomId).emit("client-comment-create", encryptedBuffer, iv);
   });
 
-  socket.on("server-comment-resolve", (roomId, commentId) => {
-    socket.to(roomId).emit("client-comment-resolve", commentId);
+  socket.on("server-comment-resolve", (roomId, encryptedBuffer, iv) => {
+    // Viewers no pueden resolver comentarios
+    if (socket.data?.role === "viewer") return;
+    socket.to(roomId).emit("client-comment-resolve", encryptedBuffer, iv);
   });
 
   socket.on("disconnecting", () => {

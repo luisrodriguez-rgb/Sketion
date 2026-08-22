@@ -27,12 +27,27 @@
         password TEXT,
         is_template BOOLEAN NOT NULL DEFAULT FALSE,
         is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+        is_favorite BOOLEAN NOT NULL DEFAULT FALSE,
+        notes_count INTEGER NOT NULL DEFAULT 0,
+        comments_count INTEGER NOT NULL DEFAULT 0,
+        collaborators_count INTEGER NOT NULL DEFAULT 0,
+        is_collaboration BOOLEAN NOT NULL DEFAULT FALSE,
+        room_id TEXT,
+        room_key TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
 
-    -- Asegurar que la columna is_deleted existe en caso de que la tabla ya estuviera creada
+    -- Asegurar que las columnas de metadatos existen en caso de que la tabla ya estuviera creada
     ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS is_deleted BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS is_template BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS is_favorite BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS notes_count INTEGER NOT NULL DEFAULT 0;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS comments_count INTEGER NOT NULL DEFAULT 0;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS collaborators_count INTEGER NOT NULL DEFAULT 0;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS is_collaboration BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS room_id TEXT;
+    ALTER TABLE public.boards ADD COLUMN IF NOT EXISTS room_key TEXT;
 
     -- Habilitar RLS para tableros
     ALTER TABLE public.boards ENABLE ROW LEVEL SECURITY;

@@ -12,143 +12,163 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 
-[🚀 Explorar Sketion](https://sketion.com) • [✅ Funciones Hoy](#-lo-que-existe-hoy) • [🔬 Ecosistema Técnico](#-ecosistema-acad%C3%A9mico--t%C3%A9cnico-de-alto-impacto) • [🛣️ Roadmap 2026](#%EF%B8%8F-roadmap-2026)
+[Explorar Sketion](https://sketion.com) • [Funciones Disponibles](#funciones-disponibles-100-funcional) • [Ecosistema Tecnico](#ecosistema-academico--tecnico-de-alto-impacto) • [Roadmap 2026](#roadmap-2026)
 
 </div>
 
 ---
 
-## 💡 Acerca de Sketion
+## Acerca de Sketion
 
-**Sketion** es un **Visual Knowledge Workspace** para aprender, pensar, estructurar información, diseñar sistemas, documentar conocimiento y construir con IA. Permite integrar documentos **PDF**, fórmulas **LaTeX**, diagramas **Mermaid**, tablas nativas, notas en **Markdown**, salas de colaboración en tiempo real y herramientas de estudio en un único espacio visual.
+**Sketion** es un **Visual Knowledge Workspace** para aprender, pensar, estructurar informacion, disenar sistemas, documentar conocimiento y construir con IA. Permite integrar documentos **PDF**, formulas **LaTeX**, diagramas **Mermaid**, tablas y graficos de **Data Pipelines**, notas en **Markdown**, salas de colaboracion en tiempo real y herramientas de estudio en un unico espacio visual.
 
 ---
 
-## 🚀 Visión de Sketion
+## Vision de Sketion
 
 > **Where knowledge becomes visual.**
 
-Sketion está optimizado para el **estudiante técnico, ingeniero, desarrollador e investigador**. Nuestra visión es construir un **Visual Knowledge Workspace** donde se integre el flujo completo de pensamiento, estructura y construcción:
+Sketion esta optimizado para el **estudiante tecnico, ingeniero, desarrollador e investigador**. Nuestra vision es construir un **Visual Knowledge Workspace** donde se integre el flujo completo de pensamiento, estructura y construccion:
 
 ```text
-Profesor / Equipo entrega PDF
+Profesor / Equipo entrega PDF o Dataset
               ↓
-  Importación al Canvas (PDF Engine)
+  Importacion al Canvas (PDF & Data Engine)
               ↓
- Gráfica interactiva GeoGebra + Ecuaciones LaTeX
+  Graficas Vectoriales + Ecuaciones LaTeX (ML & Calculo)
               ↓
-  Vista previa de Notebook Google Colab / Python
+  Diagramas de Flujo y Secuencia (Mermaid.js)
               ↓
-     Notas en Markdown & Flashcards
+     Notas en Markdown & Flashcards Activas
               ↓
-   Repaso activo antes del examen o entrega
+    Repaso espaciado antes del examen o entrega
 ```
 
 ---
 
-## 🔬 Ecosistema Académico & Técnico de Alto Impacto
+## Ecosistema Academico & Tecnico de Alto Impacto
 
-**Sketion** integra directamente herramientas que generan y representan conocimiento visual científico y de ingeniería:
+**Sketion** integra directamente herramientas que generan y representan conocimiento visual cientifico y de ingenieria:
 
-1. **🐍 Google Colab & Jupyter Cards**: Tarjetas enriquecidas con vista previa de celdas de código Python y gráficas.
-2. **📐 GeoGebra Web Embed**: Embebido interactivo de construcciones geométricas, cálculo y álgebra lineal (costo 0.0).
-3. **𝚺 LaTeX Avanzado (KaTeX Engine)**: Compilación local instantánea de matrices, integrales, derivadas e Investigación Operativa.
-4. **📊 Data-to-Chart Pipeline**: Conversión de datos copiados de Excel/Sheets o archivos `.csv` en gráficos vectoriales.
-5. **🧜‍♂️ Mermaid.js Code-to-Diagram**: Generación de diagramas de secuencia, flujos y arquitecturas a partir de código.
+1. **Google Colab & Jupyter Cards**: Tarjetas enriquecidas con vista previa de celdas de codigo Python y graficas.
+2. **GeoGebra Web Embed**: Embebido interactivo de construcciones geometricas, calculo y algebra lineal.
+3. **LaTeX Cientifico & ML**: Compilacion instantanea a SVG de formulas de Machine Learning (Attention Transformers, Backpropagation), Calculo, Algebra y Optimizacion (KKT).
+4. **Data-to-Chart Pipeline**: Conversion de datos copiados de Excel/Sheets o archivos `.csv` en tablas vectoriales proporcionales, graficos de barras y graficos de lineas.
+5. **Mermaid.js Code-to-Diagram**: Conversion jerarquica por capas de diagramas de flujo (`TD`/`LR`), secuencias (`sequenceDiagram`) y multiples formas de nodo.
 
 ---
 
-## ✅ Lo que Existe Hoy (100% Funcional)
+## Funciones Disponibles (100% Funcional)
 
-Las siguientes capacidades se encuentran completamente implementadas y listas para usar en producción:
+Las siguientes capacidades se encuentran completamente implementadas y listas para usar en produccion:
 
-| Módulo | Estado | Descripción |
+| Modulo | Estado | Descripcion |
 | :--- | :---: | :--- |
-| ⚡ **PDF Fast Engine** | `✅ Disponible` | Renderizado nativo de PDFs multicapa sobre el canvas con compresión ultraliviana. |
-| 📊 **Google Sheets Importer** | `✅ Disponible` | Conversión de celdas copiadas de Excel/Sheets (`Cmd+C`) a tablas editables (`Cmd+V`). |
-| 🎓 **Modo Estudio (Flashcards)** | `✅ Disponible` | Tarjetas de memorización activa con seguimiento de progreso e interfaz interactiva. |
-| 🔒 **Control de Roles por URL** | `✅ Disponible` | Enlaces de solo lectura (`?role=viewer`) y comentarios (`?role=commenter`). |
-| 📂 **Dashboard & Workspaces** | `✅ Disponible` | Organización por carpetas, filtros de búsqueda y papelera de reciclaje. |
-| 🔄 **Persistencia Híbrida** | `✅ Disponible` | Arquitectura Local-First (IndexedDB) con sincronización automática en la nube (Supabase). |
-| 📝 **Notas Markdown & Comentarios** | `✅ Disponible` | Panel lateral de especificaciones en Markdown y hilos de comentarios anclados. |
-| 🎬 **Modo Presentación Cine** | `✅ Disponible` | Marcos estilo diapositivas con zoom reactivo y exportación a PowerPoint (.pptx). |
-| 💳 **Persistencia de Planes** | `✅ Disponible` | Gestión de suscripciones (*Gratuito / Pro / Empresarial*) persistida en cuenta y storage. |
+| **PDF Fast Engine** | Disponible | Renderizado nativo de PDFs multicapa sobre el canvas con compresion ultraliviana (JPEG 75% Blob). |
+| **Google Sheets & CSV Importer** | Disponible | Conversion con ancho dinamico de columnas y tablas editables a partir de `Cmd+C` / `Cmd+V`. |
+| **Data-to-Chart Pipelines** | Disponible | Generacion instantanea de Graficos de Barras, Graficos de Lineas y Widgets de KPIs. |
+| **LaTeX Vectorial SVG** | Disponible | Compilador matematico de alta resolucion con catalogo de presets para IA, Calculo y Fisica. |
+| **Mermaid.js Jerarquico** | Disponible | Conversor de diagramas de flujo por capas y diagramas de secuencia con etiquetas en aristas. |
+| **Modo Estudio (Flashcards)** | Disponible | Tarjetas de memorizacion activa con seguimiento de progreso, persistencia local y barajas tematicas. |
+| **Control de Roles por URL** | Disponible | Enlaces de solo lectura (`?role=viewer`) y comentarios (`?role=commenter`). |
+| **Dashboard & Workspaces** | Disponible | Organizacion por carpetas, filtros de busqueda y papelera de reciclaje. |
+| **Persistencia Hibrida** | Disponible | Arquitectura Local-First (IndexedDB) con sincronizacion automatica en la nube (Supabase). |
+| **Notas Markdown & Comentarios** | Disponible | Panel lateral de especificaciones en Markdown y hilos de comentarios anclados. |
+| **Modo Presentacion Cine** | Disponible | Marcos estilo diapositivas con zoom reactivo y exportacion a PowerPoint (.pptx). |
+| **Persistencia de Planes** | Disponible | Gestion de suscripciones (*Gratuito / Pro / Empresarial*) persistida en cuenta y storage. |
 
 ---
 
-## 🎯 Casos de Uso Principales
+## Casos de Uso Principales
 
 | Caso de Uso | Nivel de Cobertura | Beneficio Clave |
 | :--- | :---: | :--- |
-| 🎓 **Universidad & Ingeniería** | ⭐⭐⭐⭐⭐ | PDFs en canvas + GeoGebra + LaTeX + Modo Estudio (Flashcards) |
-| 🛠️ **Programación & Data Science** | ⭐⭐⭐⭐⭐ | Google Colab Cards, Mermaid.js y diagramas de arquitectura |
-| 🏗️ **Arquitectura de Sistemas** | ⭐⭐⭐⭐⭐ | Plantillas de diseño hexagonal, microservicios y RAG |
-| 💼 **Product Management & Análisis** | ⭐⭐⭐⭐ | Importación de Google Sheets y seguimiento de sprints |
-| 🎬 **Workshops & Presentaciones** | ⭐⭐⭐⭐ | Modo presentación diapositivas + Exportación a PPTX |
-| 💡 **Brainstorming Rápido** | ⭐⭐⭐⭐⭐ | Pizarra infinita colaborativa Local-First instantánea |
+| **Universidad & Ingenieria** | Completo | PDFs en canvas + LaTeX Cientifico + Modo Estudio (Flashcards) |
+| **Programacion & Data Science** | Completo | Data Pipelines (Barras/Lineas), Mermaid.js y diagramas de arquitectura |
+| **Arquitectura de Sistemas** | Completo | Plantillas de diseno hexagonal, microservicios y RAG |
+| **Product Management & Analisis** | Completo | Importacion de Google Sheets, graficos de tendencia y seguimiento de sprints |
+| **Workshops & Presentaciones** | Alto | Modo presentacion diapositivas + Exportacion a PPTX |
+| **Brainstorming Rapido** | Completo | Pizarra infinita colaborativa Local-First instantanea |
 
 ---
 
-## 📊 Tabla Comparativa: Sketion vs. Excalidraw Original
+## Tabla Comparativa: Sketion vs. Excalidraw Original
 
-| Característica | Excalidraw Estándar | Sketion Workspace |
+| Caracteristica | Excalidraw Estandar | Sketion Workspace |
 | :--- | :---: | :---: |
-| **Documentos PDF en Canvas** | ❌ No soportado | ⚡ **Renderizado nativo ultra-liviano** |
-| **Tablas de Google Sheets & CSV** | ❌ No soportado | 📊 **Conversión instantánea a tablas editables** |
-| **Modo Estudio & Flashcards** | ❌ No soportado | 🎓 **Tarjetas de memorización activa con progreso** |
-| **Control de Roles por URL** | ❌ No disponible | 🔒 **Modo Lector (`?role=viewer`) y Comentador (`?role=commenter`)** |
-| **Dashboard y Workspaces** | ❌ Pizarra única volátil | 📂 **Gestión por carpetas, papelera y filtros** |
-| **Persistencia de Datos** | ⚠️ Solo LocalStorage básico | 🔄 **Local-First (IndexedDB) + Nube (Supabase Cloud Sync)** |
-| **Notas Enriquecidas** | ❌ Texto plano | 📝 **Panel lateral de especificaciones en Markdown** |
-| **Comentarios Interactivos** | ❌ No disponible | 💬 **Hilos de comentarios anclados a figuras** |
-| **Modo Presentación Cine** | ⚠️ Básico | 🎬 **Marcos estilo diapositiva + Exportación a PPTX** |
-| **Navegación & Chat Colaborativo** | ❌ No disponible | 🗺️ **Minimapa flotante + Chat lateral en tiempo real** |
-| **Gestión de Cuota / Planes** | ❌ No disponible | 💳 **Persistencia de planes Pro/Empresarial** |
+| **Documentos PDF en Canvas** | No soportado | **Renderizado nativo ultra-liviano** |
+| **Tablas de Google Sheets & CSV** | No soportado | **Conversion instantanea con ancho adaptativo** |
+| **Data Pipelines (Graficos)** | No soportado | **Graficos de Barras, Lineas y KPIs vectoriales** |
+| **Ecuaciones LaTeX** | No soportado | **Renderizado vectorial SVG de alta definicion** |
+| **Diagramas Mermaid.js** | No disponible | **Flujos jerarquicos y diagramas de secuencia** |
+| **Modo Estudio & Flashcards** | No soportado | **Tarjetas de memorizacion activa con progreso persistente** |
+| **Control de Roles por URL** | No disponible | **Modo Lector (`?role=viewer`) y Comentador (`?role=commenter`)** |
+| **Dashboard y Workspaces** | Pizarra unica volatil | **Gestion por carpetas, papelera y filtros** |
+| **Persistencia de Datos** | Solo LocalStorage basico | **Local-First (IndexedDB) + Cloud Sync + Reconciliacion Concurrente (`mergeElements`)** |
+| **Seguridad Criptografica** | No disponible | **Cifrado End-to-End genuino (AES-GCM 128 bits) para Lienzo y Comentarios** |
+| **Control de Acceso (RBAC)** | No disponible | **Roles estrictos en servidor WebSocket (`viewer`, `editor`)** |
+| **Notas Enriquecidas** | Texto plano | **Panel lateral de especificaciones en Markdown** |
+| **Comentarios Interactivos** | No disponible | **Hilos de comentarios anclados con fusion atomica (`mergeComments`)** |
+| **Modo Presentacion Cine** | Basico | **Marcos estilo diapositiva + Exportacion a PPTX** |
+| **LaTeX Offline (PWA)** | Requiere Internet | **Workbox Service Worker con cache offline (90 dias)** |
+| **Navegacion & Chat Colaborativo** | No disponible | **Minimapa flotante doble canvas + Chat lateral en tiempo real** |
+| **Gestion de Cuota / Planes** | No disponible | **Persistencia de planes y blindaje contra `QuotaExceededError`** |
 
 ---
 
-## 🛣️ Roadmap 2026
+## Documentacion Tecnica y Arquitectura
+
+Para consultar el analisis detallado de arquitectura, flujos criptograficos E2EE, manejo de concurrencia y especificaciones de ingenieria:
+
+[**Leer Documentacion Tecnica Completa y Changelog (v11.0 GA)**](./docs/SKETION_CORE_ARCHITECTURE_AND_CHANGELOG.md)
+
+---
+
+## Roadmap 2026
 
 Nivel de madurez actual del ecosistema:
 
 ```text
-✅ Workspace / Dashboard           90%
-✅ PDFs                            95%
-✅ Google Sheets                   90%
-✅ Flashcards                      85%
-✅ Comentarios                     80%
-✅ Roles                           80%
+[OK] Workspace / Dashboard           100%
+[OK] Cifrado E2EE & Colaboracion     100%
+[OK] Persistencia & Concurrencia     100%
+[OK] PDFs & Memoria Grafica          98%
+[OK] Data Pipelines & Sheets         95%
+[OK] Flashcards & Modo Estudio       92%
+[OK] LaTeX & Ecuaciones (Offline)    95%
+[OK] Mermaid.js Engine               88%
+[OK] Plantillas Profesionales        95%
 
-🚧 Librerías Premium              60%
-🚧 Plantillas Profesionales        35%
-🚧 Motores Visuales (DSL)          30%
-🚧 Ecosistema Académico-Técnico    20%
-🚧 Skills IA                       10%
+[--] Ecosistema Academico Avanzado   65%
+[--] Motor de Inteligencia Artificial (En Desarrollo por el Creador)
 ```
 
 ---
 
-### 🔹 Fase 1 — Núcleo del Workspace (✅ 100% Completado)
+### Fase 1 — Nucleo del Workspace & Blindaje (100% Completado)
 
 - [x] Persistencia Local-First con IndexedDB y Supabase Cloud Sync
-- [x] Motor de importación de PDFs en canvas
-- [x] Conversión de Google Sheets / CSV a tablas vectoriales
-- [x] Modo Estudio con tarjetas de memoria interactiva (Flashcards)
-- [x] Enlaces compartidos con restricción de roles (`?role=viewer` / `?role=commenter`)
+- [x] Reconciliacion no destructiva de elementos (`mergeElements`) y comentarios (`mergeComments`)
+- [x] Cifrado E2EE simetrico (AES-GCM) para canvas, cursores y comentarios
+- [x] Vaciado sincronico inmediato al cerrar pestana (`flushPendingSupabaseSync`)
+- [x] Motor de importacion de PDFs en canvas con liberacion de memoria RAM
+- [x] Conversion de Google Sheets / CSV a tablas vectoriales y graficos (Barras/Lineas)
+- [x] Modo Estudio con tarjetas de memoria interactiva y progreso persistente
+- [x] Control estricto de roles en WebSockets (`viewer` / `editor`) y URLs compartidas
 
 ---
 
-### 🔹 Fase 2 — Ecosistema Académico & Técnico (🚧 En Desarrollo)
+### Fase 2 — Ecosistema Academico & Tecnico (85% Completado)
 
-- [x] Motor LaTeX KaTeX básico
-- [ ] Renderizado nativo de ecuaciones LaTeX compuestas
-- [ ] Componente `GeoGebraEmbedNode` para trazado dinámico de funciones
-- [ ] Tarjetas enriquecidas de Google Colab & Jupyter Notebooks
-- [ ] Conversor de código Mermaid.js a elementos vectoriales
+- [x] Motor LaTeX Cientifico con catalogo de Machine Learning, Optimizacion y Fisica
+- [x] Renderizado de ecuaciones vectoriales compuestas en SVG
+- [x] Conversor de codigo Mermaid.js a elementos vectoriales (Flujos jerarquicos y Secuencias)
+- [x] Tarjetas de Google Drive Suite
+- [ ] Componente `GeoGebraEmbedNode` para trazado dinamico de funciones
 
 ---
 
-### 🔹 Fase 3 — Motores Visuales & Schemas (🚧 En Progreso)
+### Fase 3 — Motores Visuales & Schemas (95% Completado)
 
 - [x] Motor `matriz` (SWOT, Lean Canvas, RICE)
 - [x] Motor `board` (Kanban, Scrum, Pipelines)
@@ -159,19 +179,18 @@ Nivel de madurez actual del ecosistema:
 - [x] Motor `cerebro` (Mind Maps, Radial Hubs)
 - [x] Motor `arbol` (Org Chart, Trees)
 - [x] Motor `storyboard` (Slides, Pitch Decks)
-- [ ] Catálogo extendido con más de 230 plantillas en Schemas JSON
+- [x] Catalogo con mas de 230 plantillas en Schemas JSON
 
 ---
 
-### 🔹 Fase 4 — Generación Asistida por IA & Skills (📝 Investigación)
+### Fase 4 — Generacion Asistida por IA & Skills (En Desarrollo)
 
-- [x] Clasificador de intenciones por lenguaje natural (`aiSkillEngine.ts`)
-- [ ] Generación automática de diagramas complejos a partir de prompts estructurados
+- [ ] Integracion del nuevo motor generativo de IA personalizado
 - [ ] Asistente de resumen e inteligencia espacial para notas y PDFs
 
 ---
 
-## 🛠️ Guía de Instalación Local
+## Guia de Instalacion Local
 
 ```bash
 # 1. Clonar el repositorio
@@ -189,7 +208,7 @@ npm run start
 
 ---
 
-## 👨‍💻 Creador & Mantenimiento
+## Creador & Mantenimiento
 
 Desarrollado y mantenido por **Luis Rodriguez** ([@luisrodriguez-rgb](https://github.com/luisrodriguez-rgb)).
 

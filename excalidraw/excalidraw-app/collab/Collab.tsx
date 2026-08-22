@@ -18,7 +18,7 @@ import {
   resolvablePromise,
   throttleRAF,
 } from "@excalidraw/common";
-import { decryptData } from "@excalidraw/excalidraw/data/encryption";
+import { decryptData, encryptData } from "@excalidraw/excalidraw/data/encryption";
 import { getVisibleSceneBounds } from "@excalidraw/element";
 import { newElementWith } from "@excalidraw/element";
 import { isImageElement, isInitializedImageElement } from "@excalidraw/element";
@@ -449,8 +449,43 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     }
   };
 
-  sendCommentCreate = (comment: any) => {
+  sendCommentCreate = async (comment: any) => {
     if (this.portal.roomId) {
+      if (this.portal.roomKey) {
+        try {
+          const json = JSON.stringify(comment);
+          const encoded = new TextEncoder().encode(json);
+          const { encryptedBuffer, iv } = await encryptData(
+            this.portal.roomKey,
+            encoded,
+          );
+
+          if (this.portal.socket && this.portal.socket.connected) {
+            this.portal.socket.emit(
+              "server-comment-create",
+              this.portal.roomId,
+              encryptedBuffer,
+              iv,
+            );
+          }
+          if (this.portal.supabaseChannel) {
+            this.portal.supabaseChannel.send({
+              type: "broadcast",
+              event: "collab-comment-create",
+              payload: {
+                senderId: this.portal.clientId,
+                encryptedBuffer: Array.from(new Uint8Array(encryptedBuffer)),
+                iv: Array.from(iv),
+              },
+            });
+          }
+          return;
+        } catch (err) {
+          console.error("Error encrypting comment create payload:", err);
+        }
+      }
+
+      // Fallback si no hay roomKey
       if (this.portal.socket && this.portal.socket.connected) {
         this.portal.socket.emit(
           "server-comment-create",
@@ -468,8 +503,43 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     }
   };
 
-  sendCommentResolve = (commentId: string) => {
+  sendCommentResolve = async (commentId: string) => {
     if (this.portal.roomId) {
+      if (this.portal.roomKey) {
+        try {
+          const json = JSON.stringify({ commentId });
+          const encoded = new TextEncoder().encode(json);
+          const { encryptedBuffer, iv } = await encryptData(
+            this.portal.roomKey,
+            encoded,
+          );
+
+          if (this.portal.socket && this.portal.socket.connected) {
+            this.portal.socket.emit(
+              "server-comment-resolve",
+              this.portal.roomId,
+              encryptedBuffer,
+              iv,
+            );
+          }
+          if (this.portal.supabaseChannel) {
+            this.portal.supabaseChannel.send({
+              type: "broadcast",
+              event: "collab-comment-resolve",
+              payload: {
+                senderId: this.portal.clientId,
+                encryptedBuffer: Array.from(new Uint8Array(encryptedBuffer)),
+                iv: Array.from(iv),
+              },
+            });
+          }
+          return;
+        } catch (err) {
+          console.error("Error encrypting comment resolve payload:", err);
+        }
+      }
+
+      // Fallback si no hay roomKey
       if (this.portal.socket && this.portal.socket.connected) {
         this.portal.socket.emit(
           "server-comment-resolve",
@@ -806,17 +876,71 @@ class Collab extends PureComponent<CollabProps, CollabState> {
         );
       });
 
-      this.portal.socket.on("client-comment-create", (comment: any) => {
-        window.dispatchEvent(
-          new CustomEvent("collab-comment-create", { detail: comment }),
-        );
-      });
+      this.portal.socket.on(
+        "client-comment-create",
+        async (encryptedBuffer: any, iv: any) => {
+          try {
+            if (encryptedBuffer && iv && this.portal.roomKey) {
+              const ivArray =
+                iv instanceof Uint8Array ? iv : new Uint8Array(iv);
+              const decrypted = await decryptData(
+                ivArray,
+                encryptedBuffer,
+                this.portal.roomKey,
+              );
+              const decoded = new TextDecoder("utf-8").decode(
+                new Uint8Array(decrypted),
+              );
+              const comment = JSON.parse(decoded);
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-create", { detail: comment }),
+              );
+            } else if (encryptedBuffer && !iv) {
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-create", {
+                  detail: encryptedBuffer,
+                }),
+              );
+            }
+          } catch (err) {
+            console.error("Error decrypting comment create payload:", err);
+          }
+        },
+      );
 
-      this.portal.socket.on("client-comment-resolve", (commentId: string) => {
-        window.dispatchEvent(
-          new CustomEvent("collab-comment-resolve", { detail: commentId }),
-        );
-      });
+      this.portal.socket.on(
+        "client-comment-resolve",
+        async (encryptedBuffer: any, iv: any) => {
+          try {
+            if (encryptedBuffer && iv && this.portal.roomKey) {
+              const ivArray =
+                iv instanceof Uint8Array ? iv : new Uint8Array(iv);
+              const decrypted = await decryptData(
+                ivArray,
+                encryptedBuffer,
+                this.portal.roomKey,
+              );
+              const decoded = new TextDecoder("utf-8").decode(
+                new Uint8Array(decrypted),
+              );
+              const data = JSON.parse(decoded);
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-resolve", {
+                  detail: data.commentId || data,
+                }),
+              );
+            } else if (encryptedBuffer && !iv) {
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-resolve", {
+                  detail: encryptedBuffer,
+                }),
+              );
+            }
+          } catch (err) {
+            console.error("Error decrypting comment resolve payload:", err);
+          }
+        },
+      );
     }
 
     this.initializeIdleDetector();

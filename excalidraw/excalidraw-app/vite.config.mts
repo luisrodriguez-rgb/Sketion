@@ -124,6 +124,10 @@ export default defineConfig(({ mode }) => {
             if (id.includes("@codemirror/") || id.includes("@lezer/")) {
               return "codemirror.chunk";
             }
+
+            if (id.includes("excalidraw-app/data/templates")) {
+              return "templates.chunk";
+            }
           },
         },
       },
@@ -219,6 +223,20 @@ export default defineConfig(({ mode }) => {
                 expiration: {
                   maxEntries: 50,
                   maxAgeSeconds: 60 * 60 * 24 * 90, // <== 90 days
+                },
+              },
+            },
+            {
+              urlPattern: new RegExp("https://cdn\\.jsdelivr\\.net/npm/mathjax@3/.+"),
+              handler: "CacheFirst",
+              options: {
+                cacheName: "mathjax-cdn",
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 90, // 90 días
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
                 },
               },
             },

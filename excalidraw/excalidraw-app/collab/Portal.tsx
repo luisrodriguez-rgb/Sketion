@@ -1,6 +1,6 @@
 import { CaptureUpdateAction } from "@excalidraw/excalidraw";
 import { trackEvent } from "@excalidraw/excalidraw/analytics";
-import { encryptData } from "@excalidraw/excalidraw/data/encryption";
+import { encryptData, decryptData } from "@excalidraw/excalidraw/data/encryption";
 import { newElementWith } from "@excalidraw/element";
 import throttle from "lodash.throttle";
 
@@ -82,20 +82,58 @@ class Portal {
           );
         }
       })
-      .on("broadcast", { event: "collab-comment-create" }, ({ payload }: any) => {
+      .on("broadcast", { event: "collab-comment-create" }, async ({ payload }: any) => {
         if (payload && payload.senderId !== this.clientId) {
-          window.dispatchEvent(
-            new CustomEvent("collab-comment-create", { detail: payload.comment }),
-          );
+          if (payload.encryptedBuffer && payload.iv && this.roomKey) {
+            try {
+              const iv = new Uint8Array(payload.iv);
+              const buffer = new Uint8Array(payload.encryptedBuffer).buffer;
+              const decrypted = await decryptData(iv, buffer, this.roomKey);
+              const decoded = new TextDecoder("utf-8").decode(
+                new Uint8Array(decrypted),
+              );
+              const comment = JSON.parse(decoded);
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-create", { detail: comment }),
+              );
+            } catch (err) {
+              console.error("Error decrypting Supabase comment broadcast:", err);
+            }
+          } else if (payload.comment) {
+            window.dispatchEvent(
+              new CustomEvent("collab-comment-create", {
+                detail: payload.comment,
+              }),
+            );
+          }
         }
       })
-      .on("broadcast", { event: "collab-comment-resolve" }, ({ payload }: any) => {
+      .on("broadcast", { event: "collab-comment-resolve" }, async ({ payload }: any) => {
         if (payload && payload.senderId !== this.clientId) {
-          window.dispatchEvent(
-            new CustomEvent("collab-comment-resolve", {
-              detail: payload.commentId,
-            }),
-          );
+          if (payload.encryptedBuffer && payload.iv && this.roomKey) {
+            try {
+              const iv = new Uint8Array(payload.iv);
+              const buffer = new Uint8Array(payload.encryptedBuffer).buffer;
+              const decrypted = await decryptData(iv, buffer, this.roomKey);
+              const decoded = new TextDecoder("utf-8").decode(
+                new Uint8Array(decrypted),
+              );
+              const data = JSON.parse(decoded);
+              window.dispatchEvent(
+                new CustomEvent("collab-comment-resolve", {
+                  detail: data.commentId || data,
+                }),
+              );
+            } catch (err) {
+              console.error("Error decrypting Supabase comment resolve broadcast:", err);
+            }
+          } else if (payload.commentId) {
+            window.dispatchEvent(
+              new CustomEvent("collab-comment-resolve", {
+                detail: payload.commentId,
+              }),
+            );
+          }
         }
       })
       .on("presence", { event: "sync" }, () => {
@@ -142,7 +180,8 @@ class Portal {
     if (this.socket) {
       this.socket.on("init-room", () => {
         if (this.socket) {
-          this.socket.emit("join-room", this.roomId);
+          const urlRole = new URLSearchParams(window.location.search).get("role") || "editor";
+          this.socket.emit("join-room", this.roomId, urlRole);
         }
       });
       this.socket.on("new-user", async (_socketId: string) => {

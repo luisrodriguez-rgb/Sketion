@@ -151,7 +151,7 @@ import { StudyMode } from "./components/StudyMode";
 import { importPDFToCanvas } from "./data/pdfImporter";
 import { insertLaTeXSVGToCanvas, LATEX_PRESETS } from "./data/katexEngine";
 import { parseGoogleDriveUrl, createGoogleDriveCard, openGooglePicker } from "./data/googleDriveSuite";
-import { parseCSVData, renderBarChart } from "./data/dataPipelines";
+import { parseCSVData, renderBarChart, renderLineChart } from "./data/dataPipelines";
 import { convertMermaidToCanvas } from "./data/mermaidConverter";
 import { parseSheetDataToExcalidraw } from "./data/sheetsImporter";
 import DOMPurify from "dompurify";
@@ -164,6 +164,7 @@ import {
   saveBoardComments,
   syncBoardsWithSupabase,
   getBoardsMetadata,
+  flushPendingSupabaseSync,
 } from "./data/boardsDb";
 import { WorkspaceCommandPalette } from "./components/WorkspaceCommandPalette";
 import { TEMPLATES } from "./data/templates";
@@ -1190,7 +1191,7 @@ const ExcalidrawWrapper = () => {
           }
         }
       })
-      .subscribe((status) => {
+      .subscribe((status, err) => {
         if (status === "SUBSCRIBED") {
           isBroadcastSubscribed = true;
           broadcastChannel.send({
@@ -1198,6 +1199,8 @@ const ExcalidrawWrapper = () => {
             event: "request-canvas",
             payload: { senderId: socketId },
           });
+        } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+          console.warn(`[Supabase Realtime] Canal de lienzo ${status}:`, err);
         }
       });
 
@@ -1291,13 +1294,20 @@ const ExcalidrawWrapper = () => {
           });
         }
       })
-      .subscribe(async (status) => {
+      .subscribe(async (status, err) => {
         if (status === "SUBSCRIBED") {
           isSubscribed = true;
-          await presenceChannel.track({
-            username: currentUser,
-            onlineAt: new Date().toISOString(),
-          });
+          try {
+            await presenceChannel.track({
+              username: currentUser,
+              onlineAt: new Date().toISOString(),
+            });
+          } catch (e) {
+            console.warn("[Supabase Presence] Error al registrar presencia:", e);
+          }
+        } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+          isSubscribed = false;
+          console.warn(`[Supabase Realtime] Canal de presencia ${status}:`, err);
         }
       });
 
@@ -1728,11 +1738,17 @@ const ExcalidrawWrapper = () => {
 
     const onUnload = () => {
       LocalData.flushSave();
+      flushPendingSupabaseSync(activeBoardId || undefined).catch((err) =>
+        console.error("Error flushing Supabase sync on unload:", err),
+      );
     };
 
     const visibilityChange = (event: FocusEvent | Event) => {
       if (event.type === EVENT.BLUR || document.hidden) {
         LocalData.flushSave();
+        flushPendingSupabaseSync(activeBoardId || undefined).catch((err) =>
+          console.error("Error flushing Supabase sync on blur/hidden:", err),
+        );
       }
       if (
         event.type === EVENT.VISIBILITY_CHANGE ||
@@ -1770,6 +1786,9 @@ const ExcalidrawWrapper = () => {
   useEffect(() => {
     const unloadHandler = (event: BeforeUnloadEvent) => {
       LocalData.flushSave();
+      flushPendingSupabaseSync(activeBoardId || undefined).catch((err) =>
+        console.error("Error flushing Supabase sync on beforeunload:", err),
+      );
 
       if (
         excalidrawAPI &&
@@ -1790,7 +1809,7 @@ const ExcalidrawWrapper = () => {
     return () => {
       window.removeEventListener(EVENT.BEFORE_UNLOAD, unloadHandler);
     };
-  }, [excalidrawAPI]);
+  }, [excalidrawAPI, activeBoardId]);
 
   // Debounced board save - only writes to DB after 1.5s of inactivity
   const debouncedSaveBoard = useRef(
@@ -3035,6 +3054,11 @@ const ExcalidrawWrapper = () => {
                         (excalidrawAPI as any).updateScene({
                           files: updatedFiles,
                         });
+
+                        // Liberar Blob URL de la memoria del navegador
+                        if (img.dataURL?.startsWith("blob:")) {
+                          URL.revokeObjectURL(img.dataURL);
+                        }
                       }
                     } catch (uploadErr) {
                       console.error(`[Background Storage] Fallo en carga para ${img.id}:`, uploadErr);
@@ -3200,8 +3224,8 @@ const ExcalidrawWrapper = () => {
               rows={6}
               style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "1px solid #e2e8f0", fontSize: "13px", fontFamily: "monospace", resize: "vertical", outline: "none", boxSizing: "border-box" }}
             />
-            <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginTop: "16px" }}>
-              <button onClick={() => { setShowDataModal(false); setTechnicalInputText(""); }} style={{ padding: "9px 16px", borderRadius: "8px", border: "1px solid #e2e8f0", backgroundColor: "#fff", fontSize: "13px", fontWeight: 600, color: "#475569", cursor: "pointer" }}>Cancelar</button>
+            <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "16px", flexWrap: "wrap" }}>
+              <button onClick={() => { setShowDataModal(false); setTechnicalInputText(""); }} style={{ padding: "9px 14px", borderRadius: "8px", border: "1px solid #e2e8f0", backgroundColor: "#fff", fontSize: "13px", fontWeight: 600, color: "#475569", cursor: "pointer" }}>Cancelar</button>
               <button
                 onClick={() => {
                   if (!technicalInputText.trim() || !excalidrawAPI) return;
@@ -3217,9 +3241,49 @@ const ExcalidrawWrapper = () => {
                     alert("No se detectaron datos válidos. Verifica el formato CSV.");
                   }
                 }}
-                style={{ padding: "9px 18px", borderRadius: "8px", border: "none", backgroundColor: "#ef4444", color: "#fff", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+                style={{ padding: "9px 14px", borderRadius: "8px", border: "1px solid #cbd5e1", backgroundColor: "#f8fafc", color: "#1e293b", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
               >
-                Generar Tabla en Canvas
+                📋 Tabla
+              </button>
+              <button
+                onClick={() => {
+                  if (!technicalInputText.trim() || !excalidrawAPI) return;
+                  const dataSet = parseCSVData(technicalInputText);
+                  const elements = renderBarChart(dataSet, 150, 150);
+                  if (elements.length > 0) {
+                    excalidrawAPI.updateScene({
+                      elements: [...(excalidrawAPI.getSceneElements() || []), ...elements],
+                    });
+                    (excalidrawAPI as any).scrollToContent?.(elements, { fitToViewport: true });
+                    setShowDataModal(false);
+                    setTechnicalInputText("");
+                  } else {
+                    alert("No se detectaron columnas numéricas para generar el gráfico de barras.");
+                  }
+                }}
+                style={{ padding: "9px 14px", borderRadius: "8px", border: "none", backgroundColor: "#ef4444", color: "#fff", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+              >
+                📊 Gráfico Barras
+              </button>
+              <button
+                onClick={() => {
+                  if (!technicalInputText.trim() || !excalidrawAPI) return;
+                  const dataSet = parseCSVData(technicalInputText);
+                  const elements = renderLineChart(dataSet, 150, 150);
+                  if (elements.length > 0) {
+                    excalidrawAPI.updateScene({
+                      elements: [...(excalidrawAPI.getSceneElements() || []), ...elements],
+                    });
+                    (excalidrawAPI as any).scrollToContent?.(elements, { fitToViewport: true });
+                    setShowDataModal(false);
+                    setTechnicalInputText("");
+                  } else {
+                    alert("No se detectaron columnas numéricas para generar el gráfico de líneas.");
+                  }
+                }}
+                style={{ padding: "9px 14px", borderRadius: "8px", border: "none", backgroundColor: "#0284c7", color: "#fff", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+              >
+                📈 Gráfico Líneas
               </button>
             </div>
           </div>
@@ -4261,6 +4325,7 @@ const ExcalidrawWrapper = () => {
         onClose={() => setShowStudyMode(false)}
         cards={getFlashcardsFromScene()}
         onFocusElement={handleFocusElement}
+        activeBoardId={activeBoardId}
       />
 
       <WorkspaceCommandPalette

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export interface Flashcard {
   id: string;
   question: string;
   answer: string;
   topic?: string;
-  elementId?: string; // ID del elemento en Excalidraw vinculado a esta tarjeta
+  elementId?: string;
+}
+
+export interface FlashcardDeck {
+  id: string;
+  title: string;
+  icon: string;
+  cards: Flashcard[];
 }
 
 interface StudyModeProps {
@@ -13,53 +20,159 @@ interface StudyModeProps {
   onClose: () => void;
   cards?: Flashcard[];
   onFocusElement?: (elementId: string) => void;
+  activeBoardId?: string | null;
 }
 
-const DEFAULT_CARDS: Flashcard[] = [
+export const ACADEMIC_DECKS: FlashcardDeck[] = [
   {
-    id: "1",
-    topic: "Arquitectura Web",
-    question: "¿Qué ventaja principal ofrece renderizar elementos dentro del canvas?",
-    answer: "Permite conectar ideas, realizar anotaciones directas, hacer zoom infinito y vincular diagramas sin cambiar entre aplicaciones.",
+    id: "deck_arquitectura",
+    title: "Arquitectura & Cloud",
+    icon: "🏗️",
+    cards: [
+      {
+        id: "arq_1",
+        topic: "Arquitectura de Software",
+        question: "¿Cuál es el principio fundamental de la Arquitectura Hexagonal (Ports & Adapters)?",
+        answer: "Aislar la lógica de dominio del núcleo de frameworks, bases de datos e interfaces externas mediante puertos (interfaces) y adaptadores (implementaciones concretas).",
+      },
+      {
+        id: "arq_2",
+        topic: "Microservicios & Consistencia",
+        question: "¿Cómo garantiza el patrón Saga la consistencia eventual entre microservicios?",
+        answer: "Ejecuta transacciones locales secuenciales en cada servicio. Si una falla, ejecuta transacciones compensatorias en orden inverso para revertir el estado.",
+      },
+      {
+        id: "arq_3",
+        topic: "Sistemas Distribuidos",
+        question: "¿Qué postula el Teorema CAP para bases de datos distribuidas?",
+        answer: "Es imposible garantizar simultáneamente Consistencia estricta (C), Disponibilidad (A) y Tolerancia a Particiones de red (P). Ante partición, se debe elegir entre C o A.",
+      },
+      {
+        id: "arq_4",
+        topic: "Sistemas RAG & Embeddings",
+        question: "¿Cuál es el rol de una Base de Datos Vectorial en un pipeline RAG?",
+        answer: "Almacena embeddings semánticos y ejecuta búsqueda de vecinos más cercanos (k-NN / HNSW) para recuperar fragmentos de contexto relevantes antes de pasarlos al LLM.",
+      },
+    ],
   },
   {
-    id: "2",
-    topic: "Optimización de PDF",
-    question: "¿Por qué se utiliza compresión JPEG al 75% en las páginas de PDF?",
-    answer: "Reduce el tamaño de cada página en más de un 90% (~70KB), manteniendo una nitidez de lectura clara e impidiendo la sobrecarga de memoria del navegador.",
+    id: "deck_optimizacion",
+    title: "Optimización & IO",
+    icon: "📐",
+    cards: [
+      {
+        id: "opt_1",
+        topic: "Programación Lineal",
+        question: "¿En qué punto geométrico se encuentra siempre la solución óptima de un problema lineal convexo?",
+        answer: "En al menos uno de los vértices o puntos extremos de la región factible (politopo convexo).",
+      },
+      {
+        id: "opt_2",
+        topic: "Condiciones KKT",
+        question: "¿Para qué sirven las condiciones de Karush-Kuhn-Tucker (KKT)?",
+        answer: "Son condiciones necesarias de primer orden para que una solución en programación no lineal con restricciones de desigualdad sea óptima.",
+      },
+      {
+        id: "opt_3",
+        topic: "Dualidad en Optimización",
+        question: "¿Qué relación establece el Teorema Fuerte de Dualidad?",
+        answer: "Si el problema primal tiene solución óptima finita, el problema dual también la tiene y ambos valores óptimos coinciden exactamente (brecha de dualidad = 0).",
+      },
+    ],
   },
   {
-    id: "3",
-    topic: "Seguridad y Roles",
-    question: "¿Cómo funciona el bloqueo de edición por URL?",
-    answer: "Al abrir enlaces con el parámetro ?role=viewer o ?role=commenter, la aplicación activa viewModeEnabled = true impidiendo alterations involuntarias en el canvas.",
+    id: "deck_sketion",
+    title: "Sketion Workspace",
+    icon: "⚡",
+    cards: [
+      {
+        id: "sk_1",
+        topic: "Local-First & Sync",
+        question: "¿Qué ventaja otorga la arquitectura Local-First basada en IndexedDB?",
+        answer: "Permite trabajar sin latencia y 100% fuera de línea. La sincronización a la nube con Supabase ocurre en segundo plano de forma asíncrona sin bloquear la UI.",
+      },
+      {
+        id: "sk_2",
+        topic: "Optimización de PDF",
+        question: "¿Cómo optimiza el motor PDF Fast Engine el consumo de memoria en el navegador?",
+        answer: "Renderiza páginas a resolución adaptativa HD (máx 1200px) y genera Blobs JPEG al 75%, reduciendo el consumo en >90% por página (~70KB).",
+      },
+      {
+        id: "sk_3",
+        topic: "Seguridad & Roles",
+        question: "¿Cómo restringe Sketion el acceso en modo solo lectura para invitados?",
+        answer: "Mediante el parámetro ?role=viewer en la URL, bloqueando la edición del canvas y ocultando herramientas destructivas de forma no intrusiva.",
+      },
+    ],
   },
 ];
 
 export const StudyMode: React.FC<StudyModeProps> = ({
   isOpen,
   onClose,
-  cards = DEFAULT_CARDS,
+  cards,
   onFocusElement,
+  activeBoardId,
 }) => {
+  const [selectedDeckId, setSelectedDeckId] = useState<string>("deck_arquitectura");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [completedIds, setCompletedIds] = useState<string[]>([]);
+
+  // Obtener lista activa de tarjetas
+  const activeDeck = ACADEMIC_DECKS.find((d) => d.id === selectedDeckId) || ACADEMIC_DECKS[0];
+  const activeCards: Flashcard[] = cards && cards.length > 0 ? cards : activeDeck.cards;
+
+  // Persistencia de tarjetas dominadas en localStorage
+  const storageKey = `sketion_study_mastered_${activeBoardId || selectedDeckId}`;
+  const [completedIds, setCompletedIds] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(storageKey);
+      setCompletedIds(stored ? JSON.parse(stored) : []);
+      setCurrentIndex(0);
+      setIsFlipped(false);
+    } catch {
+      setCompletedIds([]);
+    }
+  }, [storageKey, selectedDeckId]);
 
   if (!isOpen) return null;
 
-  const currentCard = cards[currentIndex] || cards[0];
-  const progressPercent = Math.round((completedIds.length / cards.length) * 100);
+  const currentCard = activeCards[currentIndex] || activeCards[0];
+  const progressPercent = activeCards.length > 0 ? Math.round((completedIds.length / activeCards.length) * 100) : 0;
 
   const handleNext = (mastered = false) => {
-    if (mastered && !completedIds.includes(currentCard.id)) {
-      setCompletedIds((prev) => [...prev, currentCard.id]);
+    if (mastered && currentCard && !completedIds.includes(currentCard.id)) {
+      const updated = [...completedIds, currentCard.id];
+      setCompletedIds(updated);
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(updated));
+      } catch (err) {
+        console.error("Error saving mastered flashcards:", err);
+      }
     }
     setIsFlipped(false);
-    if (currentIndex < cards.length - 1) {
+    if (currentIndex < activeCards.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       setCurrentIndex(0);
+    }
+  };
+
+  const handleResetProgress = () => {
+    setCompletedIds([]);
+    try {
+      localStorage.removeItem(storageKey);
+    } catch (err) {
+      console.error("Error clearing progress:", err);
     }
   };
 
@@ -83,13 +196,13 @@ export const StudyMode: React.FC<StudyModeProps> = ({
           backgroundColor: "#ffffff",
           borderRadius: "20px",
           width: "100%",
-          maxWidth: "560px",
-          padding: "28px",
+          maxWidth: "600px",
+          padding: "26px",
           boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
           border: "1px solid #e2e8f0",
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
+          gap: "16px",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -98,13 +211,13 @@ export const StudyMode: React.FC<StudyModeProps> = ({
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <div style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#fef2f2", color: "#ef4444", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: "17px", fontWeight: 700, color: "#0f172a" }}>Modo Estudio</h3>
-              <p style={{ margin: 0, fontSize: "12px", color: "#64748b" }}>Tarjetas de repaso interactivo para memorización activa</p>
+              <h3 style={{ margin: 0, fontSize: "17px", fontWeight: 700, color: "#0f172a" }}>Modo Estudio — Repaso Activo</h3>
+              <p style={{ margin: 0, fontSize: "12px", color: "#64748b" }}>Memorización activa con repetición espaciada</p>
             </div>
           </div>
           <button
@@ -115,96 +228,128 @@ export const StudyMode: React.FC<StudyModeProps> = ({
           </button>
         </div>
 
-        {/* Progress Bar */}
+        {/* Selector de Barajas / Decks */}
+        {(!cards || cards.length === 0) && (
+          <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "2px" }}>
+            {ACADEMIC_DECKS.map((deck) => (
+              <button
+                key={deck.id}
+                onClick={() => {
+                  setSelectedDeckId(deck.id);
+                  setCurrentIndex(0);
+                  setIsFlipped(false);
+                }}
+                style={{
+                  padding: "6px 12px",
+                  borderRadius: "8px",
+                  border: selectedDeckId === deck.id ? "1.5px solid #ef4444" : "1px solid #e2e8f0",
+                  backgroundColor: selectedDeckId === deck.id ? "#fef2f2" : "#f8fafc",
+                  color: selectedDeckId === deck.id ? "#991b1b" : "#475569",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <span>{deck.icon}</span>
+                <span>{deck.title}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Barra de Progreso */}
         <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", fontWeight: 600, color: "#64748b" }}>
-            <span>Tarjeta {currentIndex + 1} de {cards.length}</span>
-            <span>{progressPercent}% Dominado</span>
+            <span>Tarjeta {currentIndex + 1} de {activeCards.length}</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <span>{progressPercent}% Dominado ({completedIds.length}/{activeCards.length})</span>
+              {completedIds.length > 0 && (
+                <button
+                  onClick={handleResetProgress}
+                  title="Reiniciar progreso de esta baraja"
+                  style={{ background: "none", border: "none", color: "#94a3b8", cursor: "pointer", fontSize: "11px", textDecoration: "underline" }}
+                >
+                  Reiniciar
+                </button>
+              )}
+            </div>
           </div>
           <div style={{ width: "100%", height: "6px", backgroundColor: "#f1f5f9", borderRadius: "3px", overflow: "hidden" }}>
             <div style={{ width: `${progressPercent}%`, height: "100%", backgroundColor: "#ef4444", transition: "width 0.3s ease" }} />
           </div>
         </div>
 
-        {/* Flashcard Box */}
-        <div
-          onClick={() => setIsFlipped(!isFlipped)}
-          style={{
-            minHeight: "220px",
-            borderRadius: "16px",
-            border: "2px solid #e2e8f0",
-            backgroundColor: isFlipped ? "#fff1f2" : "#f8fafc",
-            padding: "24px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            cursor: "pointer",
-            transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
-            position: "relative",
-          }}
-        >
-          {currentCard.topic && (
-            <span style={{ position: "absolute", top: "14px", left: "16px", fontSize: "11px", fontWeight: 700, color: "#ef4444", textTransform: "uppercase", letterSpacing: "0.5px" }}>
-              {currentCard.topic}
-            </span>
-          )}
-          
-          {/* Botón Ver en Canvas */}
-          {currentCard.elementId && onFocusElement && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (currentCard.elementId) {
-                  onFocusElement(currentCard.elementId);
-                }
-              }}
-              title="Centrar elemento en el lienzo"
-              style={{
-                position: "absolute",
-                top: "12px",
-                right: "12px",
-                padding: "6px 10px",
-                borderRadius: "8px",
-                border: "1px solid #ef4444",
-                backgroundColor: "#ffffff",
-                color: "#ef4444",
-                fontSize: "11px",
-                fontWeight: 600,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-                boxShadow: "0 2px 4px rgba(239, 68, 68, 0.08)",
-                transition: "all 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#ef4444";
-                e.currentTarget.style.color = "#ffffff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#ffffff";
-                e.currentTarget.style.color = "#ef4444";
-              }}
-            >
-              👁️ Ver en Canvas
-            </button>
-          )}
+        {/* Tarjeta Flashcard */}
+        {currentCard && (
+          <div
+            onClick={() => setIsFlipped(!isFlipped)}
+            style={{
+              minHeight: "220px",
+              borderRadius: "16px",
+              border: isFlipped ? "2px solid #fecaca" : "2px solid #e2e8f0",
+              backgroundColor: isFlipped ? "#fff1f2" : "#f8fafc",
+              padding: "24px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              cursor: "pointer",
+              transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
+              position: "relative",
+            }}
+          >
+            {currentCard.topic && (
+              <span style={{ position: "absolute", top: "14px", left: "16px", fontSize: "11px", fontWeight: 700, color: "#ef4444", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                {currentCard.topic}
+              </span>
+            )}
 
-          {!currentCard.elementId && (
-            <span style={{ position: "absolute", top: "14px", right: "16px", fontSize: "11px", fontWeight: 600, color: "#94a3b8" }}>
-              {isFlipped ? "Respuesta" : "Pregunta (Haz clic para voltear)"}
-            </span>
-          )}
+            {currentCard.elementId && onFocusElement && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (currentCard.elementId) {
+                    onFocusElement(currentCard.elementId);
+                  }
+                }}
+                title="Centrar elemento en el lienzo"
+                style={{
+                  position: "absolute",
+                  top: "12px",
+                  right: "12px",
+                  padding: "5px 9px",
+                  borderRadius: "7px",
+                  border: "1px solid #ef4444",
+                  backgroundColor: "#ffffff",
+                  color: "#ef4444",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                👁️ Ver en Canvas
+              </button>
+            )}
 
-          <p style={{ fontSize: "16px", fontWeight: isFlipped ? 500 : 700, color: isFlipped ? "#991b1b" : "#0f172a", margin: 0, lineHeight: 1.5 }}>
-            {isFlipped ? currentCard.answer : currentCard.question}
-          </p>
-        </div>
+            {!currentCard.elementId && (
+              <span style={{ position: "absolute", top: "14px", right: "16px", fontSize: "11px", fontWeight: 600, color: "#94a3b8" }}>
+                {isFlipped ? "Respuesta" : "Pregunta (Clic para voltear)"}
+              </span>
+            )}
 
-        {/* Footer Actions */}
+            <p style={{ fontSize: "15.5px", fontWeight: isFlipped ? 500 : 700, color: isFlipped ? "#991b1b" : "#0f172a", margin: 0, lineHeight: 1.55 }}>
+              {isFlipped ? currentCard.answer : currentCard.question}
+            </p>
+          </div>
+        )}
+
+        {/* Acciones Inferiores */}
         <div style={{ display: "flex", gap: "12px", justifyContent: "space-between", marginTop: "4px" }}>
           <button
             onClick={() => handleNext(false)}

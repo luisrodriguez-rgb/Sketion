@@ -62,7 +62,17 @@ export async function getBoardsMetadata(): Promise<BoardMetadata[]> {
 export async function saveBoardsMetadata(
   metadata: BoardMetadata[],
 ): Promise<void> {
-  await set(METADATA_KEY, metadata, boardsStore);
+  try {
+    await set(METADATA_KEY, metadata, boardsStore);
+  } catch (error: any) {
+    if (error?.name === "QuotaExceededError") {
+      console.warn(
+        "[IndexedDB Quota] Límite de almacenamiento excedido al guardar metadatos de tableros.",
+      );
+    } else {
+      console.error("Error saving boards metadata:", error);
+    }
+  }
 }
 
 export async function getBoard(id: string): Promise<Board | null> {
@@ -94,6 +104,13 @@ export async function getBoard(id: string): Promise<Board | null> {
             password: remoteBoard.password,
             isTemplate: remoteBoard.is_template,
             isDeleted: remoteBoard.is_deleted,
+            isFavorite: remoteBoard.is_favorite || false,
+            notesCount: remoteBoard.notes_count || 0,
+            commentsCount: remoteBoard.comments_count || 0,
+            collaboratorsCount: remoteBoard.collaborators_count || 0,
+            isCollaboration: remoteBoard.is_collaboration || false,
+            roomId: remoteBoard.room_id || undefined,
+            roomKey: remoteBoard.room_key || undefined,
           };
           await set(`board_content_${id}`, loadedBoard, boardsStore);
           return loadedBoard;
@@ -111,7 +128,7 @@ export async function getBoard(id: string): Promise<Board | null> {
 }
 
 // Debounce map to handle remote Supabase synchronization
-const pendingSyncs = new Map<string, NodeJS.Timeout>();
+const pendingSyncs = new Map<string, { timer: NodeJS.Timeout; callback: () => Promise<void> }>();
 
 function debounceSupabaseSync(
   id: string,
@@ -119,7 +136,7 @@ function debounceSupabaseSync(
   delay: number,
 ) {
   if (pendingSyncs.has(id)) {
-    clearTimeout(pendingSyncs.get(id));
+    clearTimeout(pendingSyncs.get(id)!.timer);
   }
   const timer = setTimeout(() => {
     pendingSyncs.delete(id);
@@ -127,7 +144,72 @@ function debounceSupabaseSync(
       console.error("Error in debounced Supabase sync:", err),
     );
   }, delay);
-  pendingSyncs.set(id, timer);
+  pendingSyncs.set(id, { timer, callback });
+}
+
+/**
+ * Fuerza el guardado inmediato a Supabase de sincronizaciones pendientes sin esperar el debounce
+ */
+export async function flushPendingSupabaseSync(id?: string): Promise<void> {
+  if (id) {
+    const pending = pendingSyncs.get(id);
+    if (pending) {
+      clearTimeout(pending.timer);
+      pendingSyncs.delete(id);
+      try {
+        await pending.callback();
+      } catch (err) {
+        console.error("Error flushing pending Supabase sync for board", id, err);
+      }
+    }
+  } else {
+    const entries = Array.from(pendingSyncs.entries());
+    pendingSyncs.clear();
+    await Promise.all(
+      entries.map(async ([boardId, pending]) => {
+        clearTimeout(pending.timer);
+        try {
+          await pending.callback();
+        } catch (err) {
+          console.error("Error flushing pending Supabase sync for board", boardId, err);
+        }
+      }),
+    );
+  }
+}
+
+/**
+ * Reconciliación elemento a elemento para evitar pérdida de datos en sincronizaciones concurrentes
+ */
+export function mergeElements(
+  localEls: readonly any[] = [],
+  remoteEls: readonly any[] = [],
+): any[] {
+  const elementMap = new Map<string, any>();
+  for (const el of localEls) {
+    if (el && el.id) {
+      elementMap.set(el.id, el);
+    }
+  }
+  for (const remoteEl of remoteEls) {
+    if (!remoteEl || !remoteEl.id) continue;
+    const localEl = elementMap.get(remoteEl.id);
+    if (!localEl) {
+      elementMap.set(remoteEl.id, remoteEl);
+    } else {
+      const localVersion = localEl.version || 0;
+      const remoteVersion = remoteEl.version || 0;
+      const localUpdated = localEl.updated || 0;
+      const remoteUpdated = remoteEl.updated || 0;
+      if (
+        remoteVersion > localVersion ||
+        (remoteVersion === localVersion && remoteUpdated >= localUpdated)
+      ) {
+        elementMap.set(remoteEl.id, remoteEl);
+      }
+    }
+  }
+  return Array.from(elementMap.values());
 }
 
 export function optimizeElements(elements: readonly any[]): any[] {
@@ -211,7 +293,17 @@ export async function saveBoard(
       data.isDeleted !== undefined ? data.isDeleted : currentBoard?.isDeleted || false,
   };
 
-  await set(`board_content_${id}`, updatedBoard, boardsStore);
+  try {
+    await set(`board_content_${id}`, updatedBoard, boardsStore);
+  } catch (err: any) {
+    if (err?.name === "QuotaExceededError") {
+      console.warn(
+        `[IndexedDB Quota] Cuota de almacenamiento excedida para el tablero ${id}.`,
+      );
+    } else {
+      console.error(`Error saving board ${id} to IndexedDB:`, err);
+    }
+  }
 
   if (elements !== undefined) {
     saveBoardVersion(id, optimizedElements, appState, files).catch((err) =>
@@ -247,6 +339,13 @@ export async function saveBoard(
           password: updatedBoard.password || null,
           is_template: updatedBoard.isTemplate || false,
           is_deleted: updatedBoard.isDeleted || false,
+          is_favorite: updatedBoard.isFavorite || false,
+          notes_count: updatedBoard.notesCount || 0,
+          comments_count: updatedBoard.commentsCount || 0,
+          collaborators_count: updatedBoard.collaboratorsCount || 0,
+          is_collaboration: updatedBoard.isCollaboration || false,
+          room_id: updatedBoard.roomId || null,
+          room_key: updatedBoard.roomKey || null,
           updated_at: new Date(updatedBoard.updatedAt).toISOString(),
         });
         if (error) {
@@ -544,21 +643,30 @@ export async function restoreBoardVersion(
   boardId: string,
   versionId: string,
 ): Promise<void> {
-  const content = await get<{ elements: any[]; appState: any; files?: any }>(
-    `board_version_content_${boardId}_${versionId}`,
-    boardsStore,
-  );
-  if (content) {
-    const currentBoard = await getBoard(boardId);
-    if (currentBoard) {
-      await saveBoard(
-        boardId,
-        { name: currentBoard.name },
-        content.elements,
-        content.appState,
-        content.files || currentBoard.files || {},
-      );
+  try {
+    const content = await get<{ elements: any[]; appState: any; files?: any }>(
+      `board_version_content_${boardId}_${versionId}`,
+      boardsStore,
+    );
+    if (content) {
+      const currentBoard = await getBoard(boardId);
+      if (currentBoard) {
+        // Preservar y fusionar archivos binarios para evitar imágenes rotas
+        const mergedFiles = {
+          ...(currentBoard.files || {}),
+          ...(content.files || {}),
+        };
+        await saveBoard(
+          boardId,
+          { name: currentBoard.name },
+          content.elements,
+          content.appState,
+          mergedFiles,
+        );
+      }
     }
+  } catch (err) {
+    console.error("Error restoring board version:", err);
   }
 }
 
@@ -580,6 +688,43 @@ export interface BoardComment {
   replies?: BoardCommentReply[];
 }
 
+/**
+ * Fusión atómica de comentarios y respuestas para evitar condiciones de carrera
+ */
+export function mergeComments(
+  localComments: BoardComment[] = [],
+  remoteComments: BoardComment[] = [],
+): BoardComment[] {
+  const commentMap = new Map<string, BoardComment>();
+
+  // 1. Registrar comentarios locales
+  localComments.forEach((c) => {
+    if (c && c.id) {
+      commentMap.set(c.id, { ...c });
+    }
+  });
+
+  // 2. Fusionar comentarios remotos y sus respuestas internas
+  remoteComments.forEach((rc) => {
+    if (!rc || !rc.id) return;
+    const existing = commentMap.get(rc.id);
+    if (!existing) {
+      commentMap.set(rc.id, rc);
+    } else {
+      const replyMap = new Map<string, BoardCommentReply>();
+      (existing.replies || []).forEach((r) => replyMap.set(r.id, r));
+      (rc.replies || []).forEach((r) => replyMap.set(r.id, r));
+      existing.replies = Array.from(replyMap.values()).sort(
+        (a, b) => a.createdAt - b.createdAt,
+      );
+      existing.resolved = rc.resolved !== undefined ? rc.resolved : existing.resolved;
+      existing.text = rc.text || existing.text;
+    }
+  });
+
+  return Array.from(commentMap.values());
+}
+
 export async function getBoardComments(
   boardId: string,
 ): Promise<BoardComment[]> {
@@ -599,37 +744,51 @@ export async function saveBoardComments(
   boardId: string,
   comments: BoardComment[],
 ): Promise<void> {
-  await set(`board_comments_${boardId}`, comments, boardsStore);
+  try {
+    const existingComments = await getBoardComments(boardId);
+    const merged = mergeComments(existingComments, comments);
+    await set(`board_comments_${boardId}`, merged, boardsStore);
 
-  const currentBoard = await getBoard(boardId);
-  if (currentBoard) {
-    currentBoard.appState = {
-      ...(currentBoard.appState || {}),
-      comments,
-    };
-    currentBoard.updatedAt = Date.now();
-    await set(`board_content_${boardId}`, currentBoard, boardsStore);
+    const currentBoard = await getBoard(boardId);
+    if (currentBoard) {
+      currentBoard.appState = {
+        ...(currentBoard.appState || {}),
+        comments: merged,
+      };
+      currentBoard.updatedAt = Date.now();
+      currentBoard.commentsCount = merged.filter((c) => !c.resolved).length;
+      await set(`board_content_${boardId}`, currentBoard, boardsStore);
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    if (session?.user) {
-      try {
-        await supabase.from("boards").upsert({
-          id: boardId,
-          user_id: session.user.id,
-          name: currentBoard.name,
-          elements: currentBoard.elements,
-          app_state: currentBoard.appState,
-          files: currentBoard.files,
-          tags: currentBoard.tags || [],
-          folder_id: currentBoard.folderId || null,
-          password: currentBoard.password || null,
-          updated_at: new Date(currentBoard.updatedAt).toISOString(),
-        });
-      } catch (err) {
-        console.error("Error syncing board comments to Supabase:", err);
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session?.user) {
+        try {
+          await supabase.from("boards").upsert({
+            id: boardId,
+            user_id: session.user.id,
+            name: currentBoard.name,
+            elements: currentBoard.elements,
+            app_state: currentBoard.appState,
+            files: currentBoard.files,
+            tags: currentBoard.tags || [],
+            folder_id: currentBoard.folderId || null,
+            password: currentBoard.password || null,
+            comments_count: currentBoard.commentsCount,
+            updated_at: new Date(currentBoard.updatedAt).toISOString(),
+          });
+        } catch (err) {
+          console.error("Error syncing board comments to Supabase:", err);
+        }
       }
+    }
+  } catch (err: any) {
+    if (err?.name === "QuotaExceededError") {
+      console.warn(
+        "[IndexedDB Quota] Límite de almacenamiento alcanzado al guardar comentarios.",
+      );
+    } else {
+      console.error("Error saving board comments:", err);
     }
   }
 }
@@ -667,7 +826,7 @@ export async function syncBoardsWithSupabase(): Promise<void> {
 
     const { data: remoteBoards } = await supabase
       .from("boards")
-      .select("id, name, created_at, updated_at, tags, folder_id, password, is_template, is_deleted");
+      .select("id, name, created_at, updated_at, tags, folder_id, password, is_template, is_deleted, is_favorite, notes_count, comments_count, collaborators_count, is_collaboration, room_id, room_key");
     if (remoteBoards) {
       const localMetadata = await getBoardsMetadata();
       let changed = false;
@@ -686,6 +845,13 @@ export async function syncBoardsWithSupabase(): Promise<void> {
           password: rb.password || undefined,
           isTemplate: rb.is_template || false,
           isDeleted: rb.is_deleted || false,
+          isFavorite: rb.is_favorite || false,
+          notesCount: rb.notes_count || 0,
+          commentsCount: rb.comments_count || 0,
+          collaboratorsCount: rb.collaborators_count || 0,
+          isCollaboration: rb.is_collaboration || false,
+          roomId: rb.room_id || undefined,
+          roomKey: rb.room_key || undefined,
         };
 
         if (index === -1) {
@@ -706,14 +872,21 @@ export async function syncBoardsWithSupabase(): Promise<void> {
                 name: rb.name,
                 createdAt: remoteMeta.createdAt,
                 updatedAt: remoteMeta.updatedAt,
-                elements: boardContent.elements,
-                appState: boardContent.app_state,
-                files: boardContent.files,
+                elements: boardContent.elements || [],
+                appState: boardContent.app_state || {},
+                files: boardContent.files || {},
                 tags: remoteMeta.tags,
                 folderId: remoteMeta.folderId,
                 password: remoteMeta.password,
                 isTemplate: remoteMeta.isTemplate,
                 isDeleted: remoteMeta.isDeleted,
+                isFavorite: remoteMeta.isFavorite,
+                notesCount: remoteMeta.notesCount,
+                commentsCount: remoteMeta.commentsCount,
+                collaboratorsCount: remoteMeta.collaboratorsCount,
+                isCollaboration: remoteMeta.isCollaboration,
+                roomId: remoteMeta.roomId,
+                roomKey: remoteMeta.roomKey,
                 preview: (boardContent.app_state as any)?.preview || undefined,
               },
               boardsStore,
@@ -732,29 +905,40 @@ export async function syncBoardsWithSupabase(): Promise<void> {
             mergedMetadata[index] = remoteMeta;
             changed = true;
 
-            // Redownload newer content
+            // Redownload content y reconciliar elementos en lugar de sobreescritura destructiva
             const { data: boardContent } = await supabase
               .from("boards")
               .select("elements, app_state, files")
               .eq("id", rb.id)
               .single();
             if (boardContent) {
+              const localBoard = await get<Board>(`board_content_${rb.id}`, boardsStore);
+              const reconciledElements = mergeElements(localBoard?.elements || [], boardContent.elements || []);
+              const mergedFiles = { ...(localBoard?.files || {}), ...(boardContent.files || {}) };
+
               await set(
                 `board_content_${rb.id}`,
                 {
                   id: rb.id,
                   name: rb.name,
                   createdAt: remoteMeta.createdAt,
-                  updatedAt: remoteMeta.updatedAt,
-                  elements: boardContent.elements,
-                  appState: boardContent.app_state,
-                  files: boardContent.files,
+                  updatedAt: Math.max(remoteMeta.updatedAt, localMeta.updatedAt),
+                  elements: reconciledElements,
+                  appState: boardContent.app_state || localBoard?.appState || {},
+                  files: mergedFiles,
                   tags: remoteMeta.tags,
                   folderId: remoteMeta.folderId,
                   password: remoteMeta.password,
                   isTemplate: remoteMeta.isTemplate,
                   isDeleted: remoteMeta.isDeleted,
-                  preview: (boardContent.app_state as any)?.preview || undefined,
+                  isFavorite: remoteMeta.isFavorite,
+                  notesCount: remoteMeta.notesCount,
+                  commentsCount: remoteMeta.commentsCount,
+                  collaboratorsCount: remoteMeta.collaboratorsCount,
+                  isCollaboration: remoteMeta.isCollaboration,
+                  roomId: remoteMeta.roomId,
+                  roomKey: remoteMeta.roomKey,
+                  preview: (boardContent.app_state as any)?.preview || localBoard?.preview || undefined,
                 },
                 boardsStore,
               );
@@ -781,6 +965,14 @@ export async function syncBoardsWithSupabase(): Promise<void> {
                 folder_id: localMeta.folderId || null,
                 password: localMeta.password || null,
                 is_template: localMeta.isTemplate || false,
+                is_deleted: localMeta.isDeleted || false,
+                is_favorite: localMeta.isFavorite || false,
+                notes_count: localMeta.notesCount || 0,
+                comments_count: localMeta.commentsCount || 0,
+                collaborators_count: localMeta.collaboratorsCount || 0,
+                is_collaboration: localMeta.isCollaboration || false,
+                room_id: localMeta.roomId || null,
+                room_key: localMeta.roomKey || null,
                 updated_at: new Date(localMeta.updatedAt).toISOString(),
               });
             }
