@@ -581,12 +581,7 @@ const ExcalidrawWrapper = () => {
     if (urlBoardId) {
       return urlBoardId;
     }
-
-    const lastBoard = localStorage.getItem("my-excalidraw-last-board-id");
-    if (lastBoard && lastBoard !== "collab_room") {
-      return lastBoard;
-    }
-    return "board_default";
+    return null;
   });
   const [activeBoardName, setActiveBoardName] = useState("");
   const [boardsList, setBoardsList] = useState<any[]>([]);
