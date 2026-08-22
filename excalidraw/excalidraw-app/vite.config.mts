@@ -147,6 +147,7 @@ export default defineConfig(({ mode }) => {
       react(),
       checker({
         typescript: true,
+        enableBuild: false,
         eslint:
           envVars.VITE_APP_ENABLE_ESLINT === "false"
             ? undefined
