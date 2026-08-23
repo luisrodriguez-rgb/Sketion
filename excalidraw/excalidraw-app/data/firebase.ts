@@ -238,7 +238,7 @@ export const saveToFirebase = async (
     restoreElements(await decryptElements(storedScene, roomKey), null),
   );
 
-  FirebaseSceneVersionCache.set(socket, storedElements);
+  FirebaseSceneVersionCache.set(portal.socket || (portal as any), storedElements);
 
   return toBrandedType<RemoteExcalidrawElement[]>(storedElements);
 };

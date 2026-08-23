@@ -23,6 +23,7 @@ import type {
 import type { MakeBrand } from "@excalidraw/common/utility-types";
 
 import { DELETED_ELEMENT_TIMEOUT, ROOM_ID_BYTES } from "../app_constants";
+import { supabase } from "./supabaseClient";
 
 import type { WS_SUBTYPES } from "../app_constants";
 
@@ -274,7 +275,7 @@ export const saveRoomToSupabase = async (
       },
     });
 
-    const { data: compressed } = await compressData(
+    const compressed = await compressData(
       new TextEncoder().encode(json),
       {
         encryptionKey: roomKey,
