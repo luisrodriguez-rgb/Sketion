@@ -42,9 +42,13 @@ class Portal {
     this.roomId = id;
     this.roomKey = key;
 
-    // Initialize Supabase Realtime channel for instant E2EE room collaboration
+    // Initialize Supabase Realtime channel for ultra-low latency collaboration fallback
     this.supabaseChannel = supabase.channel(`collab-room-${id}`, {
       config: {
+        broadcast: {
+          ack: false,
+          self: false,
+        },
         presence: {
           key: this.clientId,
         },
@@ -264,10 +268,7 @@ class Portal {
           encryptedBuffer,
           iv,
         );
-      }
-
-      // Broadcast over Supabase Realtime channel (instant E2EE)
-      if (this.supabaseChannel && this.socketInitialized) {
+      } else if (this.supabaseChannel && this.socketInitialized) {
         this.supabaseChannel.send({
           type: "broadcast",
           event: "collab",

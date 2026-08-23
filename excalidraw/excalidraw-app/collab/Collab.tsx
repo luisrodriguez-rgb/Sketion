@@ -798,15 +798,17 @@ class Collab extends PureComponent<CollabProps, CollabState> {
     this.fallbackInitializationHandler = fallbackInitializationHandler;
 
     let socket: any = null;
-    const wsUrl = import.meta.env.VITE_APP_WS_SERVER_URL;
-    if (wsUrl && wsUrl.trim() && !wsUrl.includes("oss-collab.excalidraw.com")) {
+    const wsUrl =
+      import.meta.env.VITE_APP_WS_SERVER_URL ||
+      "https://oss-collab.excalidraw.com";
+    if (wsUrl && wsUrl.trim()) {
       try {
         const { default: socketIOClient } = await import(
           /* webpackChunkName: "socketIoClient" */ "socket.io-client"
         );
         socket = socketIOClient(wsUrl, {
-          transports: ["polling", "websocket"],
-          reconnectionAttempts: 3,
+          transports: ["websocket", "polling"],
+          reconnectionAttempts: 5,
           timeout: 4000,
         });
         socket.once("connect_error", fallbackInitializationHandler);
