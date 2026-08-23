@@ -256,3 +256,87 @@ export const importFromBackend = async (
   }
 };
 
+/**
+ * Guarda una instantánea cifrada E2E de la sala colaborativa en Supabase (shared_links).
+ * La clave de cifrado nunca toca el servidor (Zero-Knowledge).
+ */
+export const saveRoomToSupabase = async (
+  roomId: string,
+  roomKey: string,
+  elements: readonly SyncableExcalidrawElement[],
+  appState: any,
+) => {
+  try {
+    const json = JSON.stringify({
+      elements,
+      appState: {
+        viewBackgroundColor: appState?.viewBackgroundColor || "#F8FAFC",
+      },
+    });
+
+    const { data: compressed } = await compressData(
+      new TextEncoder().encode(json),
+      {
+        encryptionKey: roomKey,
+      },
+    );
+
+    const bytes = new Uint8Array(compressed.buffer, compressed.byteOffset, compressed.byteLength);
+    let binary = "";
+    const len = bytes.byteLength;
+    const CHUNK_SIZE = 0x8000;
+    for (let i = 0; i < len; i += CHUNK_SIZE) {
+      binary += String.fromCharCode.apply(
+        null,
+        Array.from(bytes.subarray(i, Math.min(i + CHUNK_SIZE, len))),
+      );
+    }
+    const payloadBase64 = btoa(binary);
+
+    await supabase.from("shared_links").upsert({
+      id: `room_${roomId}`,
+      data: payloadBase64,
+    });
+  } catch (err) {
+    console.warn("Could not save collab room snapshot to Supabase:", err);
+  }
+};
+
+/**
+ * Carga y descifra la instantánea de la sala colaborativa desde Supabase.
+ */
+export const loadRoomFromSupabase = async (
+  roomId: string,
+  roomKey: string,
+): Promise<readonly SyncableExcalidrawElement[] | null> => {
+  try {
+    const { data: row, error } = await supabase
+      .from("shared_links")
+      .select("data")
+      .eq("id", `room_${roomId}`)
+      .single();
+
+    if (error || !row?.data) {
+      return null;
+    }
+
+    const binaryStr = atob(row.data);
+    const len = binaryStr.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryStr.charCodeAt(i);
+    }
+
+    const { data: decompressed } = await decompressData(bytes, {
+      decryptionKey: roomKey,
+    });
+
+    const decoded = new TextDecoder().decode(decompressed);
+    const parsed = JSON.parse(decoded);
+    return parsed.elements || [];
+  } catch (err) {
+    console.warn("Could not load collab room from Supabase:", err);
+    return null;
+  }
+};
+

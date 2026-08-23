@@ -132,13 +132,11 @@ export const isSavedToFirebase = (
   portal: Portal,
   elements: readonly ExcalidrawElement[],
 ): boolean => {
-  if (portal.socket && portal.roomId && portal.roomKey) {
+  if (portal.roomId && portal.roomKey) {
     const sceneVersion = getSceneVersion(elements);
-
-    return FirebaseSceneVersionCache.get(portal.socket) === sceneVersion;
+    const key = portal.socket || (portal as any);
+    return FirebaseSceneVersionCache.get(key) === sceneVersion;
   }
-  // if no room exists, consider the room saved so that we don't unnecessarily
-  // prevent unload (there's nothing we could do at that point anyway)
   return true;
 };
 
@@ -189,12 +187,11 @@ export const saveToFirebase = async (
   elements: readonly SyncableExcalidrawElement[],
   appState: AppState,
 ) => {
-  const { roomId, roomKey, socket } = portal;
+  const { roomId, roomKey } = portal;
   if (
-    // bail if no room exists as there's nothing we can do at this point
     !roomId ||
     !roomKey ||
-    !socket ||
+    !FIREBASE_CONFIG?.apiKey ||
     isSavedToFirebase(portal, elements)
   ) {
     return null;

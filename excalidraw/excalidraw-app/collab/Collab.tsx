@@ -68,6 +68,8 @@ import {
   generateCollaborationLinkData,
   getCollaborationLink,
   getSyncableElements,
+  loadRoomFromSupabase,
+  saveRoomToSupabase,
 } from "../data";
 import {
   encodeFilesForUpload,
@@ -326,6 +328,14 @@ class Collab extends PureComponent<CollabProps, CollabState> {
   ) => {
     syncableElements = cloneJSON(syncableElements);
     try {
+      if (this.portal.roomId && this.portal.roomKey) {
+        saveRoomToSupabase(
+          this.portal.roomId,
+          this.portal.roomKey,
+          syncableElements,
+          this.excalidrawAPI.getAppState(),
+        );
+      }
       const storedElements = await saveToFirebase(
         this.portal,
         syncableElements,
@@ -756,6 +766,16 @@ class Collab extends PureComponent<CollabProps, CollabState> {
         APP_NAME,
         getCollaborationLink({ roomId, roomKey }),
       );
+      // Persistir inmediatamente el lienzo actual del anfitrión en Supabase con cifrado E2E
+      const hostElements = this.getSceneElementsIncludingDeleted();
+      if (hostElements && hostElements.length > 0) {
+        saveRoomToSupabase(
+          roomId,
+          roomKey,
+          hostElements as any,
+          this.excalidrawAPI.getAppState(),
+        );
+      }
     }
 
     // TODO: `ImportedDataState` type here seems abused
@@ -796,6 +816,10 @@ class Collab extends PureComponent<CollabProps, CollabState> {
           e,
         );
       }
+    }
+
+    if (!socket) {
+      fallbackInitializationHandler();
     }
 
     try {
@@ -966,28 +990,37 @@ class Collab extends PureComponent<CollabProps, CollabState> {
         this.fallbackInitializationHandler,
       );
     }
-    if (fetchScene && roomLinkData && this.portal.socket) {
+    if (fetchScene && roomLinkData) {
       this.excalidrawAPI.resetScene();
 
       try {
-        const elements = await loadFromFirebase(
+        // 1. Cargar instantánea cifrada E2E desde Supabase
+        let elements = await loadRoomFromSupabase(
           roomLinkData.roomId,
           roomLinkData.roomKey,
-          this.portal.socket,
         );
-        if (elements) {
+
+        // 2. Respaldo en Firebase Firestore
+        if (!elements || elements.length === 0) {
+          elements = await loadFromFirebase(
+            roomLinkData.roomId,
+            roomLinkData.roomKey,
+            this.portal.socket,
+          );
+        }
+
+        if (elements && elements.length > 0) {
           this.setLastBroadcastedOrReceivedSceneVersion(
             getSceneVersion(elements),
           );
 
           return {
-            elements,
+            elements: elements as readonly OrderedExcalidrawElement[],
             scrollToContent: true,
           };
         }
       } catch (error: any) {
-        // log the error and move on. other peers will sync us the scene.
-        console.error(error);
+        console.error("Error cargando escena de la sala colaborativa:", error);
       } finally {
         this.portal.socketInitialized = true;
       }
