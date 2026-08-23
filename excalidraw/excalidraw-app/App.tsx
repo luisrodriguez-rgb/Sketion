@@ -415,11 +415,10 @@ const initializeScene = async (opts: {
           // go through App.initializeScene() that resets this flag
           isLoading: false,
         },
-        elements: reconcileElements(
-          scene?.elements || [],
-          excalidrawAPI.getSceneElementsIncludingDeleted() as RemoteExcalidrawElement[],
-          excalidrawAPI.getAppState(),
-        ),
+        elements:
+          scene?.elements && scene.elements.length > 0
+            ? scene.elements
+            : (excalidrawAPI.getSceneElementsIncludingDeleted() as RemoteExcalidrawElement[]),
       },
       isExternalScene: true,
       id: roomLinkData.roomId,
@@ -997,6 +996,16 @@ const ExcalidrawWrapper = () => {
 
   // Update URL search parameters based on activeBoardId
   useEffect(() => {
+    // Si estamos en una sala colaborativa (#room=) o enlace compartido (#json=), NUNCA alterar el hash
+    if (
+      isCollaborationLink(window.location.href) ||
+      window.location.hash.includes("room=") ||
+      window.location.hash.includes("json=") ||
+      activeBoardId === "collab_room"
+    ) {
+      return;
+    }
+
     if (
       activeBoardId === null &&
       (window.location.hash.includes("addLibrary") ||
@@ -1016,17 +1025,13 @@ const ExcalidrawWrapper = () => {
     }
 
     if (activeBoardId) {
-      if (activeBoardId === "collab_room") {
-        // Keep hash for collab rooms
-      } else {
-        localStorage.setItem("my-excalidraw-last-board-id", activeBoardId);
-        const url = new URL(window.location.href);
-        url.searchParams.set("boardId", activeBoardId);
-        if (!window.location.hash.includes("addLibrary")) {
-          url.hash = "";
-        }
-        window.history.pushState({}, "", url.toString());
+      localStorage.setItem("my-excalidraw-last-board-id", activeBoardId);
+      const url = new URL(window.location.href);
+      url.searchParams.set("boardId", activeBoardId);
+      if (!window.location.hash.includes("addLibrary")) {
+        url.hash = "";
       }
+      window.history.pushState({}, "", url.toString());
     } else {
       const url = new URL(window.location.href);
       url.searchParams.delete("boardId");
@@ -1039,7 +1044,12 @@ const ExcalidrawWrapper = () => {
 
   // Synchronize canvas scene when activeBoardId changes
   useEffect(() => {
-    if (!excalidrawAPI || !activeBoardId || activeBoardId === "collab_room") {
+    if (
+      !excalidrawAPI ||
+      !activeBoardId ||
+      activeBoardId === "collab_room" ||
+      isCollaborationLink(window.location.href)
+    ) {
       return;
     }
     getBoard(activeBoardId).then((board) => {
@@ -1717,6 +1727,9 @@ const ExcalidrawWrapper = () => {
       event.preventDefault();
       const libraryUrlTokens = parseLibraryTokensFromUrl();
       if (!libraryUrlTokens) {
+        if (isCollaborationLink(window.location.href)) {
+          return;
+        }
         if (
           collabAPI?.isCollaborating() &&
           !isCollaborationLink(window.location.href)
