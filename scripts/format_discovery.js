@@ -1,7 +1,8 @@
 const fs = require("fs");
-const path = "/Users/leonfeliperodriguez/Desktop/Trabajos/My-Excalidraw/My-Excalidraw/discovery-web-project-v2.excalidraw";
+const path = require("path");
+const filePath = path.join(__dirname, "../examples/discovery-web-project-v2.excalidraw");
 
-const rawData = fs.readFileSync(path, "utf8");
+const rawData = fs.readFileSync(filePath, "utf8");
 const data = JSON.parse(rawData);
 
 const elements = data.elements;
@@ -221,5 +222,5 @@ frames.forEach((frame, idx) => {
 });
 
 // Save transformed file
-fs.writeFileSync(path, JSON.stringify(data, null, 2), "utf8");
-console.log("✅ ¡Formateo y optimización completada con éxito en discovery-web-project-v2.excalidraw!");
+fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+console.log("Formateo y optimizacion completada con exito en discovery-web-project-v2.excalidraw");

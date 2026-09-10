@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const srcDir = path.join(__dirname, 'excalidraw/public');
-const destDir = path.join(__dirname, 'excalidraw/excalidraw-app/public');
+const srcDir = path.join(__dirname, '../excalidraw/public');
+const destDir = path.join(__dirname, '../excalidraw/excalidraw-app/public');
 
 if (!fs.existsSync(destDir)) {
   fs.mkdirSync(destDir, { recursive: true });

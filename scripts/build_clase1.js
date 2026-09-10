@@ -727,6 +727,6 @@ const scene = {
   files: {}
 };
 
-const targetPath = path.join(__dirname, 'clase_1.excalidraw');
+const targetPath = path.join(__dirname, '../examples/clase_1.excalidraw');
 fs.writeFileSync(targetPath, JSON.stringify(scene, null, 2), 'utf-8');
-console.log("Compilación de clase_1.excalidraw finalizada. Elementos vectoriales creados:", elements.length);
+console.log("Compilacion de clase_1.excalidraw finalizada. Elementos vectoriales creados:", elements.length);
