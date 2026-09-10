@@ -4,6 +4,9 @@ on:
     branches:
       - release
 
+permissions:
+  contents: write
+
 jobs:
   Auto-release-excalidraw-next:
     runs-on: ubuntu-latest

@@ -5,6 +5,9 @@ on:
     branches:
       - release
 
+permissions:
+  contents: read
+
 jobs:
   build-docker:
     runs-on: ubuntu-latest

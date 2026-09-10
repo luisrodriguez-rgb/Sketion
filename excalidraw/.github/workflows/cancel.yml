@@ -6,6 +6,9 @@ on:
       - release
   pull_request:
 
+permissions:
+  actions: write
+
 jobs:
   cancel:
     runs-on: ubuntu-latest
