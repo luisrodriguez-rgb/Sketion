@@ -125,8 +125,26 @@ export default defineConfig(({ mode }) => {
               return "codemirror.chunk";
             }
 
+            if (id.includes("node_modules/@supabase/")) {
+              return "supabase.chunk";
+            }
+
+            if (id.includes("node_modules/firebase/")) {
+              return "firebase.chunk";
+            }
+
+            if (id.includes("node_modules/jspdf") || id.includes("node_modules/html2canvas")) {
+              return "pdf-export.chunk";
+            }
+
             if (id.includes("excalidraw-app/data/templates")) {
-              return "templates.chunk";
+              if (id.includes("software_ia")) return "templates-software-ia.chunk";
+              if (id.includes("negocios")) return "templates-negocios.chunk";
+              if (id.includes("productividad")) return "templates-productividad.chunk";
+              if (id.includes("diseno_ux")) return "templates-diseno-ux.chunk";
+              if (id.includes("ingenieria")) return "templates-ingenieria.chunk";
+              if (id.includes("estudio")) return "templates-estudio.chunk";
+              return "templates-core.chunk";
             }
           },
         },

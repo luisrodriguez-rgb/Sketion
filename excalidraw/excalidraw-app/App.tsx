@@ -167,7 +167,6 @@ import {
   flushPendingSupabaseSync,
 } from "./data/boardsDb";
 import { WorkspaceCommandPalette } from "./components/WorkspaceCommandPalette";
-import { TEMPLATES } from "./data/templates";
 
 import type { BoardComment } from "./data/boardsDb";
 
@@ -2506,6 +2505,7 @@ const ExcalidrawWrapper = () => {
     let elements: any[] = [];
     let appState: any = { viewBackgroundColor: "#F8FAFC" };
     if (templateId) {
+      const { TEMPLATES } = await import("./data/templates");
       const template = TEMPLATES.find((t) => t.id === templateId);
       if (template) {
         name = template.name;
