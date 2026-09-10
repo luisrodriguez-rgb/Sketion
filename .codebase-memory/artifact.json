@@ -1,11 +1,11 @@
 {
     "schema_version": 1,
-    "commit": "b8d1a32a8a176cf24ae6e7321e5f5a6781f7f65b",
-    "indexed_at": "2026-07-23T20:03:44Z",
-    "project": "Users-leonfeliperodriguez-Desktop-Trabajos-My-Excalidraw-My-Excalidraw",
-    "nodes": 39144,
-    "edges": 58871,
-    "original_size": 46071808,
-    "compressed_size": 5139576,
-    "compression_level": 9
+    "commit": "8e5d3b82b711d74e15a57e1bb1909f33d7b2d59c",
+    "indexed_at": "2026-09-10T21:11:54Z",
+    "project": "Users-leonfeliperodriguez-Desktop-Trabajos-SKETION-My-Excalidraw",
+    "nodes": 6252,
+    "edges": 19008,
+    "original_size": 21626880,
+    "compressed_size": 2200485,
+    "compression_level": 3
 }
